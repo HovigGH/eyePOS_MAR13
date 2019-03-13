@@ -22,7 +22,7 @@ namespace MultiFaceRec
             frmPrincipal.Show();
             this.Hide();
 
-            //hello
+            //hello there
         }
 
         private void btnExist_Click(object sender, EventArgs e)
