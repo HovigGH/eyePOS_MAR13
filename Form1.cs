@@ -21,6 +21,8 @@ namespace MultiFaceRec
             FrmPrincipal frmPrincipal = new FrmPrincipal('n');
             frmPrincipal.Show();
             this.Hide();
+
+            //s
         }
 
         private void btnExist_Click(object sender, EventArgs e)
