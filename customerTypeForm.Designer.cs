@@ -1,6 +1,6 @@
 ﻿namespace MultiFaceRec
 {
-    partial class customerTypeForm
+    partial class CustomerTypeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,32 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnNewCustomer = new System.Windows.Forms.Button();
-            this.btnExistnCustomer = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.btnExist = new System.Windows.Forms.Button();
             this.lblIAm = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // btnNewCustomer
+            // btnNew
             // 
-            this.btnNewCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewCustomer.Location = new System.Drawing.Point(83, 12);
-            this.btnNewCustomer.Name = "btnNewCustomer";
-            this.btnNewCustomer.Size = new System.Drawing.Size(182, 258);
-            this.btnNewCustomer.TabIndex = 0;
-            this.btnNewCustomer.Text = "New customer";
-            this.btnNewCustomer.UseVisualStyleBackColor = true;
-            this.btnNewCustomer.Click += new System.EventHandler(this.btnNewCustomer_Click);
+            this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNew.Location = new System.Drawing.Point(83, 12);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(182, 258);
+            this.btnNew.TabIndex = 0;
+            this.btnNew.Text = "New customer";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // btnExistnCustomer
+            // btnExist
             // 
-            this.btnExistnCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExistnCustomer.Location = new System.Drawing.Point(271, 12);
-            this.btnExistnCustomer.Name = "btnExistnCustomer";
-            this.btnExistnCustomer.Size = new System.Drawing.Size(169, 258);
-            this.btnExistnCustomer.TabIndex = 1;
-            this.btnExistnCustomer.Text = "Existing customer";
-            this.btnExistnCustomer.UseVisualStyleBackColor = true;
-            this.btnExistnCustomer.Click += new System.EventHandler(this.btnExistnCustomer_Click);
+            this.btnExist.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExist.Location = new System.Drawing.Point(271, 12);
+            this.btnExist.Name = "btnExist";
+            this.btnExist.Size = new System.Drawing.Size(169, 258);
+            this.btnExist.TabIndex = 1;
+            this.btnExist.Text = "Existing customer";
+            this.btnExist.UseVisualStyleBackColor = true;
+            this.btnExist.Click += new System.EventHandler(this.btnExist_Click);
             // 
             // lblIAm
             // 
@@ -65,15 +65,15 @@
             this.lblIAm.TabIndex = 2;
             this.lblIAm.Text = "I\'m a";
             // 
-            // customerTypeForm
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 282);
             this.Controls.Add(this.lblIAm);
-            this.Controls.Add(this.btnExistnCustomer);
-            this.Controls.Add(this.btnNewCustomer);
-            this.Name = "customerTypeForm";
+            this.Controls.Add(this.btnExist);
+            this.Controls.Add(this.btnNew);
+            this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -82,8 +82,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnNewCustomer;
-        private System.Windows.Forms.Button btnExistnCustomer;
+        private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.Button btnExist;
         private System.Windows.Forms.Label lblIAm;
     }
 }

@@ -7,9 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
- 
-
-
+using System.Text.RegularExpressions;
 
 namespace MultiFaceRec
 {
@@ -31,9 +29,9 @@ namespace MultiFaceRec
 																			  //Format: Null, int qty, string UPC, string item name, double price
 			barcodeInputTextbox.Select();
 
-			cartGrid.Rows.Add(null, 1, "01052843", "Chocolate Bar", 2.00); //RM testing only
+			cartGrid.Rows.Add(null, 1, "01052843", "Chocolate Bar", "$2.00"); //RM testing only
 			updateTotals();
-
+			payGB.Visible = false;
 		}
 
 
@@ -83,15 +81,20 @@ namespace MultiFaceRec
 
 		private void updateTotals()
 		{
-			double sum = 0;
-			double tax = 0;
-			double total = 0;
+			decimal sum = 0m;
+			decimal tax = 0m;
+			decimal total = 0m;
+
+			string temp;
+
 			foreach (DataGridViewRow r in cartGrid.Rows)
 			{
-				sum += Convert.ToDouble(r.Cells[4].Value) * Convert.ToInt32(r.Cells[1].Value);
+				temp = (r.Cells[4].Value).ToString().Replace("$", String.Empty);
+				sum += decimal.Round(Convert.ToDecimal(temp) * Convert.ToInt32(r.Cells[1].Value), 2, MidpointRounding.AwayFromZero);
 			}
-			tax = (sum * 0.15);
-			total = sum + tax;
+
+			tax = decimal.Round((sum * (decimal)0.15), 2, MidpointRounding.AwayFromZero);
+			total = decimal.Round((sum + tax), 2, MidpointRounding.AwayFromZero);
 
 			subLabel.Text = "$" + sum.ToString();
 			taxLabel.Text = "$" + tax.ToString();
@@ -124,11 +127,8 @@ namespace MultiFaceRec
 
 		private void checkOutButton_Click(object sender, EventArgs e)
 		{
-
-		}
-
-		private void totalBox_TextChanged(object sender, EventArgs e)
-		{
+			updateTotals();
+			payGB.Visible = true;
 
 		}
 	}

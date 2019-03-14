@@ -28,7 +28,7 @@ namespace MultiFaceRec
 
         private void btnContinue_Click(object sender, EventArgs e)
         {
-			CustomerIDer id = new CustomerIDer();
+			CustomerTypeForm id = new CustomerTypeForm();
 
 			this.Hide();
             id.ShowDialog();

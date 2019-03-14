@@ -82,12 +82,6 @@
     <Compile Include="CustForm1.designer.cs">
       <DependentUpon>CustForm1.cs</DependentUpon>
     </Compile>
-    <Compile Include="customerTypeForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="customerTypeForm.Designer.cs">
-      <DependentUpon>customerTypeForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="DataGridViewNumericUpDownCell.cs" />
     <Compile Include="DataGridViewNumericUpDownColumn.cs" />
     <Compile Include="DataGridViewNumericUpDownEditingControl.cs">
@@ -112,11 +106,11 @@
     <Compile Include="EmployeeLogIn.Designer.cs">
       <DependentUpon>EmployeeLogIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomerIDer.cs">
+    <Compile Include="CustomerTypeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomerIDer.Designer.cs">
-      <DependentUpon>CustomerIDer.cs</DependentUpon>
+    <Compile Include="CustomerTypeForm.Designer.cs">
+      <DependentUpon>CustomerTypeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -135,9 +129,6 @@
     <EmbeddedResource Include="CustForm1.resx">
       <DependentUpon>CustForm1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="customerTypeForm.resx">
-      <DependentUpon>customerTypeForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EmpSettings.resx">
       <DependentUpon>EmpSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -147,8 +138,8 @@
     <EmbeddedResource Include="EmployeeLogIn.resx">
       <DependentUpon>EmployeeLogIn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomerIDer.resx">
-      <DependentUpon>CustomerIDer.cs</DependentUpon>
+    <EmbeddedResource Include="CustomerTypeForm.resx">
+      <DependentUpon>CustomerTypeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
