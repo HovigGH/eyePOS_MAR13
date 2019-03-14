@@ -51,13 +51,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Emgu.CV">
-      <HintPath>F:\Emgu\emgucv-windows-x86 2.2.1.1150\bin\Emgu.CV.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\TPJ\New folder\FaceRecProOV\bin\Debug\Emgu.CV.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.GPU">
+      <HintPath>..\..\..\..\Desktop\TPJ\New folder\FaceRecProOV\bin\Debug\Emgu.CV.GPU.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.ML">
+      <HintPath>..\..\..\..\Desktop\TPJ\New folder\FaceRecProOV\bin\Debug\Emgu.CV.ML.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.UI">
-      <HintPath>F:\Emgu\emgucv-windows-x86 2.2.1.1150\bin\Emgu.CV.UI.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\TPJ\New folder\FaceRecProOV\bin\Debug\Emgu.CV.UI.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.Util">
-      <HintPath>F:\Emgu\emgucv-windows-x86 2.2.1.1150\bin\Emgu.Util.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\TPJ\New folder\FaceRecProOV\bin\Debug\Emgu.Util.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -70,6 +76,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustForm1.designer.cs">
+      <DependentUpon>CustForm1.cs</DependentUpon>
+    </Compile>
     <Compile Include="customerTypeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,11 +94,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="EigenObjectRecognizer.cs" />
-    <Compile Include="employee settings Form.cs">
+    <Compile Include="EmpSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="employee settings Form.Designer.cs">
-      <DependentUpon>employee settings Form.cs</DependentUpon>
+    <Compile Include="EmpSettings.Designer.cs">
+      <DependentUpon>EmpSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="EmployeeForm1.cs">
       <SubType>Form</SubType>
@@ -100,11 +112,11 @@
     <Compile Include="EmployeeLogIn.Designer.cs">
       <DependentUpon>EmployeeLogIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="CustomerIDer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="CustomerIDer.Designer.cs">
+      <DependentUpon>CustomerIDer.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -120,11 +132,14 @@
     <Compile Include="WelcomeForm.Designer.cs">
       <DependentUpon>WelcomeForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CustForm1.resx">
+      <DependentUpon>CustForm1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="customerTypeForm.resx">
       <DependentUpon>customerTypeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="employee settings Form.resx">
-      <DependentUpon>employee settings Form.cs</DependentUpon>
+    <EmbeddedResource Include="EmpSettings.resx">
+      <DependentUpon>EmpSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EmployeeForm1.resx">
       <DependentUpon>EmployeeForm1.cs</DependentUpon>
@@ -132,8 +147,8 @@
     <EmbeddedResource Include="EmployeeLogIn.resx">
       <DependentUpon>EmployeeLogIn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="CustomerIDer.resx">
+      <DependentUpon>CustomerIDer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

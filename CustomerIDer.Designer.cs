@@ -1,6 +1,6 @@
 ﻿namespace MultiFaceRec
 {
-    partial class Form1
+    partial class CustomerIDer
     {
         /// <summary>
         /// Required designer variable.

@@ -18,21 +18,21 @@ namespace MultiFaceRec
 
         private void btnImEmployee_Click(object sender, EventArgs e)
         {
-
-            // this.Hide();
-            // welcome.ShowDialog();
-            //this.Show();
             EmployeeLogIn employeeLogIn = new EmployeeLogIn();
-            employeeLogIn.Show();
-            this.Hide();
 
-        }
+			this.Hide();
+			employeeLogIn.ShowDialog();
+			this.Show();
+
+		}
 
         private void btnContinue_Click(object sender, EventArgs e)
         {
-           // this.Hide();
-          //  empLogin.ShowDialog();
-           // this.Show();
+			CustomerIDer id = new CustomerIDer();
+
+			this.Hide();
+            id.ShowDialog();
+            this.Show();
           
         }
     }
