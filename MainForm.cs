@@ -36,12 +36,12 @@ namespace MultiFaceRec
         {
             InitializeComponent();
             //Load haarcascades for face detection
-            face = new HaarCascade("haarcascade_frontalface_default.xml");
+            face = new HaarCascade("haarcascade_frontalface_default.xml");    //this file is missing the repos
             //eye = new HaarCascade("haarcascade_eye.xml");
             try
             {
                 //Load of previous trainned faces and labels for each image
-                string Labelsinfo = File.ReadAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt");
+                string Labelsinfo = File.ReadAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt");  //this file is missing the repos
                 string[] Labels = Labelsinfo.Split('%');
                 NumLabels = Convert.ToInt16(Labels[0]);
                 ContTrain = NumLabels;
@@ -50,7 +50,7 @@ namespace MultiFaceRec
                 for (int tf = 1; tf < NumLabels+1; tf++)
                 {
                     LoadFaces = "face" + tf + ".bmp";
-                    trainingImages.Add(new Image<Gray, byte>(Application.StartupPath + "/TrainedFaces/" + LoadFaces));
+                    trainingImages.Add(new Image<Gray, byte>(Application.StartupPath + "/TrainedFaces/" + LoadFaces)); //this file is missing the repos
                     labels.Add(Labels[tf]);
                 }
             

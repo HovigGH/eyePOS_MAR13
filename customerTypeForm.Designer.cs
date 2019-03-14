@@ -31,6 +31,7 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.btnExist = new System.Windows.Forms.Button();
             this.lblIAm = new System.Windows.Forms.Label();
+            this.btnTest = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnNew
@@ -65,15 +66,26 @@
             this.lblIAm.TabIndex = 2;
             this.lblIAm.Text = "I\'m a";
             // 
-            // Form1
+            // btnTest
+            // 
+            this.btnTest.Location = new System.Drawing.Point(2, 72);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(75, 109);
+            this.btnTest.TabIndex = 3;
+            this.btnTest.Text = "Test facial rec";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
+            // CustomerTypeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 282);
+            this.Controls.Add(this.btnTest);
             this.Controls.Add(this.lblIAm);
             this.Controls.Add(this.btnExist);
             this.Controls.Add(this.btnNew);
-            this.Name = "Form1";
+            this.Name = "CustomerTypeForm";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -85,5 +97,6 @@
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Button btnExist;
         private System.Windows.Forms.Label lblIAm;
+        private System.Windows.Forms.Button btnTest;
     }
 }

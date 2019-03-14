@@ -17,8 +17,8 @@ namespace MultiFaceRec
         }
 
         private void btnNew_Click(object sender, EventArgs e)
-        {
-			try
+        {//  facial functions commented out because it's causing exception
+            /*try
 			{
 				FrmPrincipal frmPrincipal = new FrmPrincipal('n');
 
@@ -36,13 +36,18 @@ namespace MultiFaceRec
 				custscan.ShowDialog();
 				this.Close();
 
-			}
+			}*/
+            CustForm1 custscan = new CustForm1();
+
+            this.Hide();
+            custscan.ShowDialog();
+            this.Close();
         }
 
         private void btnExist_Click(object sender, EventArgs e)
         {
 
-			try
+            /*try
 			{
 				FrmPrincipal frmPrincipal = new FrmPrincipal('e');
 
@@ -59,8 +64,18 @@ namespace MultiFaceRec
 				this.Hide();
 				custscan.ShowDialog();
 				this.Close();
-			}
+			}*/
+            CustForm1 custscan = new CustForm1();
 
-		}
+            this.Hide();
+            custscan.ShowDialog();
+            this.Close();
+
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            FrmPrincipal main = new FrmPrincipal('n');
+        }
     }
 }
