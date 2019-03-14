@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using System.Data.OleDb;
 
 namespace MultiFaceRec
 {
@@ -26,7 +27,7 @@ namespace MultiFaceRec
 		private void CustForm1_Load(object sender, EventArgs e)
 		{
 			cartGrid.Columns["deleteCol"].DefaultCellStyle.NullValue = "🗑️"; //Set up the grid
-																			  //Format: Null, int qty, string UPC, string item name, double price
+																			  //Format: Null, int qty, string UPC, string item name, $price
 			barcodeInputTextbox.Select();
 
 			cartGrid.Rows.Add(null, 1, "01052843", "Chocolate Bar", "$2.00"); //RM testing only
@@ -37,11 +38,7 @@ namespace MultiFaceRec
 
 		private void addToCart(string barcode) //TODO: add DB connection to items
 		{
-			bool createNew = true; //Bool to see if a new entry is needed
-
-
-			//TODO: CONNECT TO DATABASE HERE!!! RM
-
+			bool createNew = true; //To see if a new entry is needed
 
 			foreach (DataGridViewRow r in cartGrid.Rows) //If a duplicate item is scanned it increases the amount of items
 			{
@@ -53,9 +50,28 @@ namespace MultiFaceRec
 				}
 			}
 
-			if (createNew == true)
+			if (createNew == true)//DB connection CHANGE VALUES PLS 
 			{
-				cartGrid.Rows.Add(null, 1, barcode, "ItemName", 1.11);
+				string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+				string sqlstr = "SELECT upc_code, item_name, item_price FROM items";
+				DataTable vt = new DataTable();
+
+				try
+				{
+					OleDbDataAdapter dad = new OleDbDataAdapter(sqlstr, constr);
+					dad.Fill(vt);
+					dad.Dispose();
+					dad = null;
+					//cartGrid.DataSource = vt;
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("Error " + ex);
+				}
+
+
+
+				//cartGrid.Rows.Add(null, 1, barcode, "ItemName", "$1.11");
 			}
 		}
 

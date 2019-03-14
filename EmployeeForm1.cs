@@ -79,8 +79,9 @@ namespace MultiFaceRec
         private void btnEmployeeSettings_Click(object sender, EventArgs e)
         {
             employee_settings_Form employee_Settings_Form = new employee_settings_Form();
-            employee_Settings_Form.Show();
-            this.Hide();
+			this.Hide();
+			employee_Settings_Form.ShowDialog();
+			this.Show();
         }
     }
 }
