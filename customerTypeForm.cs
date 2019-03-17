@@ -18,28 +18,31 @@ namespace MultiFaceRec
 
         private void btnNew_Click(object sender, EventArgs e)
         {//  facial functions commented out because it's causing exception
-            /*try
-			{
-				FrmPrincipal frmPrincipal = new FrmPrincipal('n');
+		 /*try
+		 {
+			 FrmPrincipal frmPrincipal = new FrmPrincipal('n');
 
-				this.Hide();
-				frmPrincipal.ShowDialog();
-				this.Close();
-			}
-			catch
-			{
-				MessageBox.Show("Errors with Facial Algorithm or Camera, continuing to scanning.");
+			 this.Hide();
+			 frmPrincipal.ShowDialog();
+			 this.Close();
+		 }
+		 catch
+		 {
+			 MessageBox.Show("Errors with Facial Algorithm or Camera, continuing to scanning.");
 
-				CustForm1 custscan = new CustForm1();
+			 CustForm1 custscan = new CustForm1();
 
-				this.Hide();
-				custscan.ShowDialog();
-				this.Close();
+			 this.Hide();
+			 custscan.ShowDialog();
+			 this.Close();
 
-			}*/
-            CustForm1 custscan = new CustForm1();
+		 }*/
+			UserInfoForm userinfo = new UserInfoForm();
 
-            this.Hide();
+			this.Hide();
+			userinfo.ShowDialog();
+
+			CustScanForm custscan = new CustScanForm();
             custscan.ShowDialog();
             this.Close();
         }
@@ -65,7 +68,7 @@ namespace MultiFaceRec
 				custscan.ShowDialog();
 				this.Close();
 			}*/
-            CustForm1 custscan = new CustForm1();
+            CustScanForm custscan = new CustScanForm();
 
             this.Hide();
             custscan.ShowDialog();

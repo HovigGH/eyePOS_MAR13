@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace MultiFaceRec
 {
-    public partial class EmployeeLogIn : Form
+    public partial class EmployeeLogInForm : Form
     {
         //strings for db
         //connection and sql strings
         string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
         string sqlstr = "SELECT * FROM employee";
-        public EmployeeLogIn()
+        public EmployeeLogInForm()
         {
             InitializeComponent();
 

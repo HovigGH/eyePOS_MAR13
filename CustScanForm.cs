@@ -12,11 +12,11 @@ using System.Data.OleDb;
 
 namespace MultiFaceRec
 {
-	public partial class CustForm1 : Form
+	public partial class CustScanForm : Form
 	{
 		
 
-		public CustForm1()
+		public CustScanForm()
 		{
 			InitializeComponent();
 
@@ -145,7 +145,7 @@ namespace MultiFaceRec
 		{
 			updateTotals();
 			payGB.Visible = true;
-
+			//go to results screen
 		}
 	}
 }

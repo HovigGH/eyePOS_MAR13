@@ -174,7 +174,9 @@ namespace MultiFaceRec
 					//Draw the label for each face detected and recognized
 					try
 					{
+						//MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_TRIPLEX, 0.5d, 0.5d);
 						MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_TRIPLEX, 0.5d, 0.5d);
+
 						currentFrame.Draw(name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.LightGreen));
 					}catch { }
 

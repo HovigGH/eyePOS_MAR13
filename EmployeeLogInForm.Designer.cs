@@ -1,6 +1,6 @@
 ﻿namespace MultiFaceRec
 {
-    partial class EmployeeLogIn
+    partial class EmployeeLogInForm
     {
         /// <summary>
         /// Required designer variable.

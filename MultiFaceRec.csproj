@@ -76,11 +76,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustForm1.cs">
+    <Compile Include="CustScanForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustForm1.designer.cs">
-      <DependentUpon>CustForm1.cs</DependentUpon>
+    <Compile Include="CustScanForm.designer.cs">
+      <DependentUpon>CustScanForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DataGridViewNumericUpDownCell.cs" />
     <Compile Include="DataGridViewNumericUpDownColumn.cs" />
@@ -88,11 +88,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="EigenObjectRecognizer.cs" />
-    <Compile Include="EmpSettings.cs">
+    <Compile Include="EmpSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EmpSettings.Designer.cs">
-      <DependentUpon>EmpSettings.cs</DependentUpon>
+    <Compile Include="EmpSettingsForm.Designer.cs">
+      <DependentUpon>EmpSettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="EmployeeForm1.cs">
       <SubType>Form</SubType>
@@ -100,11 +100,11 @@
     <Compile Include="EmployeeForm1.Designer.cs">
       <DependentUpon>EmployeeForm1.cs</DependentUpon>
     </Compile>
-    <Compile Include="EmployeeLogIn.cs">
+    <Compile Include="EmployeeLogInForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EmployeeLogIn.Designer.cs">
-      <DependentUpon>EmployeeLogIn.cs</DependentUpon>
+    <Compile Include="EmployeeLogInForm.Designer.cs">
+      <DependentUpon>EmployeeLogInForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomerTypeForm.cs">
       <SubType>Form</SubType>
@@ -120,23 +120,29 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInfoForm.Designer.cs">
+      <DependentUpon>UserInfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="WelcomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="WelcomeForm.Designer.cs">
       <DependentUpon>WelcomeForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CustForm1.resx">
-      <DependentUpon>CustForm1.cs</DependentUpon>
+    <EmbeddedResource Include="CustScanForm.resx">
+      <DependentUpon>CustScanForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EmpSettings.resx">
-      <DependentUpon>EmpSettings.cs</DependentUpon>
+    <EmbeddedResource Include="EmpSettingsForm.resx">
+      <DependentUpon>EmpSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EmployeeForm1.resx">
       <DependentUpon>EmployeeForm1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EmployeeLogIn.resx">
-      <DependentUpon>EmployeeLogIn.cs</DependentUpon>
+    <EmbeddedResource Include="EmployeeLogInForm.resx">
+      <DependentUpon>EmployeeLogInForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerTypeForm.resx">
       <DependentUpon>CustomerTypeForm.cs</DependentUpon>
@@ -154,6 +160,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UserInfoForm.resx">
+      <DependentUpon>UserInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WelcomeForm.resx">
       <DependentUpon>WelcomeForm.cs</DependentUpon>
     </EmbeddedResource>

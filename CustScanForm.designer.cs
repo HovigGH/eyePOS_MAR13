@@ -1,5 +1,5 @@
 ﻿namespace MultiFaceRec{
-	partial class CustForm1
+	partial class CustScanForm
 	{
 		/// <summary>
 		/// Required designer variable.
