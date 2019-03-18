@@ -80,5 +80,11 @@ namespace MultiFaceRec
         {
             FrmPrincipal main = new FrmPrincipal('n');
         }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+        }
     }
 }

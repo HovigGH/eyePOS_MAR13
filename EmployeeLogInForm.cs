@@ -103,6 +103,8 @@ namespace MultiFaceRec
         private void btnHome_Click(object sender, EventArgs e)
         {
             this.Close();
+            WelcomeForm welcomeForm = new WelcomeForm();
+            welcomeForm.Show();
         }
     }
 }

@@ -83,5 +83,12 @@ namespace MultiFaceRec
 			employee_Settings_Form.ShowDialog();
 			this.Show();
         }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            WelcomeForm welcomeForm = new WelcomeForm();
+            welcomeForm.Show();
+        }
     }
 }

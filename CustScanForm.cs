@@ -147,5 +147,12 @@ namespace MultiFaceRec
 			payGB.Visible = true;
 			//go to results screen
 		}
-	}
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            WelcomeForm welcomeForm = new WelcomeForm();
+            welcomeForm.Show();
+        }
+    }
 }

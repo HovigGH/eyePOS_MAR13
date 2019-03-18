@@ -13,6 +13,7 @@ namespace MultiFaceRec
     public partial class employee_settings_Form : Form
     {
         string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+        string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
         string accessLevelSelected =  "regular";
         public employee_settings_Form()
         {
@@ -51,7 +52,7 @@ namespace MultiFaceRec
                     {
                         using (var con = new OleDbConnection())
                         {
-                            con.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+                            con.ConnectionString = connectionStr;
                             con.Open();
 
                             using (var com = new OleDbCommand())
@@ -88,7 +89,7 @@ namespace MultiFaceRec
                 {
                     using (var con = new OleDbConnection())
                     {
-                        con.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+                        con.ConnectionString = connectionStr;
                         con.Open();
 
                         using (var com = new OleDbCommand())
@@ -123,7 +124,7 @@ namespace MultiFaceRec
                 {
                     using (var con = new OleDbConnection())
                     {
-                        con.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+                        con.ConnectionString = connectionStr;
                         con.Open();
 
                         using (var com = new OleDbCommand())

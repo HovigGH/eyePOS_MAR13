@@ -95,9 +95,10 @@
             // 
             // btnHome
             // 
-            this.btnHome.Location = new System.Drawing.Point(3, 161);
+            this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHome.Location = new System.Drawing.Point(3, 120);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(60, 41);
+            this.btnHome.Size = new System.Drawing.Size(64, 82);
             this.btnHome.TabIndex = 6;
             this.btnHome.Text = "Home ";
             this.btnHome.UseVisualStyleBackColor = true;
@@ -113,7 +114,7 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // EmployeeLogIn
+            // EmployeeLogInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -126,7 +127,7 @@
             this.Controls.Add(this.lblUserName);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUserName);
-            this.Name = "EmployeeLogIn";
+            this.Name = "EmployeeLogInForm";
             this.Text = "empFormLogIn";
             this.ResumeLayout(false);
             this.PerformLayout();

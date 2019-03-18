@@ -32,6 +32,7 @@
             this.btnExist = new System.Windows.Forms.Button();
             this.lblIAm = new System.Windows.Forms.Label();
             this.btnTest = new System.Windows.Forms.Button();
+            this.btnHome = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnNew
@@ -76,11 +77,22 @@
             this.btnTest.UseVisualStyleBackColor = true;
             this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
+            // btnHome
+            // 
+            this.btnHome.Location = new System.Drawing.Point(2, 187);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(75, 83);
+            this.btnHome.TabIndex = 4;
+            this.btnHome.Text = "Home";
+            this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
+            // 
             // CustomerTypeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 282);
+            this.Controls.Add(this.btnHome);
             this.Controls.Add(this.btnTest);
             this.Controls.Add(this.lblIAm);
             this.Controls.Add(this.btnExist);
@@ -98,5 +110,6 @@
         private System.Windows.Forms.Button btnExist;
         private System.Windows.Forms.Label lblIAm;
         private System.Windows.Forms.Button btnTest;
+        private System.Windows.Forms.Button btnHome;
     }
 }

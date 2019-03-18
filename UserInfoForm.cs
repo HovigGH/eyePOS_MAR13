@@ -21,5 +21,12 @@ namespace MultiFaceRec
 			//submit
 			this.Close();
 		}
-	}
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            WelcomeForm welcomeForm = new WelcomeForm();
+            welcomeForm.Show();
+        }
+    }
 }
