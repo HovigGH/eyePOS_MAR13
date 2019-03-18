@@ -33,7 +33,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.emailTB = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerDOB = new System.Windows.Forms.DateTimePicker();
             this.addressTB = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.postalTB = new System.Windows.Forms.TextBox();
@@ -96,14 +96,15 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Date of Birth";
             // 
-            // dateTimePicker1
+            // dateTimePickerDOB
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(16, 138);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(220, 26);
-            this.dateTimePicker1.TabIndex = 6;
+            this.dateTimePickerDOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerDOB.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePickerDOB.Location = new System.Drawing.Point(16, 138);
+            this.dateTimePickerDOB.Name = "dateTimePickerDOB";
+            this.dateTimePickerDOB.Size = new System.Drawing.Size(220, 26);
+            this.dateTimePickerDOB.TabIndex = 6;
+            this.dateTimePickerDOB.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChange);
             // 
             // addressTB
             // 
@@ -162,6 +163,7 @@
             this.maleRadio.TabStop = true;
             this.maleRadio.Text = "Male";
             this.maleRadio.UseVisualStyleBackColor = true;
+            this.maleRadio.CheckedChanged += new System.EventHandler(this.radioBtns_CheckedChanged);
             // 
             // femaleRadio
             // 
@@ -174,6 +176,7 @@
             this.femaleRadio.TabStop = true;
             this.femaleRadio.Text = "Female";
             this.femaleRadio.UseVisualStyleBackColor = true;
+            this.femaleRadio.CheckedChanged += new System.EventHandler(this.radioBtns_CheckedChanged);
             // 
             // otherRadio
             // 
@@ -186,6 +189,7 @@
             this.otherRadio.TabStop = true;
             this.otherRadio.Text = "Other";
             this.otherRadio.UseVisualStyleBackColor = true;
+            this.otherRadio.CheckedChanged += new System.EventHandler(this.radioBtns_CheckedChanged);
             // 
             // pictureBox1
             // 
@@ -253,7 +257,7 @@
             this.Controls.Add(this.postalTB);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.addressTB);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dateTimePickerDOB);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.emailTB);
@@ -274,7 +278,7 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.TextBox emailTB;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.DateTimePicker dateTimePicker1;
+		private System.Windows.Forms.DateTimePicker dateTimePickerDOB;
 		private System.Windows.Forms.TextBox addressTB;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TextBox postalTB;

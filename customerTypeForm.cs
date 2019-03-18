@@ -17,7 +17,9 @@ namespace MultiFaceRec
         }
 
         private void btnNew_Click(object sender, EventArgs e)
-        {//  facial functions commented out because it's causing exception
+        {
+
+                //  facial functions commented out because it's causing exception
 		 /*try
 		 {
 			 FrmPrincipal frmPrincipal = new FrmPrincipal('n');
@@ -42,8 +44,8 @@ namespace MultiFaceRec
 			this.Hide();
 			userinfo.ShowDialog();
 
-			CustScanForm custscan = new CustScanForm();
-            custscan.ShowDialog();
+			//CustScanForm custscan = new CustScanForm();
+            //custscan.ShowDialog();
             this.Close();
         }
 
