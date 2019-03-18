@@ -81,6 +81,7 @@ namespace MultiFaceRec
         private void btnTest_Click(object sender, EventArgs e)
         {
             FrmPrincipal main = new FrmPrincipal('n');
+            main.Show();
         }
 
         private void btnHome_Click(object sender, EventArgs e)
