@@ -111,6 +111,12 @@ namespace MultiFaceRec
 
 		}
 
+		private void skipButton_Click(object sender, EventArgs e)
+		{
+			this.Close();
+
+		}
+
 		private void radioBtns_CheckedChanged(object sender, EventArgs e)
         {
             gender = true;

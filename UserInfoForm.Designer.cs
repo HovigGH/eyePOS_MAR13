@@ -47,6 +47,7 @@
 			this.label7 = new System.Windows.Forms.Label();
 			this.countryTB = new System.Windows.Forms.TextBox();
 			this.btnHome = new System.Windows.Forms.Button();
+			this.skipButton = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -202,9 +203,9 @@
 			// submitButton
 			// 
 			this.submitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.submitButton.Location = new System.Drawing.Point(99, 496);
+			this.submitButton.Location = new System.Drawing.Point(182, 496);
 			this.submitButton.Name = "submitButton";
-			this.submitButton.Size = new System.Drawing.Size(266, 56);
+			this.submitButton.Size = new System.Drawing.Size(183, 56);
 			this.submitButton.TabIndex = 19;
 			this.submitButton.Text = "Submit";
 			this.submitButton.UseVisualStyleBackColor = true;
@@ -239,11 +240,23 @@
 			this.btnHome.UseVisualStyleBackColor = true;
 			this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
 			// 
+			// skipButton
+			// 
+			this.skipButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.skipButton.Location = new System.Drawing.Point(99, 497);
+			this.skipButton.Name = "skipButton";
+			this.skipButton.Size = new System.Drawing.Size(77, 56);
+			this.skipButton.TabIndex = 23;
+			this.skipButton.Text = "Skip Info";
+			this.skipButton.UseVisualStyleBackColor = true;
+			this.skipButton.Click += new System.EventHandler(this.skipButton_Click);
+			// 
 			// UserInfoForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(886, 565);
+			this.Controls.Add(this.skipButton);
 			this.Controls.Add(this.btnHome);
 			this.Controls.Add(this.countryTB);
 			this.Controls.Add(this.label7);
@@ -293,5 +306,6 @@
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.TextBox countryTB;
         private System.Windows.Forms.Button btnHome;
-    }
+		private System.Windows.Forms.Button skipButton;
+	}
 }

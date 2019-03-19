@@ -34,7 +34,7 @@ namespace MultiFaceRec
         int ContTrain, NumLabels, t;
         string name, names = null;
 
-        public CustScanForm(string beenCalledBy)
+        public CustScanForm()
 		{
             /*if (beenCalledBy == "EmployeeLogInForm")
                  groupBox1.Visible = true;
@@ -44,14 +44,15 @@ namespace MultiFaceRec
             InitializeComponent();
 
             groupBox1.Visible = false;
-			this.KeyPreview = true; //Needed to enable Keypress function
-            //Load haarcascades for face detection
-            face = new HaarCascade("haarcascade_frontalface_default.xml");    //this file is missing the repos
-            //eye = new HaarCascade("haarcascade_eye.xml");
+
             try
             {
-                //Load of previous trainned faces and labels for each image
-                string Labelsinfo = File.ReadAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt");  //this file is missing the repos
+				this.KeyPreview = true; //Needed to enable Keypress function
+										//Load haarcascades for face detection
+				face = new HaarCascade("haarcascade_frontalface_default.xml");    //this file is missing the repos
+																				  //eye = new HaarCascade("haarcascade_eye.xml");
+																				  //Load of previous trainned faces and labels for each image
+				string Labelsinfo = File.ReadAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt");  //this file is missing the repos
                 string[] Labels = Labelsinfo.Split('%');
                 NumLabels = Convert.ToInt16(Labels[0]);
                 ContTrain = NumLabels;
@@ -230,6 +231,12 @@ namespace MultiFaceRec
 
 			if (createNew == true)//DB connection CHANGE VALUES PLS 
 			{
+				string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+				var con = new OleDbConnection();
+				con.ConnectionString = connectionStr;
+				con.Open();
+
+
 				string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
 				string sqlstr = "SELECT upc_code, item_name, item_price FROM items";
 				DataTable vt = new DataTable();
@@ -244,7 +251,8 @@ namespace MultiFaceRec
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show("Error " + ex);
+					MessageBox.Show("Database error! Please use a different checkout.");
+					this.Close();
 				}
 				//cartGrid.Rows.Add(null, 1, barcode, "ItemName", "$1.11");
 			}
