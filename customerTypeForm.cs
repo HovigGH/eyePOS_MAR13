@@ -70,8 +70,7 @@ namespace MultiFaceRec
 				custscan.ShowDialog();
 				this.Close();
 			}*/
-            CustScanForm custscan = new CustScanForm();
-
+            CustScanForm custscan = new CustScanForm("CustomerTypeForm");
             this.Hide();
             custscan.ShowDialog();
             this.Close();

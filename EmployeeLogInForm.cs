@@ -14,12 +14,14 @@ namespace MultiFaceRec
     {
         //strings for db
         //connection and sql strings
+        //this form is called by welcome Form and CustScanForm
+        string beenCalledBy = "";
         string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
         string sqlstr = "SELECT * FROM employee";
-        public EmployeeLogInForm()
+        public EmployeeLogInForm(string text)
         {
+            beenCalledBy = text;
             InitializeComponent();
-
         }
 
         private void btnLogIn_Click(object sender, EventArgs e)
@@ -51,15 +53,30 @@ namespace MultiFaceRec
                             if (Convert.ToString(vt.Rows[i][3]) == txtPassword.Text)
                             {
                                 authorize = true;
-                                if (Convert.ToString(vt.Rows[i][4]) == "admin")
+
+                                 if (beenCalledBy == "WelcomeForm" && Convert.ToString(vt.Rows[i][4]) == "admin")
+                                 {
+                                     EmployeeForm1 employeeForm1 = new EmployeeForm1("admin");
+                                     this.Hide();
+                                     employeeForm1.Show();
+                                 }
+
+                                 if (beenCalledBy == "WelcomeForm" && Convert.ToString(vt.Rows[i][4]) == "regular")
+                                 {
+                                     EmployeeForm1 employeeForm1 = new EmployeeForm1("regular");
+                                     this.Hide();
+                                     employeeForm1.Show();
+                                 }
+                                
+                                else if (beenCalledBy == "CustScanForm")
                                 {
-                                    EmployeeForm1 employeeForm1 = new EmployeeForm1("admin");
+                                    CustScanForm custScanForm = new CustScanForm("EmployeeLogInForm");
+                                    custScanForm.Show();
                                     this.Hide();
-                                    employeeForm1.Show();
                                 }
                             }
-                        }
 
+                        }
                     }
                     if (!authorize)
                     {

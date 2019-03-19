@@ -34,9 +34,16 @@ namespace MultiFaceRec
         int ContTrain, NumLabels, t;
         string name, names = null;
 
-        public CustScanForm()
+        public CustScanForm(string beenCalledBy)
 		{
-			InitializeComponent();
+            /*if (beenCalledBy == "EmployeeLogInForm")
+                 groupBox1.Visible = true;
+             else if (beenCalledBy == "CustomerTypeForm")
+                 groupBox1.Visible = false;*/
+ 
+            InitializeComponent();
+
+            groupBox1.Visible = false;
 			this.KeyPreview = true; //Needed to enable Keypress function
             //Load haarcascades for face detection
             face = new HaarCascade("haarcascade_frontalface_default.xml");    //this file is missing the repos
@@ -294,6 +301,12 @@ namespace MultiFaceRec
         private void button1_Click_1(object sender, EventArgs e)
         {
             detect_reocgnize();
+        }
+
+        private void btnEmployeeSettings_Click(object sender, EventArgs e)
+        {
+            EmployeeLogInForm employeeLogInForm = new EmployeeLogInForm("CustScanForm");
+            employeeLogInForm.Show();
         }
 
         private void CustForm1_KeyDown_1(object sender, KeyEventArgs e)

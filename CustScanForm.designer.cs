@@ -61,17 +61,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.imageBox1 = new Emgu.CV.UI.ImageBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.imageBoxFrameGrabber = new Emgu.CV.UI.ImageBox();
+            this.btnEmployeeSettings = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.cartGrid)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.payGB.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).BeginInit();
@@ -361,7 +360,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(6, 87);
+            this.label5.Location = new System.Drawing.Point(182, 94);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(116, 15);
             this.label5.TabIndex = 17;
@@ -372,7 +371,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Blue;
-            this.label4.Location = new System.Drawing.Point(6, 111);
+            this.label4.Location = new System.Drawing.Point(182, 118);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 19);
             this.label4.TabIndex = 16;
@@ -383,7 +382,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(187, 18);
+            this.label3.Location = new System.Drawing.Point(368, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(16, 16);
             this.label3.TabIndex = 15;
@@ -393,7 +392,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(7, 18);
+            this.label2.Location = new System.Drawing.Point(183, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(179, 15);
             this.label2.TabIndex = 14;
@@ -402,27 +401,13 @@
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button1.Location = new System.Drawing.Point(6, 36);
+            this.button1.Location = new System.Drawing.Point(186, 43);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(79, 48);
+            this.button1.Size = new System.Drawing.Size(112, 48);
             this.button1.TabIndex = 2;
             this.button1.Text = "Detect and recognize";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Location = new System.Drawing.Point(207, 289);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(209, 170);
-            this.groupBox2.TabIndex = 30;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Results: ";
             // 
             // imageBox1
             // 
@@ -435,13 +420,19 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.imageBoxFrameGrabber);
             this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.imageBox1);
             this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(9, 289);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(184, 188);
+            this.groupBox1.Size = new System.Drawing.Size(406, 425);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Training: ";
@@ -457,17 +448,17 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(55, 157);
+            this.textBox1.Location = new System.Drawing.Point(62, 154);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(97, 20);
+            this.textBox1.Size = new System.Drawing.Size(112, 20);
             this.textBox1.TabIndex = 7;
             // 
             // button2
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button2.Location = new System.Drawing.Point(156, 157);
+            this.button2.Location = new System.Drawing.Point(11, 173);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(28, 31);
+            this.button2.Size = new System.Drawing.Size(53, 31);
             this.button2.TabIndex = 3;
             this.button2.Text = "Add face";
             this.button2.UseVisualStyleBackColor = true;
@@ -476,20 +467,29 @@
             // imageBoxFrameGrabber
             // 
             this.imageBoxFrameGrabber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imageBoxFrameGrabber.Location = new System.Drawing.Point(20, 483);
+            this.imageBoxFrameGrabber.Location = new System.Drawing.Point(17, 204);
             this.imageBoxFrameGrabber.Name = "imageBoxFrameGrabber";
             this.imageBoxFrameGrabber.Size = new System.Drawing.Size(368, 215);
             this.imageBoxFrameGrabber.TabIndex = 18;
             this.imageBoxFrameGrabber.TabStop = false;
+            // 
+            // btnEmployeeSettings
+            // 
+            this.btnEmployeeSettings.Location = new System.Drawing.Point(1272, 12);
+            this.btnEmployeeSettings.Name = "btnEmployeeSettings";
+            this.btnEmployeeSettings.Size = new System.Drawing.Size(75, 38);
+            this.btnEmployeeSettings.TabIndex = 30;
+            this.btnEmployeeSettings.Text = "Employee Settings";
+            this.btnEmployeeSettings.UseVisualStyleBackColor = true;
+            this.btnEmployeeSettings.Click += new System.EventHandler(this.btnEmployeeSettings_Click);
             // 
             // CustScanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1350, 749);
+            this.Controls.Add(this.btnEmployeeSettings);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.imageBoxFrameGrabber);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.payGB);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -508,8 +508,6 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.payGB.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -553,12 +551,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.GroupBox groupBox2;
         private Emgu.CV.UI.ImageBox imageBox1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;
         private Emgu.CV.UI.ImageBox imageBoxFrameGrabber;
+        private System.Windows.Forms.Button btnEmployeeSettings;
     }
 }

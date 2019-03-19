@@ -15,10 +15,10 @@ namespace MultiFaceRec
         {
             InitializeComponent();
         }
-
+        
         private void btnImEmployee_Click(object sender, EventArgs e)
         {
-            EmployeeLogInForm employeeLogIn = new EmployeeLogInForm();
+            EmployeeLogInForm employeeLogIn = new EmployeeLogInForm("WelcomeForm");
             employeeLogIn.Show();
 
     
