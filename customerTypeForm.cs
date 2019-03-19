@@ -44,8 +44,8 @@ namespace MultiFaceRec
 			this.Hide();
 			userinfo.ShowDialog();
 
-			//CustScanForm custscan = new CustScanForm();
-            //custscan.ShowDialog();
+			CustScanForm custscan = new CustScanForm();
+            custscan.ShowDialog();
             this.Close();
         }
 

@@ -17,8 +17,9 @@ namespace MultiFaceRec
         bool dateOfBithChecked = false, gender = false;
 		public UserInfoForm()
 		{
-            dateTimePickerDOB.CustomFormat = "dd-MM-yyyy";
             InitializeComponent();
+			dateTimePickerDOB.CustomFormat = "dd-MM-yyyy";
+
 		}
 
 		private void submitButton_Click(object sender, EventArgs e)
@@ -48,11 +49,11 @@ namespace MultiFaceRec
                             com.ExecuteNonQuery();
                             }
                         }
-                        MessageBox.Show("Added, New Customer Profile has been created");
+                        MessageBox.Show("A new customer profile has been created.");
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Not saved: " + ex.Message);
+                        MessageBox.Show("Not Saved: " + ex.Message);
                     }
               
                 this.Close();
@@ -75,17 +76,17 @@ namespace MultiFaceRec
         {
             if (nameTB.Text == "" || emailTB.Text == "" || countryTB.Text == "" || addressTB.Text == "" || postalTB.Text == "")
             {
-                MessageBox.Show("Fill in all the fields");
+                MessageBox.Show("Please fill in all the fields.");
                 return false;
             }
             else if (dateOfBithChecked == false)
             {
-                MessageBox.Show("Enter date of birth");
+                MessageBox.Show("Please enter your date of birth.");
                 return false;
             }
             else if (gender == false)
             {
-                MessageBox.Show("Select gender");
+                MessageBox.Show("Please select a gender.");
                 return false;
             }
             return true;
@@ -100,12 +101,17 @@ namespace MultiFaceRec
                 return true;
             }
             else
-                MessageBox.Show("No Change", title);
+                MessageBox.Show("No Changes.", title);
 
             return false;
         }
 
-        private void radioBtns_CheckedChanged(object sender, EventArgs e)
+		private void UserInfoForm_Load(object sender, EventArgs e)
+		{
+
+		}
+
+		private void radioBtns_CheckedChanged(object sender, EventArgs e)
         {
             gender = true;
         }
