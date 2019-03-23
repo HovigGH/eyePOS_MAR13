@@ -18,12 +18,11 @@ namespace MultiFaceRec
         
         private void btnImEmployee_Click(object sender, EventArgs e)
         {
-            EmployeeLogInForm employeeLogIn = new EmployeeLogInForm("WelcomeForm");
-            employeeLogIn.Show();
-
-    
 			this.Hide();
-
+			EmployeeLogInForm employeeLogIn = new EmployeeLogInForm("WelcomeForm");
+            employeeLogIn.ShowDialog();
+			this.Show();
+    
 		}
 
         private void btnContinue_Click(object sender, EventArgs e)

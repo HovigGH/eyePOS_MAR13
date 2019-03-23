@@ -56,23 +56,29 @@ namespace MultiFaceRec
 
                                  if (beenCalledBy == "WelcomeForm" && Convert.ToString(vt.Rows[i][4]) == "admin")
                                  {
-                                     EmployeeForm1 employeeForm1 = new EmployeeForm1("admin");
-                                     this.Hide();
-                                     employeeForm1.Show();
-                                 }
+									this.Hide();
+
+									EmployeeForm1 employeeForm1 = new EmployeeForm1("admin");
+									employeeForm1.ShowDialog();
+									this.Close();
+								}
 
                                  if (beenCalledBy == "WelcomeForm" && Convert.ToString(vt.Rows[i][4]) == "regular")
                                  {
-                                     EmployeeForm1 employeeForm1 = new EmployeeForm1("regular");
-                                     this.Hide();
-                                     employeeForm1.Show();
+									this.Hide();
+
+									EmployeeForm1 employeeForm1 = new EmployeeForm1("regular");
+									employeeForm1.ShowDialog();
+									this.Close();
                                  }
                                 
                                 else if (beenCalledBy == "CustScanForm")
                                 {
-                                    CustScanForm custScanForm = new CustScanForm("EmployeeLogInForm");
-                                    custScanForm.Show();
-                                    this.Hide();
+									this.Hide();
+
+									CustScanForm custScanForm = new CustScanForm();
+                                    custScanForm.ShowDialog();
+									this.Close();
                                 }
                             }
 
@@ -85,13 +91,13 @@ namespace MultiFaceRec
                 }
                 else
                 {
-                    MessageBox.Show("Enter a valid username");
+                    MessageBox.Show("Please enter a valid username.");
                     txtUserName.Text = "";
                     txtPassword.Text = "";
                 }
             }
             else
-                MessageBox.Show("Eneter user Id and password to log in");
+                MessageBox.Show("Enter a User ID and password to log in.");
 
         }
         bool valid()
@@ -120,8 +126,6 @@ namespace MultiFaceRec
         private void btnHome_Click(object sender, EventArgs e)
         {
             this.Close();
-            WelcomeForm welcomeForm = new WelcomeForm();
-            welcomeForm.Show();
         }
     }
 }

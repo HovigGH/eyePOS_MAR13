@@ -28,9 +28,9 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-			this.callhelpButton = new System.Windows.Forms.Button();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+			this.empButton = new System.Windows.Forms.Button();
 			this.lblPlsScan = new System.Windows.Forms.Label();
 			this.cartGrid = new System.Windows.Forms.DataGridView();
 			this.deleteCol = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -52,11 +52,6 @@
 			this.label11 = new System.Windows.Forms.Label();
 			this.totalLabel = new System.Windows.Forms.Label();
 			this.taxLabel = new System.Windows.Forms.Label();
-			this.btnCash = new System.Windows.Forms.Button();
-			this.btnCredit = new System.Windows.Forms.Button();
-			this.btnDebit = new System.Windows.Forms.Button();
-			this.btnGift = new System.Windows.Forms.Button();
-			this.payGB = new System.Windows.Forms.GroupBox();
 			this.btnHome = new System.Windows.Forms.Button();
 			this.label5 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
@@ -71,21 +66,22 @@
 			this.button2 = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.cartGrid)).BeginInit();
 			this.tableLayoutPanel1.SuspendLayout();
-			this.payGB.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// callhelpButton
+			// empButton
 			// 
-			this.callhelpButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.callhelpButton.Location = new System.Drawing.Point(122, 211);
-			this.callhelpButton.Name = "callhelpButton";
-			this.callhelpButton.Size = new System.Drawing.Size(92, 72);
-			this.callhelpButton.TabIndex = 3;
-			this.callhelpButton.Text = "Call for Assistance";
-			this.callhelpButton.UseVisualStyleBackColor = true;
+			this.empButton.BackColor = System.Drawing.Color.Salmon;
+			this.empButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.empButton.Location = new System.Drawing.Point(92, 211);
+			this.empButton.Name = "empButton";
+			this.empButton.Size = new System.Drawing.Size(127, 72);
+			this.empButton.TabIndex = 3;
+			this.empButton.Text = "Employee Menu";
+			this.empButton.UseVisualStyleBackColor = false;
+			this.empButton.Click += new System.EventHandler(this.empButton_Click);
 			// 
 			// lblPlsScan
 			// 
@@ -104,14 +100,14 @@
 			this.cartGrid.AllowUserToResizeColumns = false;
 			this.cartGrid.AllowUserToResizeRows = false;
 			this.cartGrid.BackgroundColor = System.Drawing.Color.White;
-			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-			dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.cartGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+			dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.cartGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
 			this.cartGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.cartGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.deleteCol,
@@ -119,14 +115,14 @@
             this.codeCol,
             this.itemCol,
             this.priceCol});
-			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-			dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.cartGrid.DefaultCellStyle = dataGridViewCellStyle10;
+			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+			dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.cartGrid.DefaultCellStyle = dataGridViewCellStyle12;
 			this.cartGrid.Location = new System.Drawing.Point(421, 12);
 			this.cartGrid.Name = "cartGrid";
 			this.cartGrid.RowHeadersVisible = false;
@@ -223,13 +219,14 @@
 			// 
 			// checkOutButton
 			// 
+			this.checkOutButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
 			this.checkOutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.checkOutButton.Location = new System.Drawing.Point(225, 211);
 			this.checkOutButton.Name = "checkOutButton";
 			this.checkOutButton.Size = new System.Drawing.Size(190, 72);
 			this.checkOutButton.TabIndex = 14;
 			this.checkOutButton.Text = "Check Out";
-			this.checkOutButton.UseVisualStyleBackColor = true;
+			this.checkOutButton.UseVisualStyleBackColor = false;
 			this.checkOutButton.Click += new System.EventHandler(this.checkOutButton_Click);
 			// 
 			// tableLayoutPanel1
@@ -258,7 +255,7 @@
 			// 
 			this.label9.AutoSize = true;
 			this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label9.Location = new System.Drawing.Point(522, 1);
+			this.label9.Location = new System.Drawing.Point(524, 1);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(48, 20);
 			this.label9.TabIndex = 21;
@@ -288,7 +285,7 @@
 			// 
 			this.label11.AutoSize = true;
 			this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label11.Location = new System.Drawing.Point(263, 1);
+			this.label11.Location = new System.Drawing.Point(264, 1);
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(101, 20);
 			this.label11.TabIndex = 20;
@@ -298,7 +295,7 @@
 			// 
 			this.totalLabel.AutoSize = true;
 			this.totalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.totalLabel.Location = new System.Drawing.Point(522, 25);
+			this.totalLabel.Location = new System.Drawing.Point(524, 25);
 			this.totalLabel.Name = "totalLabel";
 			this.totalLabel.Size = new System.Drawing.Size(79, 20);
 			this.totalLabel.TabIndex = 22;
@@ -308,74 +305,22 @@
 			// 
 			this.taxLabel.AutoSize = true;
 			this.taxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.taxLabel.Location = new System.Drawing.Point(263, 25);
+			this.taxLabel.Location = new System.Drawing.Point(264, 25);
 			this.taxLabel.Name = "taxLabel";
 			this.taxLabel.Size = new System.Drawing.Size(69, 20);
 			this.taxLabel.TabIndex = 23;
 			this.taxLabel.Text = "taxLabel";
 			// 
-			// btnCash
-			// 
-			this.btnCash.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnCash.Location = new System.Drawing.Point(7, 13);
-			this.btnCash.Name = "btnCash";
-			this.btnCash.Size = new System.Drawing.Size(75, 50);
-			this.btnCash.TabIndex = 24;
-			this.btnCash.Text = "Cash";
-			this.btnCash.UseVisualStyleBackColor = true;
-			// 
-			// btnCredit
-			// 
-			this.btnCredit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnCredit.Location = new System.Drawing.Point(218, 13);
-			this.btnCredit.Name = "btnCredit";
-			this.btnCredit.Size = new System.Drawing.Size(75, 50);
-			this.btnCredit.TabIndex = 25;
-			this.btnCredit.Text = "Credit Card";
-			this.btnCredit.UseVisualStyleBackColor = true;
-			// 
-			// btnDebit
-			// 
-			this.btnDebit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnDebit.Location = new System.Drawing.Point(325, 13);
-			this.btnDebit.Name = "btnDebit";
-			this.btnDebit.Size = new System.Drawing.Size(75, 50);
-			this.btnDebit.TabIndex = 26;
-			this.btnDebit.Text = "Debit Card";
-			this.btnDebit.UseVisualStyleBackColor = true;
-			// 
-			// btnGift
-			// 
-			this.btnGift.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnGift.Location = new System.Drawing.Point(113, 13);
-			this.btnGift.Name = "btnGift";
-			this.btnGift.Size = new System.Drawing.Size(75, 50);
-			this.btnGift.TabIndex = 27;
-			this.btnGift.Text = "Gift Card";
-			this.btnGift.UseVisualStyleBackColor = true;
-			// 
-			// payGB
-			// 
-			this.payGB.Controls.Add(this.btnCash);
-			this.payGB.Controls.Add(this.btnGift);
-			this.payGB.Controls.Add(this.btnCredit);
-			this.payGB.Controls.Add(this.btnDebit);
-			this.payGB.Location = new System.Drawing.Point(9, 2);
-			this.payGB.Name = "payGB";
-			this.payGB.Size = new System.Drawing.Size(406, 69);
-			this.payGB.TabIndex = 28;
-			this.payGB.TabStop = false;
-			this.payGB.Text = "Payment";
-			// 
 			// btnHome
 			// 
-			this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnHome.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnHome.Location = new System.Drawing.Point(9, 211);
 			this.btnHome.Name = "btnHome";
 			this.btnHome.Size = new System.Drawing.Size(77, 72);
 			this.btnHome.TabIndex = 29;
 			this.btnHome.Text = "Home";
-			this.btnHome.UseVisualStyleBackColor = true;
+			this.btnHome.UseVisualStyleBackColor = false;
 			this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
 			// 
 			// label5
@@ -503,23 +448,21 @@
 			this.ClientSize = new System.Drawing.Size(1210, 749);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.btnHome);
-			this.Controls.Add(this.payGB);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.checkOutButton);
 			this.Controls.Add(this.lblOrEnter);
 			this.Controls.Add(this.barcodeInputTextbox);
 			this.Controls.Add(this.cartGrid);
 			this.Controls.Add(this.lblPlsScan);
-			this.Controls.Add(this.callhelpButton);
+			this.Controls.Add(this.empButton);
 			this.Name = "CustScanForm";
-			this.Text = "CustForm1";
+			this.Text = "Scanning Items";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.Load += new System.EventHandler(this.CustForm1_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CustForm1_KeyDown_1);
 			((System.ComponentModel.ISupportInitialize)(this.cartGrid)).EndInit();
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
-			this.payGB.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.imageBox1)).EndInit();
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
@@ -530,7 +473,7 @@
 		}
 
 		#endregion
-		private System.Windows.Forms.Button callhelpButton;
+		private System.Windows.Forms.Button empButton;
 		private System.Windows.Forms.Label lblPlsScan;
 		private System.Windows.Forms.DataGridView cartGrid;
 		private System.Windows.Forms.TextBox barcodeInputTextbox;
@@ -552,11 +495,6 @@
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.Label label11;
-		private System.Windows.Forms.Button btnCash;
-		private System.Windows.Forms.Button btnCredit;
-		private System.Windows.Forms.Button btnDebit;
-		private System.Windows.Forms.Button btnGift;
-		private System.Windows.Forms.GroupBox payGB;
         private System.Windows.Forms.Button btnHome;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;

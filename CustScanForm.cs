@@ -211,7 +211,6 @@ namespace MultiFaceRec
 
 			cartGrid.Rows.Add(null, 1, "01052843", "Chocolate Bar", "$2.00"); //RM testing only
 			updateTotals();
-			payGB.Visible = false;
 		}
 
 
@@ -311,13 +310,13 @@ namespace MultiFaceRec
             detect_reocgnize();
         }
 
-        private void btnEmployeeSettings_Click(object sender, EventArgs e)
-        {
-            EmployeeLogInForm employeeLogInForm = new EmployeeLogInForm("CustScanForm");
-            employeeLogInForm.Show();
-        }
+		private void empButton_Click(object sender, EventArgs e)
+		{
+			EmployeeLogInForm employeeLogInForm = new EmployeeLogInForm("CustScanForm");
+			employeeLogInForm.Show();
+		}
 
-        private void CustForm1_KeyDown_1(object sender, KeyEventArgs e)
+		private void CustForm1_KeyDown_1(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
 			{
@@ -333,7 +332,6 @@ namespace MultiFaceRec
 		private void checkOutButton_Click(object sender, EventArgs e)
 		{
 			updateTotals();
-			payGB.Visible = true;
 			//go to results screen
 		}
 

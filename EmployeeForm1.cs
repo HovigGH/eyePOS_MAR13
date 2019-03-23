@@ -12,25 +12,45 @@ namespace MultiFaceRec
 {
     public partial class EmployeeForm1 : Form
     {
-        
+    
         public EmployeeForm1(string accessLevel)
         {
             InitializeComponent();
+
             displayDataGridView();
+
             if (accessLevel == "admin")
-            {
                 btnEmployeeSettings.Visible = true;
-            }
             else
-            {
                 btnEmployeeSettings.Visible = false;
-            }
         }
 
         private void upcSearchButton_Click(object sender, EventArgs e)
         {
+			string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+			string sqlstr = "SELECT * FROM items WHERE barcode = @barcode";
 
-        }
+			string value = searchTextBox.Text;
+
+			DataTable dt = new DataTable();
+
+
+			using (OleDbConnection connection = new OleDbConnection(constr))
+			{
+				OleDbDataAdapter adapter = new OleDbDataAdapter();
+
+				OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
+				adapter.SelectCommand = selectCMD;
+
+				// Add parameters and set values.  
+				selectCMD.Parameters.Add(
+				  "@BarCode", OleDbType.VarChar, 18).Value = value;
+
+				adapter.Fill(dt);
+				dgvInventory.ReadOnly = true;
+				dgvInventory.DataSource = dt;
+			}
+		}
 
         private void btnNameSearchButton_Click(object sender, EventArgs e)
         {
@@ -87,8 +107,11 @@ namespace MultiFaceRec
         private void btnHome_Click(object sender, EventArgs e)
         {
             this.Close();
-            WelcomeForm welcomeForm = new WelcomeForm();
-            welcomeForm.Show();
         }
-    }
+
+		private void clearButton_Click(object sender, EventArgs e)
+		{
+			searchTextBox.Text = "";
+		}
+	}
 }
