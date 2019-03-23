@@ -311,13 +311,13 @@ namespace MultiFaceRec
             detect_reocgnize();
         }
 
-        private void btnEmployeeSettings_Click(object sender, EventArgs e)
-        {
-            EmployeeLogInForm employeeLogInForm = new EmployeeLogInForm("CustScanForm");
-            employeeLogInForm.Show();
-        }
+		private void empButton_Click(object sender, EventArgs e)
+		{
+			EmployeeLogInForm employeeLogInForm = new EmployeeLogInForm("CustScanForm");
+			employeeLogInForm.Show();
+		}
 
-        private void CustForm1_KeyDown_1(object sender, KeyEventArgs e)
+		private void CustForm1_KeyDown_1(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
 			{
