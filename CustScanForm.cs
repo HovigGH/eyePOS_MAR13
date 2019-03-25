@@ -43,7 +43,7 @@ namespace MultiFaceRec
  
             InitializeComponent();
 
-            groupBox1.Visible = false;
+            grpBoxEmployee.Visible = false;
 
             try
             {
@@ -211,7 +211,7 @@ namespace MultiFaceRec
 
 			cartGrid.Rows.Add(null, 1, "01052843", "Chocolate Bar", "$2.00"); //RM testing only
 			updateTotals();
-			payGB.Visible = false;
+			grpBoxEmployee.Visible = false;
 		}
 
 
@@ -333,7 +333,7 @@ namespace MultiFaceRec
 		private void checkOutButton_Click(object sender, EventArgs e)
 		{
 			updateTotals();
-			payGB.Visible = true;
+			//payGB.Visible = true;
 			//go to results screen
 		}
 

@@ -118,33 +118,39 @@ namespace MultiFaceRec
         //Delete exiting employee
         private void btnEmpDelete_Click(object sender, EventArgs e)
         {
-            if (dialogBox("Are you sure that you want to delete employee " + lblIdValue.Text, "Delete Employee"))
+            if (lblIdValue.Text != "")
             {
-                try
+                if (dialogBox("Are you sure that you want to delete employee " + lblIdValue.Text, "Delete Employee"))
                 {
-                    using (var con = new OleDbConnection())
+                    try
                     {
-                        con.ConnectionString = connectionStr;
-                        con.Open();
-
-                        using (var com = new OleDbCommand())
+                        using (var con = new OleDbConnection())
                         {
-                            com.Connection = con;
-                            com.CommandText = "DELETE FROM employee WHERE [ID] = @ID;";
-                            com.Parameters.AddWithValue("@ID", lblIdValue.Text);
-                            com.ExecuteNonQuery();
-                        }
-                    }
+                            con.ConnectionString = connectionStr;
+                            con.Open();
 
-                    MessageBox.Show("Deleted successfully, employee " + lblIdValue.Text);
-                    displayDataGridView();
-                    clearSelections();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Not saved: " + ex.Message);
+                            using (var com = new OleDbCommand())
+                            {
+                                com.Connection = con;
+                                com.CommandText = "DELETE FROM employee WHERE [ID] = @ID;";
+                                com.Parameters.AddWithValue("@ID", lblIdValue.Text);
+                                com.ExecuteNonQuery();
+                            }
+                        }
+
+                        MessageBox.Show("Deleted successfully, employee " + lblIdValue.Text);
+                        displayDataGridView();
+                        clearSelections();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Not saved: " + ex.Message);
+                    }
                 }
             }
+            else if (lblIdValue.Text == "")
+                MessageBox.Show("No sellection, Please select an employee!");
+
         }
 
         public void clearSelections()
