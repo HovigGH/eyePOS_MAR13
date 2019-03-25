@@ -70,7 +70,7 @@ namespace MultiFaceRec
                                 
                                 else if (beenCalledBy == "CustScanForm")
                                 {
-                                    CustScanForm custScanForm = new CustScanForm();
+                                    CustScanForm custScanForm = new CustScanForm(null,null);
                                     custScanForm.Show();
                                     this.Hide();
                                 }

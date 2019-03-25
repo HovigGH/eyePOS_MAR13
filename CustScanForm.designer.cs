@@ -59,23 +59,23 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.imageBox1 = new Emgu.CV.UI.ImageBox();
-            this.grpBoxEmployee = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.imageBoxFrameGrabber = new Emgu.CV.UI.ImageBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.grpboxFaceRecog = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.cartGrid)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
-            this.grpBoxEmployee.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).BeginInit();
+            this.grpboxFaceRecog.SuspendLayout();
             this.SuspendLayout();
             // 
             // empButton
             // 
             this.empButton.BackColor = System.Drawing.Color.Salmon;
             this.empButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.empButton.Location = new System.Drawing.Point(92, 211);
+            this.empButton.Location = new System.Drawing.Point(92, 104);
             this.empButton.Name = "empButton";
             this.empButton.Size = new System.Drawing.Size(127, 72);
             this.empButton.TabIndex = 3;
@@ -87,7 +87,7 @@
             // 
             this.lblPlsScan.AutoSize = true;
             this.lblPlsScan.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlsScan.Location = new System.Drawing.Point(33, 74);
+            this.lblPlsScan.Location = new System.Drawing.Point(33, 26);
             this.lblPlsScan.Name = "lblPlsScan";
             this.lblPlsScan.Size = new System.Drawing.Size(226, 18);
             this.lblPlsScan.TabIndex = 8;
@@ -127,7 +127,7 @@
             this.cartGrid.Name = "cartGrid";
             this.cartGrid.RowHeadersVisible = false;
             this.cartGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.cartGrid.Size = new System.Drawing.Size(781, 634);
+            this.cartGrid.Size = new System.Drawing.Size(781, 607);
             this.cartGrid.TabIndex = 10;
             this.cartGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.cartGrid_CellContentClick);
             this.cartGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.cartGrid_CellValueChanged);
@@ -173,7 +173,7 @@
             // 
             // barcodeInputTextbox
             // 
-            this.barcodeInputTextbox.Location = new System.Drawing.Point(84, 107);
+            this.barcodeInputTextbox.Location = new System.Drawing.Point(84, 59);
             this.barcodeInputTextbox.Name = "barcodeInputTextbox";
             this.barcodeInputTextbox.Size = new System.Drawing.Size(223, 20);
             this.barcodeInputTextbox.TabIndex = 12;
@@ -211,7 +211,7 @@
             // 
             this.lblOrEnter.AutoSize = true;
             this.lblOrEnter.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrEnter.Location = new System.Drawing.Point(265, 74);
+            this.lblOrEnter.Location = new System.Drawing.Point(265, 26);
             this.lblOrEnter.Name = "lblOrEnter";
             this.lblOrEnter.Size = new System.Drawing.Size(105, 20);
             this.lblOrEnter.TabIndex = 13;
@@ -221,7 +221,7 @@
             // 
             this.checkOutButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.checkOutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkOutButton.Location = new System.Drawing.Point(225, 211);
+            this.checkOutButton.Location = new System.Drawing.Point(225, 104);
             this.checkOutButton.Name = "checkOutButton";
             this.checkOutButton.Size = new System.Drawing.Size(190, 72);
             this.checkOutButton.TabIndex = 14;
@@ -243,7 +243,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label11, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.totalLabel, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.taxLabel, 1, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(421, 652);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(421, 634);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
@@ -315,7 +315,7 @@
             // 
             this.btnHome.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHome.Location = new System.Drawing.Point(9, 211);
+            this.btnHome.Location = new System.Drawing.Point(9, 104);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(77, 72);
             this.btnHome.TabIndex = 29;
@@ -328,7 +328,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(182, 94);
+            this.label5.Location = new System.Drawing.Point(191, 95);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(116, 15);
             this.label5.TabIndex = 17;
@@ -339,18 +339,19 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Blue;
-            this.label4.Location = new System.Drawing.Point(182, 118);
+            this.label4.Location = new System.Drawing.Point(191, 119);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 19);
             this.label4.TabIndex = 16;
             this.label4.Text = "Nobody";
+            this.label4.TextChanged += new System.EventHandler(this.label4_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(368, 24);
+            this.label3.Location = new System.Drawing.Point(377, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(16, 16);
             this.label3.TabIndex = 15;
@@ -360,7 +361,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(183, 25);
+            this.label2.Location = new System.Drawing.Point(192, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(179, 15);
             this.label2.TabIndex = 14;
@@ -369,7 +370,7 @@
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button1.Location = new System.Drawing.Point(186, 43);
+            this.button1.Location = new System.Drawing.Point(195, 44);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(112, 48);
             this.button1.TabIndex = 2;
@@ -380,35 +381,16 @@
             // imageBox1
             // 
             this.imageBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imageBox1.Location = new System.Drawing.Point(11, 18);
+            this.imageBox1.Location = new System.Drawing.Point(20, 19);
             this.imageBox1.Name = "imageBox1";
             this.imageBox1.Size = new System.Drawing.Size(163, 134);
             this.imageBox1.TabIndex = 5;
             this.imageBox1.TabStop = false;
             // 
-            // grpBoxEmployee
-            // 
-            this.grpBoxEmployee.Controls.Add(this.label3);
-            this.grpBoxEmployee.Controls.Add(this.label1);
-            this.grpBoxEmployee.Controls.Add(this.label5);
-            this.grpBoxEmployee.Controls.Add(this.imageBoxFrameGrabber);
-            this.grpBoxEmployee.Controls.Add(this.textBox1);
-            this.grpBoxEmployee.Controls.Add(this.label4);
-            this.grpBoxEmployee.Controls.Add(this.imageBox1);
-            this.grpBoxEmployee.Controls.Add(this.button2);
-            this.grpBoxEmployee.Controls.Add(this.button1);
-            this.grpBoxEmployee.Controls.Add(this.label2);
-            this.grpBoxEmployee.Location = new System.Drawing.Point(9, 289);
-            this.grpBoxEmployee.Name = "grpBoxEmployee";
-            this.grpBoxEmployee.Size = new System.Drawing.Size(406, 425);
-            this.grpBoxEmployee.TabIndex = 19;
-            this.grpBoxEmployee.TabStop = false;
-            this.grpBoxEmployee.Text = "Training: ";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 157);
+            this.label1.Location = new System.Drawing.Point(17, 158);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 8;
@@ -417,7 +399,7 @@
             // imageBoxFrameGrabber
             // 
             this.imageBoxFrameGrabber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imageBoxFrameGrabber.Location = new System.Drawing.Point(17, 204);
+            this.imageBoxFrameGrabber.Location = new System.Drawing.Point(26, 205);
             this.imageBoxFrameGrabber.Name = "imageBoxFrameGrabber";
             this.imageBoxFrameGrabber.Size = new System.Drawing.Size(368, 215);
             this.imageBoxFrameGrabber.TabIndex = 18;
@@ -425,7 +407,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(62, 154);
+            this.textBox1.Location = new System.Drawing.Point(71, 155);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(112, 20);
             this.textBox1.TabIndex = 7;
@@ -433,7 +415,7 @@
             // button2
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button2.Location = new System.Drawing.Point(11, 173);
+            this.button2.Location = new System.Drawing.Point(20, 174);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(53, 31);
             this.button2.TabIndex = 3;
@@ -441,12 +423,31 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // grpboxFaceRecog
+            // 
+            this.grpboxFaceRecog.Controls.Add(this.imageBox1);
+            this.grpboxFaceRecog.Controls.Add(this.label3);
+            this.grpboxFaceRecog.Controls.Add(this.label2);
+            this.grpboxFaceRecog.Controls.Add(this.label1);
+            this.grpboxFaceRecog.Controls.Add(this.button1);
+            this.grpboxFaceRecog.Controls.Add(this.button2);
+            this.grpboxFaceRecog.Controls.Add(this.label5);
+            this.grpboxFaceRecog.Controls.Add(this.label4);
+            this.grpboxFaceRecog.Controls.Add(this.textBox1);
+            this.grpboxFaceRecog.Controls.Add(this.imageBoxFrameGrabber);
+            this.grpboxFaceRecog.Location = new System.Drawing.Point(-4, 199);
+            this.grpboxFaceRecog.Name = "grpboxFaceRecog";
+            this.grpboxFaceRecog.Size = new System.Drawing.Size(419, 436);
+            this.grpboxFaceRecog.TabIndex = 30;
+            this.grpboxFaceRecog.TabStop = false;
+            this.grpboxFaceRecog.Text = "Face recognition";
+            // 
             // CustScanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1210, 749);
-            this.Controls.Add(this.grpBoxEmployee);
+            this.Controls.Add(this.grpboxFaceRecog);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.checkOutButton);
@@ -464,9 +465,9 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).EndInit();
-            this.grpBoxEmployee.ResumeLayout(false);
-            this.grpBoxEmployee.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).EndInit();
+            this.grpboxFaceRecog.ResumeLayout(false);
+            this.grpboxFaceRecog.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -502,10 +503,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
         private Emgu.CV.UI.ImageBox imageBox1;
-        private System.Windows.Forms.GroupBox grpBoxEmployee;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;
         private Emgu.CV.UI.ImageBox imageBoxFrameGrabber;
+        private System.Windows.Forms.GroupBox grpboxFaceRecog;
     }
 }
