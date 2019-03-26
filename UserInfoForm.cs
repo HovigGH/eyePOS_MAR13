@@ -113,9 +113,11 @@ namespace MultiFaceRec
 
 		private void skipButton_Click(object sender, EventArgs e)
 		{
-			this.Close();
-
-		}
+            this.Hide();
+            CustScanForm custscan = new CustScanForm("CustomerTypeForm", "new");
+            custscan.ShowDialog();
+            //this.Close();
+        }
 
 		private void radioBtns_CheckedChanged(object sender, EventArgs e)
         {

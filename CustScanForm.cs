@@ -33,18 +33,25 @@ namespace MultiFaceRec
         List<string> NamePersons = new List<string>();
         int ContTrain, NumLabels, t;
         string name, names = null;
+        string typeOfCust_ = "";
+        bool match=false;
 
-        public CustScanForm()
+        public CustScanForm(string beenCalledBy,string typeOfCust)
 		{
-            /*if (beenCalledBy == "EmployeeLogInForm")
-                 groupBox1.Visible = true;
-             else if (beenCalledBy == "CustomerTypeForm")
-                 groupBox1.Visible = false;*/
- 
             InitializeComponent();
 
-            groupBox1.Visible = false;
-
+            grpboxFaceRecog.Visible = true;
+            detect_reocgnize();
+            if (beenCalledBy == "EmployeeLogInForm")
+                grpboxFaceRecog.Visible = true;
+            else if (beenCalledBy == "CustomerTypeForm")
+            {
+                grpboxFaceRecog.Visible = false;
+                if (typeOfCust == "new")
+                    typeOfCust_ = "new";
+                else if (typeOfCust == "existing")
+                    typeOfCust_ = "existing";
+            }
             try
             {
 				this.KeyPreview = true; //Needed to enable Keypress function
@@ -72,8 +79,25 @@ namespace MultiFaceRec
             }
             //end for race recog
         }
-   
+
         //face recog functions
+
+        private void label4_TextChanged(object sender, EventArgs e)
+        {
+            if (!match)
+            {
+                if(typeOfCust_== "existing")
+                {
+
+                }
+                else if(typeOfCust_ == "new")
+                {
+
+                }
+            }
+        }
+
+
         private void detect_reocgnize()
         {
             //Initialize the capture device
@@ -316,7 +340,8 @@ namespace MultiFaceRec
 			employeeLogInForm.Show();
 		}
 
-		private void CustForm1_KeyDown_1(object sender, KeyEventArgs e)
+
+        private void CustForm1_KeyDown_1(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
 			{
@@ -332,6 +357,7 @@ namespace MultiFaceRec
 		private void checkOutButton_Click(object sender, EventArgs e)
 		{
 			updateTotals();
+			//payGB.Visible = true;
 			//go to results screen
 		}
 
