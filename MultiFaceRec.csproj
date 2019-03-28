@@ -76,6 +76,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckOutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckOutForm.Designer.cs">
+      <DependentUpon>CheckOutForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustScanForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,9 @@
     <Compile Include="WelcomeForm.Designer.cs">
       <DependentUpon>WelcomeForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CheckOutForm.resx">
+      <DependentUpon>CheckOutForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustScanForm.resx">
       <DependentUpon>CustScanForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -208,9 +217,15 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Coca_Cola.jpg" />
     <Content Include="eyePOS_DB_.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="hersheys.jpg" />
+    <Content Include="kitkat.jpg" />
+    <Content Include="noPhoto.png" />
+    <Content Include="pepsi.png" />
+    <Content Include="ruffels.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace MultiFaceRec
 {
-    public partial class EmployeeForm1 : Form
+	public partial class EmployeeForm1 : Form
     {
-        string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
         string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
         DataTable vt = new DataTable();
+
         public EmployeeForm1(string accessLevel)
         {
             InitializeComponent();
@@ -85,18 +85,25 @@ namespace MultiFaceRec
  
         private void dgvInventory_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int index = e.RowIndex;// get the Row Index
-            DataGridViewRow selectedRow = dgvInventory.Rows[index];
-            lblPrdID.Text = selectedRow.Cells[0].Value.ToString();
-            txtBarCode.Text = selectedRow.Cells[1].Value.ToString();
-            txtprdName.Text = selectedRow.Cells[2].Value.ToString();
-            txtPrdDescrp.Text = selectedRow.Cells[3].Value.ToString();
-            string photoPath = selectedRow.Cells[4].Value.ToString();
-            txtphotoPath.Text = photoPath;
-            txtPrice.Text = selectedRow.Cells[5].Value.ToString();
-            txtTaxRate.Text = selectedRow.Cells[6].Value.ToString();
-            txtQty.Text = selectedRow.Cells[7].Value.ToString();
-            txtDiscount.Text = selectedRow.Cells[8].Value.ToString();
+			string photoPath = "n/a";
+
+			int index = e.RowIndex;// get the Row Index
+
+			if (index > 0 )
+			{
+				DataGridViewRow selectedRow = dgvInventory.Rows[index];
+				lblPrdID.Text = selectedRow.Cells[0].Value.ToString();
+				txtBarCode.Text = selectedRow.Cells[1].Value.ToString();
+				txtprdName.Text = selectedRow.Cells[2].Value.ToString();
+				txtPrdDescrp.Text = selectedRow.Cells[3].Value.ToString();
+				photoPath = selectedRow.Cells[4].Value.ToString();
+				txtphotoPath.Text = photoPath;
+				txtPrice.Text = selectedRow.Cells[5].Value.ToString();
+				txtTaxRate.Text = selectedRow.Cells[6].Value.ToString();
+				txtQty.Text = selectedRow.Cells[7].Value.ToString();
+				txtDiscount.Text = selectedRow.Cells[8].Value.ToString();
+			}
+
             try
             {
                 if(photoPath != "n/a")
@@ -107,22 +114,21 @@ namespace MultiFaceRec
                     picBoxProduct.Image = Image.FromFile("productsPhotos\\noPhoto.png");
 
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show("Error Loading product photo reser path from edit product");
+                MessageBox.Show("Error Loading product photo. Please reset path from product edit.");
             }
                 
         }
 
         public void displayDataGridView()
         {
-            string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
             string sqlstr = "SELECT * FROM items";
             DataTable vt = new DataTable();
 
                 try
                 {
-                    OleDbDataAdapter dad = new OleDbDataAdapter(sqlstr, constr);
+                    OleDbDataAdapter dad = new OleDbDataAdapter(sqlstr, connectionStr);
                     dad.Fill(vt);
                     dad.Dispose();
                     dad = null;
@@ -152,7 +158,7 @@ namespace MultiFaceRec
 
         private void btnEditItem_Click(object sender, EventArgs e)
         {
-            if (checkTextBoxes() && dialogBox("Are you sure that you want to Edit item " + lblPrdID.Text, "Edit Item"))
+            if (checkTextBoxes() && dialogBox("Are you sure that you want to edit item " + lblPrdID.Text + "?", "Edit Item"))
             {
                 try
                 {
@@ -269,18 +275,18 @@ namespace MultiFaceRec
         {
             if (txtprdName.Text == "")
             {
-                MessageBox.Show("Enter Product Name");
+                MessageBox.Show("Enter Product Name.");
                 return false;
             }
             else if (!check_numeric(txtDiscount.Text) || !check_numeric(txtPrice.Text) ||!check_numeric(txtQty.Text) || !check_numeric(txtTaxRate.Text))
             {
-                MessageBox.Show("Discount Value, Price, Quantity, and Tax Rate must be numeric values");
+                MessageBox.Show("Discount Value, Price, Quantity, and Tax Rate must be numeric values.");
                 return false;
             }
             else if (txtBarCode.Text == "" || txtDiscount.Text == "" || txtphotoPath.Text == "" || txtPrdDescrp.Text == ""|| txtPrice.Text == "" || txtQty.Text == "" || txtTaxRate.Text == "")
             {
-                DialogResult res = MessageBox.Show("Some info are missing, would you like to complete it? " + Environment.NewLine +
-                "If NO Item will be saved with currentlly entered information", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                DialogResult res = MessageBox.Show("Some information is missing, would you like to complete it? " + Environment.NewLine +
+                "If NO, the item will be saved with currently entered information.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                  if (res == DialogResult.Yes)
                  {
                     return false;
@@ -312,5 +318,71 @@ namespace MultiFaceRec
             ClearTextBoxes();
             picBoxProduct.Image = null;
         }
-    }
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void upcSearchButton_Click(object sender, EventArgs e)
+		{
+			string sqlstr = "SELECT * FROM items WHERE barcode LIKE @barcode";
+
+			string value = searchTextBox.Text;
+
+			DataTable dt = new DataTable();
+
+
+			using (OleDbConnection connection = new OleDbConnection(connectionStr))
+			{
+				OleDbDataAdapter adapter = new OleDbDataAdapter();
+
+				OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
+				adapter.SelectCommand = selectCMD;
+
+				// Add parameters and set values.  
+				selectCMD.Parameters.Add(
+				  "@BarCode", OleDbType.VarChar, 25).Value = "%"+ value+ "%";
+
+				adapter.Fill(dt);
+				dgvInventory.DataSource = dt;
+			}
+		}
+
+		private void clearButton_Click(object sender, EventArgs e)
+		{
+			searchTextBox.Text = "";
+			displayDataGridView();
+		}
+
+		private void nameSearchButton_Click(object sender, EventArgs e)
+		{
+			string sqlstr = "SELECT * FROM items WHERE name LIKE @name";
+
+			string value = searchTextBox.Text;
+
+			DataTable dt = new DataTable();
+
+
+			using (OleDbConnection connection = new OleDbConnection(connectionStr))
+			{
+				OleDbDataAdapter adapter = new OleDbDataAdapter();
+
+				OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
+				adapter.SelectCommand = selectCMD;
+
+				// Add parameters and set values.  
+				selectCMD.Parameters.Add("@name", OleDbType.VarChar, 25).Value = "%" + value + "%";
+
+				adapter.Fill(dt);
+				dgvInventory.DataSource = dt;
+			}
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
+
+	}
 }

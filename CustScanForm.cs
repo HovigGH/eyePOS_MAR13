@@ -41,7 +41,7 @@ namespace MultiFaceRec
             InitializeComponent();
 
             grpboxFaceRecog.Visible = true;
-            detect_reocgnize();
+            detect_recognize();
             if (beenCalledBy == "EmployeeLogInForm")
                 grpboxFaceRecog.Visible = true;
             else if (beenCalledBy == "CustomerTypeForm")
@@ -98,14 +98,23 @@ namespace MultiFaceRec
         }
 
 
-        private void detect_reocgnize()
+        private void detect_recognize()
         {
-            //Initialize the capture device
-            grabber = new Capture();
-            grabber.QueryFrame();
-            //Initialize the FrameGraber event
-            Application.Idle += new EventHandler(FrameGrabber);
-            button1.Enabled = false;
+			//Initialize the capture device
+
+			try
+			{
+				grabber = new Capture();
+				grabber.QueryFrame();
+				//Initialize the FrameGraber event
+				Application.Idle += new EventHandler(FrameGrabber);
+				button1.Enabled = false;
+			}
+			catch
+			{
+				MessageBox.Show("Error with Camera, continuing to checkout.");
+			}
+
         }
 
         private void add_newFace()
@@ -233,7 +242,7 @@ namespace MultiFaceRec
 																			  //Format: Null, int qty, string UPC, string item name, $price
 			barcodeInputTextbox.Select();
 
-			cartGrid.Rows.Add(null, 1, "01052843", "Chocolate Bar", "$2.00"); //RM testing only
+			//cartGrid.Rows.Add(null, 1, "01052843", "Chocolate Bar", "$2.00", "$2.00"); //RM testing only
 			updateTotals();
 		}
 
@@ -254,30 +263,39 @@ namespace MultiFaceRec
 
 			if (createNew == true)//DB connection CHANGE VALUES PLS 
 			{
+				//TODO: Get strings from database.
 				string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+
 				var con = new OleDbConnection();
 				con.ConnectionString = connectionStr;
 				con.Open();
 
 
 				string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
-				string sqlstr = "SELECT upc_code, item_name, item_price FROM items";
-				DataTable vt = new DataTable();
+				string sqlstr = "SELECT barcode, prod_name, price - discount AS price FROM items WHERE barcode = @barcode";
+				DataSet ds = new DataSet();
 
-				try
+
+				using (OleDbConnection connection = new OleDbConnection(constr))
 				{
-					OleDbDataAdapter dad = new OleDbDataAdapter(sqlstr, constr);
-					dad.Fill(vt);
-					dad.Dispose();
-					dad = null;
-					//cartGrid.DataSource = vt;
+					OleDbDataAdapter adapter = new OleDbDataAdapter();
+
+					OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
+					adapter.SelectCommand = selectCMD;
+					selectCMD.Parameters.Add("@barcode", OleDbType.VarChar, 25).Value = barcode;
+					// Add parameters and set values.  
+
+
+					adapter.Fill(ds);
+
+
+					cartGrid.Rows.Add(null, 1, ds.Tables[0].Rows[0]["barcode"].ToString(), ds.Tables[0].Rows[0]["prod_name"].ToString(), 
+						"$"+ds.Tables[0].Rows[0]["price"].ToString(), "$" + ds.Tables[0].Rows[0]["price"].ToString()); //Null, 1, barcode, productname, price, price
+
+
+					//cartGrid.DataSource = dt;
+
 				}
-				catch (Exception ex)
-				{
-					MessageBox.Show("Database error! Please use a different checkout.");
-					this.Close();
-				}
-				//cartGrid.Rows.Add(null, 1, barcode, "ItemName", "$1.11");
 			}
 		}
 
@@ -298,17 +316,19 @@ namespace MultiFaceRec
 			}
 		}
 
-		private void updateTotals()
+		private void updateTotals() //Updates UI to calculate totals/sums
 		{
 			decimal sum = 0m;
 			decimal tax = 0m;
 			decimal total = 0m;
-			string temp;
+			string temp, temp2;
 
 			foreach (DataGridViewRow r in cartGrid.Rows)
 			{
 				temp = (r.Cells[4].Value).ToString().Replace("$", String.Empty);
-				sum += decimal.Round(Convert.ToDecimal(temp) * Convert.ToInt32(r.Cells[1].Value), 2, MidpointRounding.AwayFromZero);
+				temp = decimal.Round(Convert.ToDecimal(temp) * Convert.ToInt32(r.Cells[1].Value), 2, MidpointRounding.AwayFromZero).ToString();
+				r.Cells[5].Value = "$" + temp;
+				sum += Convert.ToDecimal(temp);
 			}
 
 			tax = decimal.Round((sum * (decimal)0.15), 2, MidpointRounding.AwayFromZero);
@@ -319,6 +339,7 @@ namespace MultiFaceRec
 			totalLabel.Text = "$" + total.ToString();
 
 		}
+
 
 		private void barcodeInputTextbox_KeyDown(object sender, KeyEventArgs e) //gets barcode entries
 		{
@@ -331,7 +352,7 @@ namespace MultiFaceRec
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            detect_reocgnize();
+            detect_recognize();
         }
 
 		private void empButton_Click(object sender, EventArgs e)
@@ -357,8 +378,36 @@ namespace MultiFaceRec
 		private void checkOutButton_Click(object sender, EventArgs e)
 		{
 			updateTotals();
-			//payGB.Visible = true;
-			//go to results screen
+			int length = cartGrid.RowCount;
+			string[,] cart = new string[length,5];
+			string[] totals = new string[3]{ subLabel.Text, taxLabel.Text, totalLabel.Text };
+			string username = "";
+			int i = -1;
+
+			if (name == null)
+				username = "Guest";
+			else
+				username = name;
+			//r.Cells[2].Value.ToString()
+			foreach (DataGridViewRow r in cartGrid.Rows)
+			{
+				i++;
+
+				if (!r.IsNewRow)
+				{
+					cart[i, 0] = r.Cells[1].Value.ToString(); //qty
+					cart[i, 1] = r.Cells[2].Value.ToString(); //upc
+					cart[i, 2] = r.Cells[3].Value.ToString(); //item name
+					cart[i, 3] = r.Cells[4].Value.ToString(); //price
+					cart[i, 4] = r.Cells[5].Value.ToString(); //totalprice
+
+				}
+			}
+
+			this.Hide();
+			CheckOutForm checkout = new CheckOutForm(username, cart, totals);
+			checkout.ShowDialog();
+			this.Close();
 		}
 
         private void btnHome_Click(object sender, EventArgs e)

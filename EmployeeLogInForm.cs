@@ -76,7 +76,7 @@ namespace MultiFaceRec
                                 {
 									this.Hide();
 
-									CustScanForm custScanForm = new CustScanForm();
+									CustScanForm custScanForm = new CustScanForm("EmployeeLoginForm","CustScanForm");
                                     custScanForm.ShowDialog();
 									this.Close();
                                 }
