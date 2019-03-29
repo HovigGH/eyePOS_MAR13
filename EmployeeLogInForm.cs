@@ -83,9 +83,8 @@ namespace MultiFaceRec
                                 else if (beenCalledBy == "CustScanForm")
                                 {
                                     this.Hide();
-									CustScanForm custScanForm = new CustScanForm("EmployeeLoginForm","CustScanForm");
-                                    custScanForm.ShowDialog();
-									this.Close();
+                                    CustScanForm custscan = new CustScanForm("EmployeeLoginForm", "CustScanForm");
+                                    custscan.ShowDialog();
                                 }
                             }
                         }
