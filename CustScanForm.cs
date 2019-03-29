@@ -20,45 +20,53 @@ namespace MultiFaceRec
 {
 	public partial class CustScanForm : Form
 	{
-        //for face recognition
-        //Declararation of all variables, vectors and haarcascades
+        //**********face recognition****************
+        //variables declaration
         Image<Bgr, Byte> currentFrame;
-        Capture grabber;
         HaarCascade face;
         HaarCascade eye;
+        Capture grabber;
         Image<Gray, byte> result, TrainedFace = null;
         Image<Gray, byte> gray = null;
         List<Image<Gray, byte>> trainingImages = new List<Image<Gray, byte>>();
-        List<string> labels = new List<string>();
         List<string> NamePersons = new List<string>();
+        List<string> labels = new List<string>();
         int ContTrain, NumLabels, t;
         string name, names = null;
         string typeOfCust_ = "";
         bool match=false;
+        //sql parameters for CUSTOMERS DB
+        string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+        DataTable vt = new DataTable();        //data table
 
-        public CustScanForm(string beenCalledBy,string typeOfCust)
-		{
+
+        //constructor gets the name of the form that called it and type of the customer 
+        //from customer type form 
+        public CustScanForm(string beenCalledBy, string typeOfCust)
+        {
             InitializeComponent();
-            grpboxFaceRecog.Visible = true;
+            //detect faces when the form loads
             detect_recognize();
-            if (beenCalledBy == "EmployeeLogInForm")
+            if (beenCalledBy == "EmployeeLogInForm")    //show face recognition controls only if the user is an employee
                 grpboxFaceRecog.Visible = true;
             else if (beenCalledBy == "CustomerTypeForm")
             {
-                grpboxFaceRecog.Visible = false;
-                if (typeOfCust == "new")
+                grpboxFaceRecog.Visible = false;        //the image box for the face recog is not visible for the customer
+                if (typeOfCust == "new")                //set global variable to indicate the type of the customer
                     typeOfCust_ = "new";
                 else if (typeOfCust == "existing")
                     typeOfCust_ = "existing";
             }
+
             try
             {
-				this.KeyPreview = true; //Needed to enable Keypress function
-										//Load haarcascades for face detection
-				face = new HaarCascade("haarcascade_frontalface_default.xml");    //this file is missing the repos
-																				  //eye = new HaarCascade("haarcascade_eye.xml");
-																				  //Load of previous trainned faces and labels for each image
-				string Labelsinfo = File.ReadAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt");  //this file is missing the repos
+                this.KeyPreview = true;                 //Needed to enable Keypress function
+                                                        //Load haarcascades for face detection
+                face = new HaarCascade("haarcascade_frontalface_default.xml");
+
+                //Load the previous trainned faces and labels
+                //this .txt file contains the customer id coressponding to the id in customers table
+                string Labelsinfo = File.ReadAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt");
                 string[] Labels = Labelsinfo.Split('%');
                 NumLabels = Convert.ToInt16(Labels[0]);
                 ContTrain = NumLabels;
@@ -73,15 +81,34 @@ namespace MultiFaceRec
             }
             catch (Exception e)
             {
-                //MessageBox.Show(e.ToString());
-                // MessageBox.Show("Nothing in binary database, please add at least a face(Simply train the prototype with the Add Face Button).", "Triained faces load", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
             }
-            //end for face recog
+            //end for face recog image functions
             this.WindowState = FormWindowState.Maximized;
+
+
+            //string sqlstr = "SELECT * FROM customers Where WHERE id = (SELECT max(id) FROM customers)";
+            //string sqlstr = "SELECT * FROM customers ORDER BY id DESC LIMIT 1";
+            //Get the customer table
+           /* try
+            {
+                OleDbDataAdapter dad = new OleDbDataAdapter(sqlstr, constr);
+                dad.Fill(vt);
+                dad.Dispose();
+                dad = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error " + ex, "Error Connecting the database", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            */
+
+            //Check the user ID entered with the corresponding one in the Data table
+            //MessageBox.Show(Convert.ToString(vt.Rows[0][0]));
+
         }
-
         //face recog functions
-
+        // When a change happens, customer or someone else been detected
         private void label4_TextChanged(object sender, EventArgs e)
         {
             if (!match)
@@ -100,8 +127,7 @@ namespace MultiFaceRec
 
         private void detect_recognize()
         {
-			//Initialize the capture device
-
+			//Initialize to detect faces
 			try
 			{
 				grabber = new Capture();
@@ -112,9 +138,8 @@ namespace MultiFaceRec
 			}
 			catch
 			{
-				MessageBox.Show("Error with Camera, continuing to checkout.");
+				MessageBox.Show("Error with Camera, continuing to checkout.","Someting Went Wrong...",MessageBoxButtons.OK,MessageBoxIcon.Error);
 			}
-
         }
 
         private void add_newFace()
@@ -123,7 +148,7 @@ namespace MultiFaceRec
             {
                 //Trained face counter
                 ContTrain = ContTrain + 1;
-                //Get a gray frame from capture device
+                //Get a gray frame from camera
                 gray = grabber.QueryGrayFrame().Resize(320, 240, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
                 //Face Detector
                 MCvAvgComp[][] facesDetected = gray.DetectHaarCascade(
@@ -133,7 +158,7 @@ namespace MultiFaceRec
                 Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING,
                 new Size(20, 20));
 
-                //Action for each element detected
+                //for each element detected
                 foreach (MCvAvgComp f in facesDetected[0])
                 {
                     TrainedFace = currentFrame.Copy(f.rect).Convert<Gray, byte>();
@@ -145,13 +170,13 @@ namespace MultiFaceRec
                 trainingImages.Add(TrainedFace);
                 labels.Add(textBox1.Text);
 
-                //Show face added in gray scale
+                //Display the face added in gray scale
                 imageBox1.Image = TrainedFace;
 
-                //Write the number of triained faces in a file text for further load
+                //Print the number of triained faces in a file text for further load
                 File.WriteAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt", trainingImages.ToArray().Length.ToString() + "%");
 
-                //Write the labels of triained faces in a file text for further load
+                //Print the labels of triained faces in a text file
                 for (int i = 1; i < trainingImages.ToArray().Length + 1; i++)
                 {
                     trainingImages.ToArray()[i - 1].Save(Application.StartupPath + "/TrainedFaces/face" + i + ".bmp");
@@ -170,14 +195,10 @@ namespace MultiFaceRec
         {
             label3.Text = "0";
             NamePersons.Add("");
-
-
             //Get the current frame form capture device
             currentFrame = grabber.QueryFrame().Resize(320, 240, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-
             //Convert it to Grayscale
             gray = currentFrame.Convert<Gray, Byte>();
-
             //Face Detector
             MCvAvgComp[][] facesDetected = gray.DetectHaarCascade(face, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
             //Action for each element detected
@@ -188,7 +209,6 @@ namespace MultiFaceRec
                 //draw the face detected in the 0th (gray) channel with blue color
                 currentFrame.Draw(f.rect, new Bgr(Color.Red), 2);
 
-
                 if (trainingImages.ToArray().Length != 0)
                 {
                     //TermCriteria for face recognition with numbers of trained images like maxIteration
@@ -196,20 +216,18 @@ namespace MultiFaceRec
 
                     //Eigen face recognizer
                     EigenObjectRecognizer recognizer = new EigenObjectRecognizer(trainingImages.ToArray(), labels.ToArray(), 3000, ref termCrit);
-
                     name = recognizer.Recognize(result);
-
                     //Draw the label for each face detected and recognized
                     try
                     {
                         //MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_TRIPLEX, 0.5d, 0.5d);
                         MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_TRIPLEX, 0.5d, 0.5d);
-
                         currentFrame.Draw(name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.LightGreen));
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
-
                 NamePersons[t - 1] = name;
                 NamePersons.Add("");
                 //Set the number of faces detected on the scene
@@ -236,12 +254,12 @@ namespace MultiFaceRec
         }
         //face rcog func end
 
+
         private void CustForm1_Load(object sender, EventArgs e)
 		{
 			cartGrid.Columns["deleteCol"].DefaultCellStyle.NullValue = "🗑️"; //Set up the grid
 																			  //Format: Null, int qty, string UPC, string item name, $price
 			barcodeInputTextbox.Select();
-
 			//cartGrid.Rows.Add(null, 1, "01052843", "Chocolate Bar", "$2.00", "$2.00"); //RM testing only
 			updateTotals();
 		}
@@ -337,7 +355,6 @@ namespace MultiFaceRec
 			subLabel.Text = "$" + sum.ToString();
 			taxLabel.Text = "$" + tax.ToString();
 			totalLabel.Text = "$" + total.ToString();
-
 		}
 
 
@@ -375,6 +392,7 @@ namespace MultiFaceRec
 			updateTotals();
 		}
 
+        //go to checkou form
 		private void checkOutButton_Click(object sender, EventArgs e)
 		{
 			updateTotals();
@@ -400,20 +418,16 @@ namespace MultiFaceRec
 					cart[i, 2] = r.Cells[3].Value.ToString(); //item name
 					cart[i, 3] = r.Cells[4].Value.ToString(); //price
 					cart[i, 4] = r.Cells[5].Value.ToString(); //totalprice
-
 				}
 			}
             this.Close();
             CheckOutForm checkout = new CheckOutForm(username, cart, totals);
 			checkout.ShowDialog();
-
         }
 
         private void btnHome_Click(object sender, EventArgs e)
         {
             this.Close();
-            //WelcomeForm welcomeForm = new WelcomeForm();
-            //welcomeForm.Show();
         }
     }
 }
