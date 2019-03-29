@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+//This form directs each type of customer to the appropriate form
 namespace MultiFaceRec
 {
     public partial class CustomerTypeForm : Form
@@ -14,77 +15,31 @@ namespace MultiFaceRec
         public CustomerTypeForm()
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
         }
 
+        //Go to the form to get the new customer info
         private void btnNew_Click(object sender, EventArgs e)
         {
-
-            //  facial functions commented out because it's causing exception
-            /*try
-            {
-                FrmPrincipal frmPrincipal = new FrmPrincipal('n');
-
-                this.Hide();
-                frmPrincipal.ShowDialog();
-                this.Close();
-            }
-            catch
-            {
-                MessageBox.Show("Errors with Facial Algorithm or Camera, continuing to scanning.");
-
-                CustForm1 custscan = new CustForm1();
-
-                this.Hide();
-                custscan.ShowDialog();
-                this.Close();
-
-            }*/
             this.Hide();
             UserInfoForm userinfo = new UserInfoForm();
 			userinfo.ShowDialog();
-
-
         }
 
+        //Go to form to start checkout 
         private void btnExist_Click(object sender, EventArgs e)
         {
-
-            /*try
-			{
-				FrmPrincipal frmPrincipal = new FrmPrincipal('e');
-
-				this.Hide();
-				frmPrincipal.ShowDialog();
-				this.Close();
-			}
-			catch
-			{
-				MessageBox.Show("Errors with Facial Algorithm or Camera, continuing to scanning.");
-
-				CustForm1 custscan = new CustForm1();
-
-				this.Hide();
-				custscan.ShowDialog();
-				this.Close();
-			}*/
             this.Hide();
             CustScanForm custscan = new CustScanForm("CustomerTypeForm", "existing");
             custscan.ShowDialog();
             //custscan.ShowDialog();
             //this.Close();
-
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-            FrmPrincipal main = new FrmPrincipal('n');
-            main.Show();
-        }
-
+        //back to home form
         private void btnHome_Click(object sender, EventArgs e)
         {
             this.Close();
-
         }
     }
 }

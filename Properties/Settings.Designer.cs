@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Drawing;
+
 namespace MultiFaceRec.Properties {
     
     
@@ -22,5 +24,7 @@ namespace MultiFaceRec.Properties {
                 return defaultInstance;
             }
         }
+
+        public Size Size { get; internal set; }
     }
 }

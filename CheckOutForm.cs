@@ -16,9 +16,10 @@ namespace MultiFaceRec
 		{
 			InitializeComponent();
 			loadInfo(username, cart, totals);
-		}
+            this.WindowState = FormWindowState.Maximized;
+        }
 
-		private void CheckOutForm_Load(object sender, EventArgs e)
+        private void CheckOutForm_Load(object sender, EventArgs e)
 		{
 
 		}

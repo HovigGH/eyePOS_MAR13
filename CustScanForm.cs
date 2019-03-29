@@ -39,7 +39,6 @@ namespace MultiFaceRec
         public CustScanForm(string beenCalledBy,string typeOfCust)
 		{
             InitializeComponent();
-
             grpboxFaceRecog.Visible = true;
             detect_recognize();
             if (beenCalledBy == "EmployeeLogInForm")
@@ -77,7 +76,8 @@ namespace MultiFaceRec
                 //MessageBox.Show(e.ToString());
                 // MessageBox.Show("Nothing in binary database, please add at least a face(Simply train the prototype with the Add Face Button).", "Triained faces load", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            //end for race recog
+            //end for face recog
+            this.WindowState = FormWindowState.Maximized;
         }
 
         //face recog functions
@@ -403,16 +403,17 @@ namespace MultiFaceRec
 
 				}
 			}
-
-			this.Hide();
-			CheckOutForm checkout = new CheckOutForm(username, cart, totals);
+            this.Close();
+            CheckOutForm checkout = new CheckOutForm(username, cart, totals);
 			checkout.ShowDialog();
-			this.Close();
-		}
+
+        }
 
         private void btnHome_Click(object sender, EventArgs e)
         {
             this.Close();
+            //WelcomeForm welcomeForm = new WelcomeForm();
+            //welcomeForm.Show();
         }
     }
 }

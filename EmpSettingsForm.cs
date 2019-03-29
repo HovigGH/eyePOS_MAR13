@@ -20,6 +20,7 @@ namespace MultiFaceRec
             InitializeComponent();
             displayDataGridView();
             rdbtnRegEmp.Checked = true;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         DataTable vt = new DataTable();
@@ -41,22 +42,24 @@ namespace MultiFaceRec
             }
         }
         
-        //Add new eployee
+        //Add a new eployee
         private void lblEmpAdd_Click(object sender, EventArgs e)
         {
             if (dialogBox("Are you sure that you want to add the entered employee " + lblIdValue.Text, "Add Employee"))
             {
+                //check if all info are entered 
                 if (checkIfFilled())
                 {
                     try
                     {
+                        //Add to the DB
                         using (var con = new OleDbConnection())
                         {
                             con.ConnectionString = connectionStr;
                             con.Open();
-
                             using (var com = new OleDbCommand())
                             {
+                                //SQL satetment
                                 com.Connection = con;
                                 com.CommandText = "INSERT INTO employee ([Full_Name],[position],[password],[access_level]) VALUES (@Full_Name,@position,@password,@access_level)";
                                 com.Parameters.AddWithValue("@Full_Name", txtEmpName.Text);
@@ -80,7 +83,7 @@ namespace MultiFaceRec
             }
         }
 
-        //Edite existing Employee
+        //Edit existing Employee
         private void lblEmpEdit_Click(object sender, EventArgs e)
         {
             if (dialogBox("Are you sure that you want to edit sellected employee " + lblIdValue.Text, "Edit Employee"))
@@ -94,6 +97,8 @@ namespace MultiFaceRec
 
                         using (var com = new OleDbCommand())
                         {
+                            //Update DB
+                            //SQL satetment
                             com.Connection = con;
                             com.CommandText = "UPDATE employee SET [Full_Name] = @Full_Name, [position] = @position , [password] = @password, [access_level] = @access_level WHERE [ID] = @ID;";
                             com.Parameters.AddWithValue("@Full_Name", txtEmpName.Text);
@@ -118,28 +123,29 @@ namespace MultiFaceRec
         //Delete exiting employee
         private void btnEmpDelete_Click(object sender, EventArgs e)
         {
+            //if a employee is selected
             if (lblIdValue.Text != "")
             {
                 if (dialogBox("Are you sure that you want to delete employee " + lblIdValue.Text, "Delete Employee"))
                 {
                     try
                     {
+                        //Delete From DB
                         using (var con = new OleDbConnection())
                         {
                             con.ConnectionString = connectionStr;
                             con.Open();
-
                             using (var com = new OleDbCommand())
                             {
+                                //SQL satetment
                                 com.Connection = con;
                                 com.CommandText = "DELETE FROM employee WHERE [ID] = @ID;";
                                 com.Parameters.AddWithValue("@ID", lblIdValue.Text);
                                 com.ExecuteNonQuery();
                             }
                         }
-
                         MessageBox.Show("Deleted successfully, employee " + lblIdValue.Text);
-                        displayDataGridView();
+                        displayDataGridView(); //update data grid view
                         clearSelections();
                     }
                     catch (Exception ex)
@@ -149,35 +155,10 @@ namespace MultiFaceRec
                 }
             }
             else if (lblIdValue.Text == "")
-                MessageBox.Show("No sellection, Please select an employee!");
-
+                MessageBox.Show("No selection, Please select an employee!");
         }
 
-        public void clearSelections()
-        {
-            txtEmpName.Text = "";
-            txtEmpPass.Text = "";
-            txtEmpPosition.Text = "";
-            rdbtnAdmin.Checked = false;
-            rdbtnRegEmp.Checked = true;
-        }
-
-        public bool checkIfFilled()
-        {
-            if (txtEmpName.Text == "" || txtEmpPass.Text == "" || txtEmpPosition.Text == "" || accessLevelSelected == "")
-                return false;
-            return true;
-        }
-
-        public string whichRBTIsChecked()
-        {
-            if (rdbtnAdmin.Checked)
-                return "admin";
-            else if (rdbtnRegEmp.Checked)
-                return "regular";
-            return "not selected";
-        }
-
+        //Radio buttin for access level check change
         private void rdbtnRegEmp_CheckedChanged(object sender, EventArgs e)
         {
             if (rdbtnRegEmp.Checked == true && rdbtnAdmin.Checked == false)
@@ -186,9 +167,7 @@ namespace MultiFaceRec
                 accessLevelSelected = "admin";
         }
 
-
-        
-
+        //Click event handller of any click in the data grid view
         private void dgvEmployees_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;// get the Row Index
@@ -197,6 +176,8 @@ namespace MultiFaceRec
             txtEmpName.Text = selectedRow.Cells[1].Value.ToString();
             txtEmpPosition.Text = selectedRow.Cells[2].Value.ToString();
             txtEmpPass.Text = selectedRow.Cells[3].Value.ToString();
+
+            //manage employee admin/regular--access level radio buttons
             if (selectedRow.Cells[4].Value.ToString() == "admin")
             {
                 rdbtnAdmin.Checked = true;
@@ -212,20 +193,21 @@ namespace MultiFaceRec
                 rdbtnAdmin.Checked = false;
                 rdbtnRegEmp.Checked = false;
             }
-
-
-
         }
 
+        //reset all textboxes
         private void btnClearBoxs_Click(object sender, EventArgs e)
         {
             clearSelections();
         }
 
+        //Go back to home page
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
         }
+
+        //Custom message box
         public bool dialogBox(string message, string title)
         {
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
@@ -240,36 +222,32 @@ namespace MultiFaceRec
             return false;
         }
 
+        //Reset all selections
+        public void clearSelections()
+        {
+            txtEmpName.Text = "";
+            txtEmpPass.Text = "";
+            txtEmpPosition.Text = "";
+            rdbtnAdmin.Checked = false;
+            rdbtnRegEmp.Checked = true;
+        }
+
+        //Check inputs
+        public bool checkIfFilled()
+        {
+            if (txtEmpName.Text == "" || txtEmpPass.Text == "" || txtEmpPosition.Text == "" || accessLevelSelected == "")
+                return false;
+            return true;
+        }
+
+        //Get what access level is specified
+        public string whichRBTIsChecked()
+        {
+            if (rdbtnAdmin.Checked)
+                return "admin";
+            else if (rdbtnRegEmp.Checked)
+                return "regular";
+            return "not selected";
+        }
     }
-
-
-    }
-/*
-                OleDbConnection connect = new OleDbConnection();
-                connect.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";   //relational path to sourse
-                connect.Open();
-                OleDbCommand command = new OleDbCommand();
-                command.Connection = connect;
-                command.CommandText = "INSERT INTO employee (Full_Name,position,password,access_level) VALUES (' " + txtEmpName.Text + " ',' " + txtEmpPosition.Text + " ',' " + txtEmpPass.Text + " ' , ' " + accessLevelSelected + " ')";
-                command.ExecuteNonQuery();*/
-
-/*OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;");
-con.Open();
-OleDbCommand com = new OleDbCommand();
-com.Connection = con;
-com.CommandType = CommandType.Text;
-com.CommandText = "INSERT INTO employee (Full_Name,position,password,access_level) VALUES (' " + txtEmpName.Text + " ',' " + txtEmpPosition.Text + " ',' " + txtEmpPass.Text + " ' , ' " + accessLevelSelected + " ')";
-
-com.ExecuteNonQuery();
-MessageBox.Show("Saved");
-con.Close();
-*/
-/*
-                OleDbConnection connect = new OleDbConnection();
-                connect.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";   //relational path to sourse
-                connect.Open();
-                OleDbCommand command = new OleDbCommand();
-                command.Connection = connect;
-                command.CommandText = "INSERT INTO employee (Full_Name) VALUES (' " + txtEmpName.Text + " ')";
-                //"INSERT INTO employee(Full_Name, position, password, access_level) VALUES (, ' " + txtEmpPosition.Text + " ', ' " + txtEmpPass.Text + " ',' " + txtEmpName.Text + " ')";
-                command.ExecuteNonQuery();*/
+}
