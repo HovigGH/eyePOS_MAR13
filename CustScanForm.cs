@@ -39,14 +39,14 @@ namespace MultiFaceRec
         string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
         DataTable vt = new DataTable();        //data table
 
+        int ProfileId_ToWrite;
 
         //constructor gets the name of the form that called it and type of the customer 
         //from customer type form 
         public CustScanForm(string beenCalledBy, string typeOfCust)
         {
             InitializeComponent();
-            //detect faces when the form loads
-            detect_recognize();
+
             if (beenCalledBy == "EmployeeLogInForm")    //show face recognition controls only if the user is an employee
                 grpboxFaceRecog.Visible = true;
             else if (beenCalledBy == "CustomerTypeForm")
@@ -86,11 +86,21 @@ namespace MultiFaceRec
             //end for face recog image functions
             this.WindowState = FormWindowState.Maximized;
 
+            if (!match)
+            {
+                if (typeOfCust_ == "existing")
+                {
+                    detect_recognize();
+                }
+                else if (typeOfCust_ == "new")
+                {
 
-            //string sqlstr = "SELECT * FROM customers Where WHERE id = (SELECT max(id) FROM customers)";
-            //string sqlstr = "SELECT * FROM customers ORDER BY id DESC LIMIT 1";
+                }
+            }
+
+            string sqlstr = "Select top 1 * from customers order by ID desc";
             //Get the customer table
-           /* try
+            try
             {
                 OleDbDataAdapter dad = new OleDbDataAdapter(sqlstr, constr);
                 dad.Fill(vt);
@@ -101,7 +111,7 @@ namespace MultiFaceRec
             {
                 MessageBox.Show("Error " + ex, "Error Connecting the database", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            */
+            
 
             //Check the user ID entered with the corresponding one in the Data table
             //MessageBox.Show(Convert.ToString(vt.Rows[0][0]));
@@ -111,19 +121,67 @@ namespace MultiFaceRec
         // When a change happens, customer or someone else been detected
         private void label4_TextChanged(object sender, EventArgs e)
         {
-            if (!match)
+            if (!match && typeOfCust_ == "existing")
             {
-                if(typeOfCust_== "existing")
+                string ids_detect = label4.Text;
+                string[] ids_list = ids_detect.Split(',');
+                foreach (string id in ids_list)
                 {
-
-                }
-                else if(typeOfCust_ == "new")
-                {
+                    string id_ = id.Replace(" ","");
+                    string sqlstr = "Select * from customers";
+                    //Get the customer table
+                    try
+                    {
+                        OleDbDataAdapter dad = new OleDbDataAdapter(sqlstr, constr);
+                        dad.Fill(vt);
+                        dad.Dispose();
+                        dad = null;
+                        for (int i = 0; i < vt.Rows.Count; i++)
+                        {
+                            //Check the user ID entered with the corresponding one in the Data table
+                            if (Convert.ToInt16(vt.Rows[i][0]) == Convert.ToInt16(id_))
+                            {
+                                //customer id is saved in the memory to up the the txt file at checkout
+                                match = true;
+                                ProfileId_ToWrite = Convert.ToInt16(id_);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error " + ex, "Error Connecting the database (identifying the customer", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
 
                 }
             }
+            if (!match && typeOfCust_ == "existing")
+            {
+            }
         }
+        /*else if(typeOfCust_ == "new")
+        {
 
+        }*/
+
+        public void writeProfile(string id, string text)
+        {
+            string path = "profiles\\" + id + ".txt";
+            if (File.Exists(path))
+            {
+                //append the existing file
+                DateTime date = DateTime.Now;
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@path, true))
+                {
+
+                    file.WriteLine("");
+                }
+            }
+            else if (!File.Exists(path))
+            {
+                //create a new file
+                System.IO.File.WriteAllText(@path, Convert.ToString(text));
+            }
+        }
 
         private void detect_recognize()
         {
