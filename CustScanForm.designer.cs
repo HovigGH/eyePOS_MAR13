@@ -65,20 +65,22 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.grpboxFaceRecog = new System.Windows.Forms.GroupBox();
+            this.picBoxProduct = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.cartGrid)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).BeginInit();
             this.grpboxFaceRecog.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxProduct)).BeginInit();
             this.SuspendLayout();
             // 
             // empButton
             // 
             this.empButton.BackColor = System.Drawing.Color.Salmon;
             this.empButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.empButton.Location = new System.Drawing.Point(92, 104);
+            this.empButton.Location = new System.Drawing.Point(425, 39);
             this.empButton.Name = "empButton";
-            this.empButton.Size = new System.Drawing.Size(127, 72);
+            this.empButton.Size = new System.Drawing.Size(198, 43);
             this.empButton.TabIndex = 3;
             this.empButton.Text = "Employee Menu";
             this.empButton.UseVisualStyleBackColor = false;
@@ -88,7 +90,7 @@
             // 
             this.lblPlsScan.AutoSize = true;
             this.lblPlsScan.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlsScan.Location = new System.Drawing.Point(33, 26);
+            this.lblPlsScan.Location = new System.Drawing.Point(23, 39);
             this.lblPlsScan.Name = "lblPlsScan";
             this.lblPlsScan.Size = new System.Drawing.Size(226, 18);
             this.lblPlsScan.TabIndex = 8;
@@ -125,11 +127,11 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.cartGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            this.cartGrid.Location = new System.Drawing.Point(421, 12);
+            this.cartGrid.Location = new System.Drawing.Point(647, 3);
             this.cartGrid.Name = "cartGrid";
             this.cartGrid.RowHeadersVisible = false;
             this.cartGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.cartGrid.Size = new System.Drawing.Size(781, 607);
+            this.cartGrid.Size = new System.Drawing.Size(711, 607);
             this.cartGrid.TabIndex = 10;
             this.cartGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.cartGrid_CellContentClick);
             this.cartGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.cartGrid_CellValueChanged);
@@ -167,7 +169,7 @@
             this.itemCol.Name = "itemCol";
             this.itemCol.ReadOnly = true;
             this.itemCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemCol.Width = 380;
+            this.itemCol.Width = 300;
             // 
             // priceCol
             // 
@@ -188,7 +190,7 @@
             // 
             // barcodeInputTextbox
             // 
-            this.barcodeInputTextbox.Location = new System.Drawing.Point(84, 59);
+            this.barcodeInputTextbox.Location = new System.Drawing.Point(75, 74);
             this.barcodeInputTextbox.Name = "barcodeInputTextbox";
             this.barcodeInputTextbox.Size = new System.Drawing.Size(223, 20);
             this.barcodeInputTextbox.TabIndex = 12;
@@ -226,7 +228,7 @@
             // 
             this.lblOrEnter.AutoSize = true;
             this.lblOrEnter.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrEnter.Location = new System.Drawing.Point(265, 26);
+            this.lblOrEnter.Location = new System.Drawing.Point(255, 39);
             this.lblOrEnter.Name = "lblOrEnter";
             this.lblOrEnter.Size = new System.Drawing.Size(105, 20);
             this.lblOrEnter.TabIndex = 13;
@@ -236,9 +238,9 @@
             // 
             this.checkOutButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.checkOutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkOutButton.Location = new System.Drawing.Point(225, 104);
+            this.checkOutButton.Location = new System.Drawing.Point(430, 101);
             this.checkOutButton.Name = "checkOutButton";
-            this.checkOutButton.Size = new System.Drawing.Size(190, 72);
+            this.checkOutButton.Size = new System.Drawing.Size(193, 162);
             this.checkOutButton.TabIndex = 14;
             this.checkOutButton.Text = "Check Out";
             this.checkOutButton.UseVisualStyleBackColor = false;
@@ -258,19 +260,19 @@
             this.tableLayoutPanel1.Controls.Add(this.label11, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.totalLabel, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.taxLabel, 1, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(421, 634);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(647, 633);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(781, 62);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(711, 62);
             this.tableLayoutPanel1.TabIndex = 23;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(524, 1);
+            this.label9.Location = new System.Drawing.Point(476, 1);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(48, 20);
             this.label9.TabIndex = 21;
@@ -300,7 +302,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(264, 1);
+            this.label11.Location = new System.Drawing.Point(240, 1);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(55, 20);
             this.label11.TabIndex = 20;
@@ -310,7 +312,7 @@
             // 
             this.totalLabel.AutoSize = true;
             this.totalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalLabel.Location = new System.Drawing.Point(524, 25);
+            this.totalLabel.Location = new System.Drawing.Point(476, 25);
             this.totalLabel.Name = "totalLabel";
             this.totalLabel.Size = new System.Drawing.Size(79, 20);
             this.totalLabel.TabIndex = 22;
@@ -320,7 +322,7 @@
             // 
             this.taxLabel.AutoSize = true;
             this.taxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.taxLabel.Location = new System.Drawing.Point(264, 25);
+            this.taxLabel.Location = new System.Drawing.Point(240, 25);
             this.taxLabel.Name = "taxLabel";
             this.taxLabel.Size = new System.Drawing.Size(69, 20);
             this.taxLabel.TabIndex = 23;
@@ -330,9 +332,9 @@
             // 
             this.btnHome.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHome.Location = new System.Drawing.Point(9, 104);
+            this.btnHome.Location = new System.Drawing.Point(430, 279);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(77, 72);
+            this.btnHome.Size = new System.Drawing.Size(193, 48);
             this.btnHome.TabIndex = 29;
             this.btnHome.Text = "Home";
             this.btnHome.UseVisualStyleBackColor = false;
@@ -343,7 +345,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(191, 95);
+            this.label5.Location = new System.Drawing.Point(220, 12);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(116, 15);
             this.label5.TabIndex = 17;
@@ -354,7 +356,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Blue;
-            this.label4.Location = new System.Drawing.Point(191, 119);
+            this.label4.Location = new System.Drawing.Point(332, 15);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 19);
             this.label4.TabIndex = 16;
@@ -366,7 +368,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(377, 25);
+            this.label3.Location = new System.Drawing.Point(195, 17);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(16, 16);
             this.label3.TabIndex = 15;
@@ -376,7 +378,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(192, 26);
+            this.label2.Location = new System.Drawing.Point(10, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(179, 15);
             this.label2.TabIndex = 14;
@@ -385,9 +387,9 @@
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button1.Location = new System.Drawing.Point(195, 44);
+            this.button1.Location = new System.Drawing.Point(452, 227);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 48);
+            this.button1.Size = new System.Drawing.Size(110, 22);
             this.button1.TabIndex = 2;
             this.button1.Text = "Detect and recognize";
             this.button1.UseVisualStyleBackColor = true;
@@ -396,7 +398,7 @@
             // imageBox1
             // 
             this.imageBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imageBox1.Location = new System.Drawing.Point(20, 19);
+            this.imageBox1.Location = new System.Drawing.Point(393, 65);
             this.imageBox1.Name = "imageBox1";
             this.imageBox1.Size = new System.Drawing.Size(163, 134);
             this.imageBox1.TabIndex = 5;
@@ -405,7 +407,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 158);
+            this.label1.Location = new System.Drawing.Point(390, 204);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 8;
@@ -414,7 +416,7 @@
             // imageBoxFrameGrabber
             // 
             this.imageBoxFrameGrabber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imageBoxFrameGrabber.Location = new System.Drawing.Point(26, 205);
+            this.imageBoxFrameGrabber.Location = new System.Drawing.Point(13, 46);
             this.imageBoxFrameGrabber.Name = "imageBoxFrameGrabber";
             this.imageBoxFrameGrabber.Size = new System.Drawing.Size(368, 215);
             this.imageBoxFrameGrabber.TabIndex = 18;
@@ -422,7 +424,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(71, 155);
+            this.textBox1.Location = new System.Drawing.Point(444, 201);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(112, 20);
             this.textBox1.TabIndex = 7;
@@ -430,7 +432,7 @@
             // button2
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button2.Location = new System.Drawing.Point(20, 174);
+            this.button2.Location = new System.Drawing.Point(393, 220);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(53, 31);
             this.button2.TabIndex = 3;
@@ -450,18 +452,29 @@
             this.grpboxFaceRecog.Controls.Add(this.label4);
             this.grpboxFaceRecog.Controls.Add(this.textBox1);
             this.grpboxFaceRecog.Controls.Add(this.imageBoxFrameGrabber);
-            this.grpboxFaceRecog.Location = new System.Drawing.Point(-4, 199);
+            this.grpboxFaceRecog.Location = new System.Drawing.Point(11, 429);
             this.grpboxFaceRecog.Name = "grpboxFaceRecog";
-            this.grpboxFaceRecog.Size = new System.Drawing.Size(419, 436);
+            this.grpboxFaceRecog.Size = new System.Drawing.Size(574, 267);
             this.grpboxFaceRecog.TabIndex = 30;
             this.grpboxFaceRecog.TabStop = false;
             this.grpboxFaceRecog.Text = "Face recognition";
+            // 
+            // picBoxProduct
+            // 
+            this.picBoxProduct.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picBoxProduct.Location = new System.Drawing.Point(15, 101);
+            this.picBoxProduct.Name = "picBoxProduct";
+            this.picBoxProduct.Size = new System.Drawing.Size(377, 322);
+            this.picBoxProduct.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBoxProduct.TabIndex = 31;
+            this.picBoxProduct.TabStop = false;
             // 
             // CustScanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1210, 749);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.Controls.Add(this.picBoxProduct);
             this.Controls.Add(this.grpboxFaceRecog);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -483,6 +496,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).EndInit();
             this.grpboxFaceRecog.ResumeLayout(false);
             this.grpboxFaceRecog.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxProduct)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -518,11 +532,12 @@
         private System.Windows.Forms.Button button2;
         private Emgu.CV.UI.ImageBox imageBoxFrameGrabber;
         private System.Windows.Forms.GroupBox grpboxFaceRecog;
-		private System.Windows.Forms.DataGridViewButtonColumn deleteCol;
-		private DataGridViewNumericUpDownElements.DataGridViewNumericUpDownColumn qtyCol;
-		private System.Windows.Forms.DataGridViewTextBoxColumn codeCol;
-		private System.Windows.Forms.DataGridViewTextBoxColumn itemCol;
-		private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
-		private System.Windows.Forms.DataGridViewTextBoxColumn totalCol;
-	}
+        private System.Windows.Forms.PictureBox picBoxProduct;
+        private System.Windows.Forms.DataGridViewButtonColumn deleteCol;
+        private DataGridViewNumericUpDownElements.DataGridViewNumericUpDownColumn qtyCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codeCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totalCol;
+    }
 }

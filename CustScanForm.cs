@@ -49,9 +49,13 @@ namespace MultiFaceRec
         {
             InitializeComponent();
             if (beenCalledBy == "EmployeeLogInForm")    //show face recognition controls only if the user is an employee
+            {
                 grpboxFaceRecog.Visible = true;
+                picBoxProduct.Visible = false;
+            }
             else if (beenCalledBy == "CustomerTypeForm")
             {
+                picBoxProduct.Visible = true;
                 grpboxFaceRecog.Visible = false;        //the image box for the face recog is not visible for the customer
                 if (typeOfCust == "new")                //set global variable to indicate the type of the customer
                     typeOfCust_ = "new";
@@ -346,42 +350,75 @@ namespace MultiFaceRec
 				}
 			}
 
-			if (createNew == true)//DB connection CHANGE VALUES PLS 
-			{
-				//TODO: Get strings from database.
-				string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+            if (createNew == true)//DB connection CHANGE VALUES PLS 
+            {
+                //TODO: Get strings from database.
+                string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
 
-				var con = new OleDbConnection();
-				con.ConnectionString = connectionStr;
-				con.Open();
-
-
-				string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
-				string sqlstr = "SELECT barcode, prod_name, price - discount AS price FROM items WHERE barcode = @barcode";
-				DataSet ds = new DataSet();
+                var con = new OleDbConnection();
+                con.ConnectionString = connectionStr;
+                con.Open();
 
 
-				using (OleDbConnection connection = new OleDbConnection(constr))
-				{
-					OleDbDataAdapter adapter = new OleDbDataAdapter();
-
-					OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
-					adapter.SelectCommand = selectCMD;
-					selectCMD.Parameters.Add("@barcode", OleDbType.VarChar, 25).Value = barcode;
-					// Add parameters and set values.  
+                string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+                string sqlstr = "SELECT barcode, prod_name, price - discount AS price FROM items WHERE barcode = @barcode";
+                DataSet ds = new DataSet();
 
 
-					adapter.Fill(ds);
+                using (OleDbConnection connection = new OleDbConnection(constr))
+                {
+                    OleDbDataAdapter adapter = new OleDbDataAdapter();
+
+                    OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
+                    adapter.SelectCommand = selectCMD;
+                    selectCMD.Parameters.Add("@barcode", OleDbType.VarChar, 25).Value = barcode;
+                    // Add parameters and set values.  
 
 
-					cartGrid.Rows.Add(null, 1, ds.Tables[0].Rows[0]["barcode"].ToString(), ds.Tables[0].Rows[0]["prod_name"].ToString(), 
-						"$"+ds.Tables[0].Rows[0]["price"].ToString(), "$" + ds.Tables[0].Rows[0]["price"].ToString()); //Null, 1, barcode, productname, price, price
+                    adapter.Fill(ds);
 
 
-					//cartGrid.DataSource = dt;
+                    cartGrid.Rows.Add(null, 1, ds.Tables[0].Rows[0]["barcode"].ToString(), ds.Tables[0].Rows[0]["prod_name"].ToString(),
+                        "$" + ds.Tables[0].Rows[0]["price"].ToString(), "$" + ds.Tables[0].Rows[0]["price"].ToString()); //Null, 1, barcode, productname, price, price
 
-				}
-			}
+
+                    //cartGrid.DataSource = dt;
+
+                    //set photo
+
+                }
+
+                DataTable vt = new DataTable();        //data table
+                string photoPath = "";
+                //Exception Handlling for any errors
+                //Fill the data table with all the employee info
+                try
+                {
+                    string sqlst = "SELECT * FROM items";
+                    string cons = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+                    OleDbDataAdapter dadd = new OleDbDataAdapter(sqlst, cons);
+                    dadd.Fill(vt);
+                    dadd.Dispose();
+                    dadd = null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("error " + ex, "Getting product photo error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                for (int i = 0; i < vt.Rows.Count; i++)
+                {
+                    if (Convert.ToString(vt.Rows[i][1]) == barcode)
+                        photoPath = Convert.ToString(vt.Rows[i][4]);
+                }
+                try
+                {
+                    picBoxProduct.Image = Image.FromFile(photoPath);
+                }
+                catch
+                {
+                    MessageBox.Show("Please reset path from product edit.", "Error Loading product photo. ", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+            }
 		}
 
 		private void cartGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -432,7 +469,7 @@ namespace MultiFaceRec
 				addToCart(barcodeInputTextbox.Text);
 				barcodeInputTextbox.Clear();
 			}
-		}
+        }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -452,9 +489,9 @@ namespace MultiFaceRec
 			{
 				barcodeInputTextbox.Select();
 			}
-		}
+        }
 
-		private void cartGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void cartGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
 			updateTotals();
 		}
