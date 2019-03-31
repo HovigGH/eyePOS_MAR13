@@ -39,14 +39,15 @@ namespace MultiFaceRec
         string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
         DataTable vt = new DataTable();        //data table
 
-        int ProfileId_ToWrite;
+        string ProfileId_ToWrite;
+        //----------------------------------------------------------------------------
+
 
         //constructor gets the name of the form that called it and type of the customer 
         //from customer type form 
         public CustScanForm(string beenCalledBy, string typeOfCust)
         {
             InitializeComponent();
-
             if (beenCalledBy == "EmployeeLogInForm")    //show face recognition controls only if the user is an employee
                 grpboxFaceRecog.Visible = true;
             else if (beenCalledBy == "CustomerTypeForm")
@@ -94,33 +95,40 @@ namespace MultiFaceRec
                 }
                 else if (typeOfCust_ == "new")
                 {
-
+                    detect_recognize();
                 }
             }
-
-            string sqlstr = "Select top 1 * from customers order by ID desc";
-            //Get the customer table
-            try
-            {
-                OleDbDataAdapter dad = new OleDbDataAdapter(sqlstr, constr);
-                dad.Fill(vt);
-                dad.Dispose();
-                dad = null;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error " + ex, "Error Connecting the database", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            
-
-            //Check the user ID entered with the corresponding one in the Data table
-            //MessageBox.Show(Convert.ToString(vt.Rows[0][0]));
-
         }
+
         //face recog functions
         // When a change happens, customer or someone else been detected
         private void label4_TextChanged(object sender, EventArgs e)
         {
+            //if there's still no match and there is a new customer and at least one person
+            if (!match && typeOfCust_ == "new" && label3.Text != "0")
+            {
+                DataTable vtt = new DataTable();        //data table
+                //get the highest id in the DB
+                string sqlstr = "Select * from customers where ID = (Select max(ID) as highestID from customers)";
+                //Get the customer table
+                try
+                {
+                    OleDbDataAdapter dad = new OleDbDataAdapter(sqlstr, constr);
+                    dad.Fill(vtt);
+                    dad.Dispose();
+                    dad = null;
+                   // MessageBox.Show("araaa" + vtt.Rows[0][0].ToString());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error " + ex, "Error Connecting the database", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                textBox1.Text = vtt.Rows[0][0].ToString(); //assign the latest added id to the new customer
+                add_newFace();
+                match = true;
+                ProfileId_ToWrite = vtt.Rows[0][0].ToString();
+            }
+
             if (!match && typeOfCust_ == "existing")
             {
                 string ids_detect = label4.Text;
@@ -132,62 +140,64 @@ namespace MultiFaceRec
                     //Get the customer table
                     try
                     {
+                        DataTable wt = new DataTable();        //data table
                         OleDbDataAdapter dad = new OleDbDataAdapter(sqlstr, constr);
-                        dad.Fill(vt);
+                        dad.Fill(wt);
                         dad.Dispose();
                         dad = null;
-                        for (int i = 0; i < vt.Rows.Count; i++)
+                        for (int i = 0; i < wt.Rows.Count; i++)
                         {
                             //Check the user ID entered with the corresponding one in the Data table
-                            if (Convert.ToInt16(vt.Rows[i][0]) == Convert.ToInt16(id_))
+                            if (Convert.ToString(wt.Rows[i][0]) == id_)
                             {
                                 //customer id is saved in the memory to up the the txt file at checkout
                                 match = true;
-                                ProfileId_ToWrite = Convert.ToInt16(id_);
+                                ProfileId_ToWrite = id_;
                             }
                         }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error " + ex, "Error Connecting the database (identifying the customer", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("Error " + ex, "Error identifying the customer", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
-
                 }
             }
-            if (!match && typeOfCust_ == "existing")
-            {
-            }
         }
-        /*else if(typeOfCust_ == "new")
-        {
 
-        }*/
-
-        public void writeProfile(string id, string text)
+        //---------------------------------------------------------------------
+        public void writeProfile(string id)
         {
-            string path = "profiles\\" + id + ".txt";
+            string path = @"profiles\" + id + ".txt";
+            //append the existing file
+            DateTime date = DateTime.Now;
+            string WriteText = ">>" + Environment.NewLine + Convert.ToString(date) + Environment.NewLine;
+
+            for (int i = 0; i < cartGrid.Rows.Count; i++)
+            {
+                WriteText += cartGrid.Rows[i].Cells[1].Value.ToString() + Environment.NewLine;
+                WriteText += cartGrid.Rows[i].Cells[2].Value.ToString() + Environment.NewLine;
+                WriteText += "//"+Environment.NewLine + subLabel.Text.Substring(1) + Environment.NewLine;
+            }
+
             if (File.Exists(path))
             {
-                //append the existing file
-                DateTime date = DateTime.Now;
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@path, true))
-                {
-
-                    file.WriteLine("");
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(path, true))
+                { 
+                    file.WriteLine(WriteText);
                 }
             }
             else if (!File.Exists(path))
             {
                 //create a new file
-                System.IO.File.WriteAllText(@path, Convert.ToString(text));
+                System.IO.File.WriteAllText(path, WriteText);
             }
         }
-
+        //-------------------------------------------------------------------
         private void detect_recognize()
         {
-			//Initialize to detect faces
-			try
-			{
+            //Initialize to detect faces
+            try
+            {
 				grabber = new Capture();
 				grabber.QueryFrame();
 				//Initialize the FrameGraber event
@@ -271,7 +281,6 @@ namespace MultiFaceRec
                 {
                     //TermCriteria for face recognition with numbers of trained images like maxIteration
                     MCvTermCriteria termCrit = new MCvTermCriteria(ContTrain, 0.001);
-
                     //Eigen face recognizer
                     EigenObjectRecognizer recognizer = new EigenObjectRecognizer(trainingImages.ToArray(), labels.ToArray(), 3000, ref termCrit);
                     name = recognizer.Recognize(result);
@@ -418,7 +427,7 @@ namespace MultiFaceRec
 
 		private void barcodeInputTextbox_KeyDown(object sender, KeyEventArgs e) //gets barcode entries
 		{
-			if (e.KeyCode == Keys.Enter) //Reads for specific button to send to cart, i.e tab, enter
+            if (e.KeyCode == Keys.Enter) //Reads for specific button to send to cart, i.e tab, enter
 			{
 				addToCart(barcodeInputTextbox.Text);
 				barcodeInputTextbox.Clear();
@@ -450,7 +459,7 @@ namespace MultiFaceRec
 			updateTotals();
 		}
 
-        //go to checkou form
+        //*******************************go to checkou form*********************
 		private void checkOutButton_Click(object sender, EventArgs e)
 		{
 			updateTotals();
@@ -483,8 +492,10 @@ namespace MultiFaceRec
 			checkout.ShowDialog();
         }
 
+        //*************HOME************************
         private void btnHome_Click(object sender, EventArgs e)
         {
+            writeProfile(ProfileId_ToWrite);
             this.Close();
         }
     }
