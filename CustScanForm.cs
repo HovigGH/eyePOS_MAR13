@@ -35,6 +35,7 @@ namespace MultiFaceRec
         string name, names = null;
         string typeOfCust_ = "";
         bool match=false;
+
         //sql parameters for CUSTOMERS DB
         string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
         DataTable vt = new DataTable();        //data table
@@ -51,11 +52,9 @@ namespace MultiFaceRec
             if (beenCalledBy == "EmployeeLogInForm")    //show face recognition controls only if the user is an employee
             {
                 grpboxFaceRecog.Visible = true;
-                picBoxProduct.Visible = false;
             }
             else if (beenCalledBy == "CustomerTypeForm")
             {
-                picBoxProduct.Visible = true;
                 grpboxFaceRecog.Visible = false;        //the image box for the face recog is not visible for the customer
                 if (typeOfCust == "new")                //set global variable to indicate the type of the customer
                     typeOfCust_ = "new";
@@ -178,9 +177,9 @@ namespace MultiFaceRec
 
             for (int i = 0; i < cartGrid.Rows.Count; i++)
             {
-                WriteText += cartGrid.Rows[i].Cells[1].Value.ToString() + Environment.NewLine;
-                WriteText += cartGrid.Rows[i].Cells[2].Value.ToString() + Environment.NewLine;
-                WriteText += "//"+Environment.NewLine + subLabel.Text.Substring(1) + Environment.NewLine;
+                WriteText += "item quantity"+cartGrid.Rows[i].Cells[1].Value.ToString() + Environment.NewLine;
+                WriteText += "item barcode" + cartGrid.Rows[i].Cells[2].Value.ToString() + Environment.NewLine;
+                WriteText += "Total $//"+Environment.NewLine + subLabel.Text.Substring(1) + Environment.NewLine;
             }
 
             if (File.Exists(path))
@@ -535,5 +534,72 @@ namespace MultiFaceRec
             writeProfile(ProfileId_ToWrite);
             this.Close();
         }
+
     }
 }
+
+
+
+
+
+/*        public void updateProfileTable(string id)
+        {
+        string path = "profiles\\" + id + ".txt";
+            if (File.Exists(path))
+            {
+                
+        string custID, most_freq_item;
+                float totalPurchase = 0;
+                int num_of_visits = 0;
+                match = false;
+                DataTable vt = new DataTable();        //data table
+                try
+                {
+                    string sqlst = "SELECT * FROM profiles";
+                    string cons = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+                    OleDbDataAdapter dat = new OleDbDataAdapter(sqlst, cons);
+                    dat.Fill(vt);
+                    dat.Dispose();
+                    dat = null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("error " + ex, "Getting customer profile", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                if (!match)
+                {
+                    List<items> _items = new List<items>();
+                    for (int i = 0; i < vt.Rows.Count; i++)
+                    {
+                        if (Convert.ToString(vt.Rows[i][1]) == id)
+                        {
+                            match = true;
+                            System.IO.StreamReader file = new System.IO.StreamReader(path);
+                            string line = "";
+                            while ((line = file.ReadLine()) != null)
+                            {
+                                if(line == ">>")
+                                {
+                                    num_of_visits++;
+                                    line = file.ReadLine(); //the date
+                                }
+                                while ((line = file.ReadLine()) != "//")
+                                {
+                                    string qty_ = line;
+                                    string barcode_ = file.ReadLine();
+                                    _items.Add(new items { barcode = barcode_, qty = Convert.ToInt32(qty_)});
+                                }
+
+                            }
+                            file.Close();
+                        }
+                    }
+                }
+            }
+        }
+
+        public class items
+        {
+            public string barcode { get; set; }
+            public int qty { get; set; }
+        }*/
