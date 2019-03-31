@@ -46,14 +46,19 @@
             this.btnEmpDelete = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnClearBoxs = new System.Windows.Forms.Button();
+            this.dgvCustms = new System.Windows.Forms.DataGridView();
+            this.lblSelectCust = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtProfile = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustms)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvEmployees
             // 
             this.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEmployees.Location = new System.Drawing.Point(12, 12);
+            this.dgvEmployees.Location = new System.Drawing.Point(2, 12);
             this.dgvEmployees.Name = "dgvEmployees";
             this.dgvEmployees.Size = new System.Drawing.Size(550, 688);
             this.dgvEmployees.TabIndex = 0;
@@ -121,7 +126,7 @@
             this.groupBox1.Controls.Add(this.txtEmpPass);
             this.groupBox1.Controls.Add(this.txtEmpName);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(596, 40);
+            this.groupBox1.Location = new System.Drawing.Point(558, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(314, 428);
             this.groupBox1.TabIndex = 9;
@@ -182,7 +187,7 @@
             // 
             this.lblEmpAdd.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.lblEmpAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmpAdd.Location = new System.Drawing.Point(967, 63);
+            this.lblEmpAdd.Location = new System.Drawing.Point(558, 446);
             this.lblEmpAdd.Name = "lblEmpAdd";
             this.lblEmpAdd.Size = new System.Drawing.Size(100, 90);
             this.lblEmpAdd.TabIndex = 10;
@@ -194,7 +199,7 @@
             // 
             this.lblEmpEdit.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.lblEmpEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmpEdit.Location = new System.Drawing.Point(1083, 63);
+            this.lblEmpEdit.Location = new System.Drawing.Point(664, 447);
             this.lblEmpEdit.Name = "lblEmpEdit";
             this.lblEmpEdit.Size = new System.Drawing.Size(100, 90);
             this.lblEmpEdit.TabIndex = 11;
@@ -206,7 +211,7 @@
             // 
             this.btnEmpDelete.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnEmpDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEmpDelete.Location = new System.Drawing.Point(1198, 64);
+            this.btnEmpDelete.Location = new System.Drawing.Point(767, 447);
             this.btnEmpDelete.Name = "btnEmpDelete";
             this.btnEmpDelete.Size = new System.Drawing.Size(100, 90);
             this.btnEmpDelete.TabIndex = 12;
@@ -218,7 +223,7 @@
             // 
             this.btnBack.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBack.Location = new System.Drawing.Point(1068, 288);
+            this.btnBack.Location = new System.Drawing.Point(689, 543);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(115, 82);
             this.btnBack.TabIndex = 13;
@@ -230,7 +235,7 @@
             // 
             this.btnClearBoxs.BackColor = System.Drawing.SystemColors.ControlDark;
             this.btnClearBoxs.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearBoxs.Location = new System.Drawing.Point(967, 288);
+            this.btnClearBoxs.Location = new System.Drawing.Point(588, 543);
             this.btnClearBoxs.Name = "btnClearBoxs";
             this.btnClearBoxs.Size = new System.Drawing.Size(82, 84);
             this.btnClearBoxs.TabIndex = 14;
@@ -238,11 +243,50 @@
             this.btnClearBoxs.UseVisualStyleBackColor = false;
             this.btnClearBoxs.Click += new System.EventHandler(this.btnClearBoxs_Click);
             // 
+            // dgvCustms
+            // 
+            this.dgvCustms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCustms.Location = new System.Drawing.Point(878, 12);
+            this.dgvCustms.Name = "dgvCustms";
+            this.dgvCustms.Size = new System.Drawing.Size(104, 688);
+            this.dgvCustms.TabIndex = 15;
+            this.dgvCustms.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustms_CellClick);
+            // 
+            // lblSelectCust
+            // 
+            this.lblSelectCust.AutoSize = true;
+            this.lblSelectCust.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectCust.Location = new System.Drawing.Point(1003, 12);
+            this.lblSelectCust.Name = "lblSelectCust";
+            this.lblSelectCust.Size = new System.Drawing.Size(259, 20);
+            this.lblSelectCust.TabIndex = 14;
+            this.lblSelectCust.Text = "Select a customer to preview profile";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.FillWeight = 5F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "customer id";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 60;
+            // 
+            // txtProfile
+            // 
+            this.txtProfile.Location = new System.Drawing.Point(988, 35);
+            this.txtProfile.Multiline = true;
+            this.txtProfile.Name = "txtProfile";
+            this.txtProfile.ReadOnly = true;
+            this.txtProfile.Size = new System.Drawing.Size(377, 665);
+            this.txtProfile.TabIndex = 16;
+            // 
             // employee_settings_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.Controls.Add(this.txtProfile);
+            this.Controls.Add(this.lblSelectCust);
+            this.Controls.Add(this.dgvCustms);
             this.Controls.Add(this.btnClearBoxs);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnEmpDelete);
@@ -255,7 +299,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustms)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -279,5 +325,9 @@
         private System.Windows.Forms.Label lblEmpName;
         private System.Windows.Forms.Button btnClearBoxs;
         private System.Windows.Forms.Label lblIdValue;
+        private System.Windows.Forms.DataGridView dgvCustms;
+        private System.Windows.Forms.Label lblSelectCust;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.TextBox txtProfile;
     }
 }

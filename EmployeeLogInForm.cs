@@ -47,7 +47,7 @@ namespace MultiFaceRec
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error " + ex, "No Photo availble", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Error " + ex, "Log in error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
 
                 //Check to make sure if username contains any non numeric characters

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -29,7 +30,15 @@ namespace MultiFaceRec
         //Continue as customer
         private void btnContinue_Click(object sender, EventArgs e)
         {
-			CustomerTypeForm id = new CustomerTypeForm();
+                /*
+                System.IO.File.WriteAllText(@"profiles\\2.txt", "ara");
+
+                if (File.Exists("profiles\\1.txt"))
+                    MessageBox.Show("Yes");
+                if (!File.Exists("profiles\\1.txt"))
+                    MessageBox.Show("nah nah");
+                    */
+                CustomerTypeForm id = new CustomerTypeForm();
 			this.Hide();
             id.ShowDialog();
             this.Show();

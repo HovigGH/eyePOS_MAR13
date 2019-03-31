@@ -35,9 +35,13 @@ namespace MultiFaceRec
         string name, names = null;
         string typeOfCust_ = "";
         bool match=false;
+
         //sql parameters for CUSTOMERS DB
         string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
         DataTable vt = new DataTable();        //data table
+
+        string ProfileId_ToWrite;
+        //----------------------------------------------------------------------------
 
 
         //constructor gets the name of the form that called it and type of the customer 
@@ -45,10 +49,10 @@ namespace MultiFaceRec
         public CustScanForm(string beenCalledBy, string typeOfCust)
         {
             InitializeComponent();
-            //detect faces when the form loads
-            detect_recognize();
             if (beenCalledBy == "EmployeeLogInForm")    //show face recognition controls only if the user is an employee
+            {
                 grpboxFaceRecog.Visible = true;
+            }
             else if (beenCalledBy == "CustomerTypeForm")
             {
                 grpboxFaceRecog.Visible = false;        //the image box for the face recog is not visible for the customer
@@ -86,50 +90,117 @@ namespace MultiFaceRec
             //end for face recog image functions
             this.WindowState = FormWindowState.Maximized;
 
-
-            //string sqlstr = "SELECT * FROM customers Where WHERE id = (SELECT max(id) FROM customers)";
-            //string sqlstr = "SELECT * FROM customers ORDER BY id DESC LIMIT 1";
-            //Get the customer table
-           /* try
+            if (!match)
             {
-                OleDbDataAdapter dad = new OleDbDataAdapter(sqlstr, constr);
-                dad.Fill(vt);
-                dad.Dispose();
-                dad = null;
+                if (typeOfCust_ == "existing")
+                {
+                    detect_recognize();
+                }
+                else if (typeOfCust_ == "new")
+                {
+                    detect_recognize();
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error " + ex, "Error Connecting the database", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            */
-
-            //Check the user ID entered with the corresponding one in the Data table
-            //MessageBox.Show(Convert.ToString(vt.Rows[0][0]));
-
         }
+
         //face recog functions
         // When a change happens, customer or someone else been detected
         private void label4_TextChanged(object sender, EventArgs e)
         {
-            if (!match)
+            //if there's still no match and there is a new customer and at least one person
+            if (!match && typeOfCust_ == "new" && label3.Text != "0")
             {
-                if(typeOfCust_== "existing")
+                DataTable vtt = new DataTable();        //data table
+                //get the highest id in the DB
+                string sqlstr = "Select * from customers where ID = (Select max(ID) as highestID from customers)";
+                //Get the customer table
+                try
                 {
-
+                    OleDbDataAdapter dad = new OleDbDataAdapter(sqlstr, constr);
+                    dad.Fill(vtt);
+                    dad.Dispose();
+                    dad = null;
+                   // MessageBox.Show("araaa" + vtt.Rows[0][0].ToString());
                 }
-                else if(typeOfCust_ == "new")
+                catch (Exception ex)
                 {
+                    MessageBox.Show("Error " + ex, "Error Connecting the database", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                textBox1.Text = vtt.Rows[0][0].ToString(); //assign the latest added id to the new customer
+                add_newFace();
+                match = true;
+                ProfileId_ToWrite = vtt.Rows[0][0].ToString();
+            }
 
+            if (!match && typeOfCust_ == "existing")
+            {
+                string ids_detect = label4.Text;
+                string[] ids_list = ids_detect.Split(',');
+                foreach (string id in ids_list)
+                {
+                    string id_ = id.Replace(" ","");
+                    string sqlstr = "Select * from customers";
+                    //Get the customer table
+                    try
+                    {
+                        DataTable wt = new DataTable();        //data table
+                        OleDbDataAdapter dad = new OleDbDataAdapter(sqlstr, constr);
+                        dad.Fill(wt);
+                        dad.Dispose();
+                        dad = null;
+                        for (int i = 0; i < wt.Rows.Count; i++)
+                        {
+                            //Check the user ID entered with the corresponding one in the Data table
+                            if (Convert.ToString(wt.Rows[i][0]) == id_)
+                            {
+                                //customer id is saved in the memory to up the the txt file at checkout
+                                match = true;
+                                ProfileId_ToWrite = id_;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error " + ex, "Error identifying the customer", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
                 }
             }
         }
 
+        //---------------------------------------------------------------------
+        public void writeProfile(string id)
+        {
+            string path = @"profiles\" + id + ".txt";
+            //append the existing file
+            DateTime date = DateTime.Now;
+            string WriteText = ">>" + Environment.NewLine + Convert.ToString(date) + Environment.NewLine;
 
+            for (int i = 0; i < cartGrid.Rows.Count; i++)
+            {
+                WriteText += "item quantity"+cartGrid.Rows[i].Cells[1].Value.ToString() + Environment.NewLine;
+                WriteText += "item barcode" + cartGrid.Rows[i].Cells[2].Value.ToString() + Environment.NewLine;
+                WriteText += "Total $//"+Environment.NewLine + subLabel.Text.Substring(1) + Environment.NewLine;
+            }
+
+            if (File.Exists(path))
+            {
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(path, true))
+                { 
+                    file.WriteLine(WriteText);
+                }
+            }
+            else if (!File.Exists(path))
+            {
+                //create a new file
+                System.IO.File.WriteAllText(path, WriteText);
+            }
+        }
+        //-------------------------------------------------------------------
         private void detect_recognize()
         {
-			//Initialize to detect faces
-			try
-			{
+            //Initialize to detect faces
+            try
+            {
 				grabber = new Capture();
 				grabber.QueryFrame();
 				//Initialize the FrameGraber event
@@ -213,7 +284,6 @@ namespace MultiFaceRec
                 {
                     //TermCriteria for face recognition with numbers of trained images like maxIteration
                     MCvTermCriteria termCrit = new MCvTermCriteria(ContTrain, 0.001);
-
                     //Eigen face recognizer
                     EigenObjectRecognizer recognizer = new EigenObjectRecognizer(trainingImages.ToArray(), labels.ToArray(), 3000, ref termCrit);
                     name = recognizer.Recognize(result);
@@ -257,8 +327,6 @@ namespace MultiFaceRec
 
         private void CustForm1_Load(object sender, EventArgs e)
 		{
-			wrongLabel.Visible = false;
-
 			cartGrid.Columns["deleteCol"].DefaultCellStyle.NullValue = "🗑️"; //Set up the grid
 																			  //Format: Null, int qty, string UPC, string item name, $price
 			barcodeInputTextbox.Select();
@@ -269,7 +337,6 @@ namespace MultiFaceRec
 
 		private void addToCart(string barcode) //TODO: add DB connection to items
 		{
-
 			bool createNew = true; //To see if a new entry is needed
 
 			foreach (DataGridViewRow r in cartGrid.Rows) //If a duplicate item is scanned it increases the amount of items
@@ -282,49 +349,75 @@ namespace MultiFaceRec
 				}
 			}
 
-			if (createNew == true)//DB connection CHANGE VALUES PLS 
-			{
-				//TODO: Get strings from database.
-				string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+            if (createNew == true)//DB connection CHANGE VALUES PLS 
+            {
+                //TODO: Get strings from database.
+                string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
 
-				var con = new OleDbConnection();
-				con.ConnectionString = connectionStr;
-				con.Open();
-
-
-				string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
-				string sqlstr = "SELECT barcode, prod_name, price - discount AS price FROM items WHERE barcode = @barcode";
-				DataSet ds = new DataSet();
+                var con = new OleDbConnection();
+                con.ConnectionString = connectionStr;
+                con.Open();
 
 
-				using (OleDbConnection connection = new OleDbConnection(constr))
-				{
-					OleDbDataAdapter adapter = new OleDbDataAdapter();
-
-					OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
-					adapter.SelectCommand = selectCMD;
-					selectCMD.Parameters.Add("@barcode", OleDbType.VarChar, 25).Value = barcode;
-					// Add parameters and set values.  
+                string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+                string sqlstr = "SELECT barcode, prod_name, price - discount AS price FROM items WHERE barcode = @barcode";
+                DataSet ds = new DataSet();
 
 
-					adapter.Fill(ds);
+                using (OleDbConnection connection = new OleDbConnection(constr))
+                {
+                    OleDbDataAdapter adapter = new OleDbDataAdapter();
 
-					try
-					{
-						cartGrid.Rows.Add(null, 1, ds.Tables[0].Rows[0]["barcode"].ToString(), ds.Tables[0].Rows[0]["prod_name"].ToString(),
-							"$" + ds.Tables[0].Rows[0]["price"].ToString(), "$" + ds.Tables[0].Rows[0]["price"].ToString()); //Null, 1, barcode, productname, price, price
-					}
-					catch
-					{
-						wrongLabel.Visible = true;
-					}
+                    OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
+                    adapter.SelectCommand = selectCMD;
+                    selectCMD.Parameters.Add("@barcode", OleDbType.VarChar, 25).Value = barcode;
+                    // Add parameters and set values.  
 
 
+                    adapter.Fill(ds);
 
-					//cartGrid.DataSource = dt;
 
-				}
-			}
+                    cartGrid.Rows.Add(null, 1, ds.Tables[0].Rows[0]["barcode"].ToString(), ds.Tables[0].Rows[0]["prod_name"].ToString(),
+                        "$" + ds.Tables[0].Rows[0]["price"].ToString(), "$" + ds.Tables[0].Rows[0]["price"].ToString()); //Null, 1, barcode, productname, price, price
+
+
+                    //cartGrid.DataSource = dt;
+
+                    //set photo
+
+                }
+
+                DataTable vt = new DataTable();        //data table
+                string photoPath = "";
+                //Exception Handlling for any errors
+                //Fill the data table with all the employee info
+                try
+                {
+                    string sqlst = "SELECT * FROM items";
+                    string cons = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+                    OleDbDataAdapter dadd = new OleDbDataAdapter(sqlst, cons);
+                    dadd.Fill(vt);
+                    dadd.Dispose();
+                    dadd = null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("error " + ex, "Getting product photo error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                for (int i = 0; i < vt.Rows.Count; i++)
+                {
+                    if (Convert.ToString(vt.Rows[i][1]) == barcode)
+                        photoPath = Convert.ToString(vt.Rows[i][4]);
+                }
+                try
+                {
+                    picBoxProduct.Image = Image.FromFile(photoPath);
+                }
+                catch
+                {
+                    MessageBox.Show("Please reset path from product edit.", "Error Loading product photo. ", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+            }
 		}
 
 		private void cartGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -359,7 +452,7 @@ namespace MultiFaceRec
 				sum += Convert.ToDecimal(temp);
 			}
 
-			tax = decimal.Round((sum * (decimal)0.13), 2, MidpointRounding.AwayFromZero);
+			tax = decimal.Round((sum * (decimal)0.15), 2, MidpointRounding.AwayFromZero);
 			total = decimal.Round((sum + tax), 2, MidpointRounding.AwayFromZero);
         
 			subLabel.Text = "$" + sum.ToString();
@@ -370,14 +463,12 @@ namespace MultiFaceRec
 
 		private void barcodeInputTextbox_KeyDown(object sender, KeyEventArgs e) //gets barcode entries
 		{
-			if (e.KeyCode == Keys.Enter) //Reads for specific button to send to cart, i.e tab, enter
+            if (e.KeyCode == Keys.Enter) //Reads for specific button to send to cart, i.e tab, enter
 			{
-				wrongLabel.Visible = false;
-
 				addToCart(barcodeInputTextbox.Text);
 				barcodeInputTextbox.Clear();
 			}
-		}
+        }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -397,62 +488,118 @@ namespace MultiFaceRec
 			{
 				barcodeInputTextbox.Select();
 			}
-		}
+        }
 
-		private void cartGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void cartGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
 			updateTotals();
 		}
 
-        //go to checkou form
+        //*******************************go to checkou form*********************
 		private void checkOutButton_Click(object sender, EventArgs e)
 		{
 			updateTotals();
-
-
 			int length = cartGrid.RowCount;
+			string[,] cart = new string[length,5];
+			string[] totals = new string[3]{ subLabel.Text, taxLabel.Text, totalLabel.Text };
+			string username = "";
+			int i = -1;
 
-			if (length > 0)
-			{
-				string[,] cart = new string[length, 5];
-				string[] totals = new string[3] { subLabel.Text, taxLabel.Text, totalLabel.Text };
-				string username = "";
-				int i = -1;
-
-				if (name == null)
-					username = "Guest";
-				else
-					username = name;
-				//r.Cells[2].Value.ToString()
-				foreach (DataGridViewRow r in cartGrid.Rows)
-				{
-					i++;
-
-					if (!r.IsNewRow)
-					{
-						cart[i, 0] = r.Cells[1].Value.ToString(); //qty
-						cart[i, 1] = r.Cells[2].Value.ToString(); //upc
-						cart[i, 2] = r.Cells[3].Value.ToString(); //item name
-						cart[i, 3] = r.Cells[4].Value.ToString(); //price
-						cart[i, 4] = r.Cells[5].Value.ToString(); //totalprice
-					}
-				}
-				this.Hide();
-				CheckOutForm checkout = new CheckOutForm(username, cart, totals);
-				checkout.ShowDialog();
-				this.Close();
-			}
+			if (name == null)
+				username = "Guest";
 			else
+				username = name;
+			//r.Cells[2].Value.ToString()
+			foreach (DataGridViewRow r in cartGrid.Rows)
 			{
-				MessageBox.Show("Your cart is empty!");
+				i++;
+
+				if (!r.IsNewRow)
+				{
+					cart[i, 0] = r.Cells[1].Value.ToString(); //qty
+					cart[i, 1] = r.Cells[2].Value.ToString(); //upc
+					cart[i, 2] = r.Cells[3].Value.ToString(); //item name
+					cart[i, 3] = r.Cells[4].Value.ToString(); //price
+					cart[i, 4] = r.Cells[5].Value.ToString(); //totalprice
+				}
 			}
+            this.Close();
+            CheckOutForm checkout = new CheckOutForm(username, cart, totals);
+			checkout.ShowDialog();
+        }
 
-
-		}
-
-		private void btnHome_Click(object sender, EventArgs e)
+        //*************HOME************************
+        private void btnHome_Click(object sender, EventArgs e)
         {
+            writeProfile(ProfileId_ToWrite);
             this.Close();
         }
+
     }
 }
+
+
+
+
+
+/*        public void updateProfileTable(string id)
+        {
+        string path = "profiles\\" + id + ".txt";
+            if (File.Exists(path))
+            {
+                
+        string custID, most_freq_item;
+                float totalPurchase = 0;
+                int num_of_visits = 0;
+                match = false;
+                DataTable vt = new DataTable();        //data table
+                try
+                {
+                    string sqlst = "SELECT * FROM profiles";
+                    string cons = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+                    OleDbDataAdapter dat = new OleDbDataAdapter(sqlst, cons);
+                    dat.Fill(vt);
+                    dat.Dispose();
+                    dat = null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("error " + ex, "Getting customer profile", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                if (!match)
+                {
+                    List<items> _items = new List<items>();
+                    for (int i = 0; i < vt.Rows.Count; i++)
+                    {
+                        if (Convert.ToString(vt.Rows[i][1]) == id)
+                        {
+                            match = true;
+                            System.IO.StreamReader file = new System.IO.StreamReader(path);
+                            string line = "";
+                            while ((line = file.ReadLine()) != null)
+                            {
+                                if(line == ">>")
+                                {
+                                    num_of_visits++;
+                                    line = file.ReadLine(); //the date
+                                }
+                                while ((line = file.ReadLine()) != "//")
+                                {
+                                    string qty_ = line;
+                                    string barcode_ = file.ReadLine();
+                                    _items.Add(new items { barcode = barcode_, qty = Convert.ToInt32(qty_)});
+                                }
+
+                            }
+                            file.Close();
+                        }
+                    }
+                }
+            }
+        }
+
+        public class items
+        {
+            public string barcode { get; set; }
+            public int qty { get; set; }
+        }*/

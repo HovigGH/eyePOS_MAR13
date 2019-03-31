@@ -81,6 +81,33 @@ namespace MultiFaceRec
         //takes the user to checkout form whitout entering info
 		private void skipButton_Click(object sender, EventArgs e)
 		{
+            try
+                    {
+                        using (var con = new OleDbConnection())
+                        {
+                            con.ConnectionString = connectionStr;
+                            con.Open();
+
+                            using (var com = new OleDbCommand())
+                            {
+                                com.Connection = con;
+                                com.CommandText = "INSERT INTO customers ([cust_name],[cust_email],[cust_dob],[cust_address],[cust_post]) " +
+                                                  "VALUES (@cust_name,@cust_email,@cust_dob,@cust_address,@cust_post)";
+                                //set insert values
+                                com.Parameters.AddWithValue("@cust_name", "");
+                                com.Parameters.AddWithValue("@cust_email", "");
+                                com.Parameters.AddWithValue("@cust_dob", "");
+                                com.Parameters.AddWithValue("@cust_address", "");
+                                com.Parameters.AddWithValue("@cust_post", "");
+                                com.ExecuteNonQuery();
+                            }
+                        }
+                        //MessageBox.Show("A new customer profile has been created.","New customer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Not Saved: " + ex.Message);
+                    }
             this.Hide();
             CustScanForm custscan = new CustScanForm("CustomerTypeForm", "new");
             custscan.ShowDialog();
