@@ -49,6 +49,9 @@ namespace MultiFaceRec
         public CustScanForm(string beenCalledBy, string typeOfCust)
         {
             InitializeComponent();
+
+			wrongLabel.Visible = false;
+
             if (beenCalledBy == "EmployeeLogInForm")    //show face recognition controls only if the user is an employee
             {
                 grpboxFaceRecog.Visible = true;
@@ -373,19 +376,22 @@ namespace MultiFaceRec
                     selectCMD.Parameters.Add("@barcode", OleDbType.VarChar, 25).Value = barcode;
                     // Add parameters and set values.  
 
-
                     adapter.Fill(ds);
 
+					try
+					{
+						cartGrid.Rows.Add(null, 1, ds.Tables[0].Rows[0]["barcode"].ToString(), ds.Tables[0].Rows[0]["prod_name"].ToString(),
+							"$" + ds.Tables[0].Rows[0]["price"].ToString(), "$" + ds.Tables[0].Rows[0]["price"].ToString()); //Null, 1, barcode, productname, price, price 
+					}
+					catch
+					{
+						wrongLabel.Visible = true;
+					}
+						//cartGrid.DataSource = dt;
 
-                    cartGrid.Rows.Add(null, 1, ds.Tables[0].Rows[0]["barcode"].ToString(), ds.Tables[0].Rows[0]["prod_name"].ToString(),
-                        "$" + ds.Tables[0].Rows[0]["price"].ToString(), "$" + ds.Tables[0].Rows[0]["price"].ToString()); //Null, 1, barcode, productname, price, price
+						//set photo
 
-
-                    //cartGrid.DataSource = dt;
-
-                    //set photo
-
-                }
+				}
 
                 DataTable vt = new DataTable();        //data table
                 string photoPath = "";
@@ -468,7 +474,8 @@ namespace MultiFaceRec
 				addToCart(barcodeInputTextbox.Text);
 				barcodeInputTextbox.Clear();
 			}
-        }
+
+		}
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -495,7 +502,7 @@ namespace MultiFaceRec
 			updateTotals();
 		}
 
-        //*******************************go to checkou form*********************
+        //*******************************go to checkout form*********************
 		private void checkOutButton_Click(object sender, EventArgs e)
 		{
 			updateTotals();
@@ -523,6 +530,7 @@ namespace MultiFaceRec
 					cart[i, 4] = r.Cells[5].Value.ToString(); //totalprice
 				}
 			}
+
             this.Close();
             CheckOutForm checkout = new CheckOutForm(username, cart, totals);
 			checkout.ShowDialog();
