@@ -33,6 +33,12 @@
 			this.empButton = new System.Windows.Forms.Button();
 			this.lblPlsScan = new System.Windows.Forms.Label();
 			this.cartGrid = new System.Windows.Forms.DataGridView();
+			this.deleteCol = new System.Windows.Forms.DataGridViewButtonColumn();
+			this.qtyCol = new DataGridViewNumericUpDownElements.DataGridViewNumericUpDownColumn();
+			this.codeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.itemCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.totalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.barcodeInputTextbox = new System.Windows.Forms.TextBox();
 			this.dataGridViewNumericUpDownColumn1 = new DataGridViewNumericUpDownElements.DataGridViewNumericUpDownColumn();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,12 +65,7 @@
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.button2 = new System.Windows.Forms.Button();
 			this.grpboxFaceRecog = new System.Windows.Forms.GroupBox();
-			this.deleteCol = new System.Windows.Forms.DataGridViewButtonColumn();
-			this.qtyCol = new DataGridViewNumericUpDownElements.DataGridViewNumericUpDownColumn();
-			this.codeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.itemCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.totalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.wrongLabel = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.cartGrid)).BeginInit();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
@@ -76,7 +77,7 @@
 			// 
 			this.empButton.BackColor = System.Drawing.Color.Salmon;
 			this.empButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.empButton.Location = new System.Drawing.Point(92, 104);
+			this.empButton.Location = new System.Drawing.Point(92, 155);
 			this.empButton.Name = "empButton";
 			this.empButton.Size = new System.Drawing.Size(127, 72);
 			this.empButton.TabIndex = 3;
@@ -129,10 +130,62 @@
 			this.cartGrid.Name = "cartGrid";
 			this.cartGrid.RowHeadersVisible = false;
 			this.cartGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.cartGrid.Size = new System.Drawing.Size(781, 607);
+			this.cartGrid.Size = new System.Drawing.Size(781, 657);
 			this.cartGrid.TabIndex = 10;
 			this.cartGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.cartGrid_CellContentClick);
 			this.cartGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.cartGrid_CellValueChanged);
+			// 
+			// deleteCol
+			// 
+			this.deleteCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+			this.deleteCol.HeaderText = "🗑️";
+			this.deleteCol.Name = "deleteCol";
+			this.deleteCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.deleteCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			this.deleteCol.Width = 30;
+			// 
+			// qtyCol
+			// 
+			this.qtyCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+			this.qtyCol.HeaderText = "Qty";
+			this.qtyCol.Name = "qtyCol";
+			this.qtyCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.qtyCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			this.qtyCol.Width = 55;
+			// 
+			// codeCol
+			// 
+			this.codeCol.HeaderText = "UPC";
+			this.codeCol.Name = "codeCol";
+			this.codeCol.ReadOnly = true;
+			this.codeCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.codeCol.Width = 110;
+			// 
+			// itemCol
+			// 
+			this.itemCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+			this.itemCol.HeaderText = "Item Name";
+			this.itemCol.Name = "itemCol";
+			this.itemCol.ReadOnly = true;
+			this.itemCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.itemCol.Width = 380;
+			// 
+			// priceCol
+			// 
+			this.priceCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+			this.priceCol.HeaderText = "Price per Item";
+			this.priceCol.Name = "priceCol";
+			this.priceCol.ReadOnly = true;
+			this.priceCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			// 
+			// totalCol
+			// 
+			this.totalCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+			this.totalCol.HeaderText = "Total Price";
+			this.totalCol.Name = "totalCol";
+			this.totalCol.ReadOnly = true;
+			this.totalCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.totalCol.Width = 110;
 			// 
 			// barcodeInputTextbox
 			// 
@@ -184,7 +237,7 @@
 			// 
 			this.checkOutButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
 			this.checkOutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.checkOutButton.Location = new System.Drawing.Point(225, 104);
+			this.checkOutButton.Location = new System.Drawing.Point(225, 155);
 			this.checkOutButton.Name = "checkOutButton";
 			this.checkOutButton.Size = new System.Drawing.Size(190, 72);
 			this.checkOutButton.TabIndex = 14;
@@ -206,7 +259,7 @@
 			this.tableLayoutPanel1.Controls.Add(this.label11, 1, 0);
 			this.tableLayoutPanel1.Controls.Add(this.totalLabel, 2, 1);
 			this.tableLayoutPanel1.Controls.Add(this.taxLabel, 1, 1);
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(421, 634);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(421, 675);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 2;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
@@ -252,7 +305,7 @@
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(101, 20);
 			this.label11.TabIndex = 20;
-			this.label11.Text = "Taxes (15%):";
+			this.label11.Text = "Taxes (13%):";
 			// 
 			// totalLabel
 			// 
@@ -278,7 +331,7 @@
 			// 
 			this.btnHome.BackColor = System.Drawing.SystemColors.ActiveCaption;
 			this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnHome.Location = new System.Drawing.Point(9, 104);
+			this.btnHome.Location = new System.Drawing.Point(9, 155);
 			this.btnHome.Name = "btnHome";
 			this.btnHome.Size = new System.Drawing.Size(77, 72);
 			this.btnHome.TabIndex = 29;
@@ -398,70 +451,31 @@
 			this.grpboxFaceRecog.Controls.Add(this.label4);
 			this.grpboxFaceRecog.Controls.Add(this.textBox1);
 			this.grpboxFaceRecog.Controls.Add(this.imageBoxFrameGrabber);
-			this.grpboxFaceRecog.Location = new System.Drawing.Point(-4, 199);
+			this.grpboxFaceRecog.Location = new System.Drawing.Point(-4, 233);
 			this.grpboxFaceRecog.Name = "grpboxFaceRecog";
 			this.grpboxFaceRecog.Size = new System.Drawing.Size(419, 436);
 			this.grpboxFaceRecog.TabIndex = 30;
 			this.grpboxFaceRecog.TabStop = false;
 			this.grpboxFaceRecog.Text = "Face recognition";
 			// 
-			// deleteCol
+			// wrongLabel
 			// 
-			this.deleteCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-			this.deleteCol.HeaderText = "🗑️";
-			this.deleteCol.Name = "deleteCol";
-			this.deleteCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.deleteCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.deleteCol.Width = 30;
-			// 
-			// qtyCol
-			// 
-			this.qtyCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-			this.qtyCol.HeaderText = "Qty";
-			this.qtyCol.Name = "qtyCol";
-			this.qtyCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.qtyCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.qtyCol.Width = 55;
-			// 
-			// codeCol
-			// 
-			this.codeCol.HeaderText = "UPC";
-			this.codeCol.Name = "codeCol";
-			this.codeCol.ReadOnly = true;
-			this.codeCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.codeCol.Width = 110;
-			// 
-			// itemCol
-			// 
-			this.itemCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-			this.itemCol.HeaderText = "Item Name";
-			this.itemCol.Name = "itemCol";
-			this.itemCol.ReadOnly = true;
-			this.itemCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.itemCol.Width = 380;
-			// 
-			// priceCol
-			// 
-			this.priceCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-			this.priceCol.HeaderText = "Price per Item";
-			this.priceCol.Name = "priceCol";
-			this.priceCol.ReadOnly = true;
-			this.priceCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			// 
-			// totalCol
-			// 
-			this.totalCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-			this.totalCol.HeaderText = "Total Price";
-			this.totalCol.Name = "totalCol";
-			this.totalCol.ReadOnly = true;
-			this.totalCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.totalCol.Width = 110;
+			this.wrongLabel.AutoSize = true;
+			this.wrongLabel.BackColor = System.Drawing.SystemColors.Control;
+			this.wrongLabel.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.wrongLabel.ForeColor = System.Drawing.Color.Red;
+			this.wrongLabel.Location = new System.Drawing.Point(122, 82);
+			this.wrongLabel.Name = "wrongLabel";
+			this.wrongLabel.Size = new System.Drawing.Size(152, 20);
+			this.wrongLabel.TabIndex = 31;
+			this.wrongLabel.Text = "Incorrect Value Entered!";
 			// 
 			// CustScanForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1210, 749);
+			this.Controls.Add(this.wrongLabel);
 			this.Controls.Add(this.grpboxFaceRecog);
 			this.Controls.Add(this.btnHome);
 			this.Controls.Add(this.tableLayoutPanel1);
@@ -524,5 +538,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn itemCol;
 		private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
 		private System.Windows.Forms.DataGridViewTextBoxColumn totalCol;
+		private System.Windows.Forms.Label wrongLabel;
 	}
 }

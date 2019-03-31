@@ -257,6 +257,8 @@ namespace MultiFaceRec
 
         private void CustForm1_Load(object sender, EventArgs e)
 		{
+			wrongLabel.Visible = false;
+
 			cartGrid.Columns["deleteCol"].DefaultCellStyle.NullValue = "🗑️"; //Set up the grid
 																			  //Format: Null, int qty, string UPC, string item name, $price
 			barcodeInputTextbox.Select();
@@ -267,6 +269,7 @@ namespace MultiFaceRec
 
 		private void addToCart(string barcode) //TODO: add DB connection to items
 		{
+
 			bool createNew = true; //To see if a new entry is needed
 
 			foreach (DataGridViewRow r in cartGrid.Rows) //If a duplicate item is scanned it increases the amount of items
@@ -306,9 +309,16 @@ namespace MultiFaceRec
 
 					adapter.Fill(ds);
 
+					try
+					{
+						cartGrid.Rows.Add(null, 1, ds.Tables[0].Rows[0]["barcode"].ToString(), ds.Tables[0].Rows[0]["prod_name"].ToString(),
+							"$" + ds.Tables[0].Rows[0]["price"].ToString(), "$" + ds.Tables[0].Rows[0]["price"].ToString()); //Null, 1, barcode, productname, price, price
+					}
+					catch
+					{
+						wrongLabel.Visible = true;
+					}
 
-					cartGrid.Rows.Add(null, 1, ds.Tables[0].Rows[0]["barcode"].ToString(), ds.Tables[0].Rows[0]["prod_name"].ToString(), 
-						"$"+ds.Tables[0].Rows[0]["price"].ToString(), "$" + ds.Tables[0].Rows[0]["price"].ToString()); //Null, 1, barcode, productname, price, price
 
 
 					//cartGrid.DataSource = dt;
@@ -349,7 +359,7 @@ namespace MultiFaceRec
 				sum += Convert.ToDecimal(temp);
 			}
 
-			tax = decimal.Round((sum * (decimal)0.15), 2, MidpointRounding.AwayFromZero);
+			tax = decimal.Round((sum * (decimal)0.13), 2, MidpointRounding.AwayFromZero);
 			total = decimal.Round((sum + tax), 2, MidpointRounding.AwayFromZero);
         
 			subLabel.Text = "$" + sum.ToString();
@@ -362,6 +372,8 @@ namespace MultiFaceRec
 		{
 			if (e.KeyCode == Keys.Enter) //Reads for specific button to send to cart, i.e tab, enter
 			{
+				wrongLabel.Visible = false;
+
 				addToCart(barcodeInputTextbox.Text);
 				barcodeInputTextbox.Clear();
 			}
@@ -396,36 +408,49 @@ namespace MultiFaceRec
 		private void checkOutButton_Click(object sender, EventArgs e)
 		{
 			updateTotals();
+
+
 			int length = cartGrid.RowCount;
-			string[,] cart = new string[length,5];
-			string[] totals = new string[3]{ subLabel.Text, taxLabel.Text, totalLabel.Text };
-			string username = "";
-			int i = -1;
 
-			if (name == null)
-				username = "Guest";
-			else
-				username = name;
-			//r.Cells[2].Value.ToString()
-			foreach (DataGridViewRow r in cartGrid.Rows)
+			if (length > 0)
 			{
-				i++;
+				string[,] cart = new string[length, 5];
+				string[] totals = new string[3] { subLabel.Text, taxLabel.Text, totalLabel.Text };
+				string username = "";
+				int i = -1;
 
-				if (!r.IsNewRow)
+				if (name == null)
+					username = "Guest";
+				else
+					username = name;
+				//r.Cells[2].Value.ToString()
+				foreach (DataGridViewRow r in cartGrid.Rows)
 				{
-					cart[i, 0] = r.Cells[1].Value.ToString(); //qty
-					cart[i, 1] = r.Cells[2].Value.ToString(); //upc
-					cart[i, 2] = r.Cells[3].Value.ToString(); //item name
-					cart[i, 3] = r.Cells[4].Value.ToString(); //price
-					cart[i, 4] = r.Cells[5].Value.ToString(); //totalprice
-				}
-			}
-            this.Close();
-            CheckOutForm checkout = new CheckOutForm(username, cart, totals);
-			checkout.ShowDialog();
-        }
+					i++;
 
-        private void btnHome_Click(object sender, EventArgs e)
+					if (!r.IsNewRow)
+					{
+						cart[i, 0] = r.Cells[1].Value.ToString(); //qty
+						cart[i, 1] = r.Cells[2].Value.ToString(); //upc
+						cart[i, 2] = r.Cells[3].Value.ToString(); //item name
+						cart[i, 3] = r.Cells[4].Value.ToString(); //price
+						cart[i, 4] = r.Cells[5].Value.ToString(); //totalprice
+					}
+				}
+				this.Hide();
+				CheckOutForm checkout = new CheckOutForm(username, cart, totals);
+				checkout.ShowDialog();
+				this.Close();
+			}
+			else
+			{
+				MessageBox.Show("Your cart is empty!");
+			}
+
+
+		}
+
+		private void btnHome_Click(object sender, EventArgs e)
         {
             this.Close();
         }
