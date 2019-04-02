@@ -147,9 +147,9 @@
 			this.lblBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblBarcode.Location = new System.Drawing.Point(3, 154);
 			this.lblBarcode.Name = "lblBarcode";
-			this.lblBarcode.Size = new System.Drawing.Size(60, 17);
+			this.lblBarcode.Size = new System.Drawing.Size(61, 17);
 			this.lblBarcode.TabIndex = 23;
-			this.lblBarcode.Text = "barcode";
+			this.lblBarcode.Text = "Barcode";
 			// 
 			// lblDescrp
 			// 
@@ -177,9 +177,9 @@
 			this.lbltaxRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lbltaxRate.Location = new System.Drawing.Point(3, 241);
 			this.lbltaxRate.Name = "lbltaxRate";
-			this.lbltaxRate.Size = new System.Drawing.Size(76, 17);
+			this.lbltaxRate.Size = new System.Drawing.Size(91, 17);
 			this.lbltaxRate.TabIndex = 26;
-			this.lbltaxRate.Text = "Tax rate %";
+			this.lbltaxRate.Text = "Tax Rate (%)";
 			// 
 			// lblQuantity
 			// 
@@ -197,9 +197,9 @@
 			this.lblDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblDiscount.Location = new System.Drawing.Point(3, 289);
 			this.lblDiscount.Name = "lblDiscount";
-			this.lblDiscount.Size = new System.Drawing.Size(113, 17);
+			this.lblDiscount.Size = new System.Drawing.Size(125, 17);
 			this.lblDiscount.TabIndex = 28;
-			this.lblDiscount.Text = "Discount $ value";
+			this.lblDiscount.Text = "Discount Value ($)";
 			// 
 			// grpBxPrdInfo
 			// 
@@ -271,9 +271,9 @@
 			this.lblImgPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblImgPath.Location = new System.Drawing.Point(3, 333);
 			this.lblImgPath.Name = "lblImgPath";
-			this.lblImgPath.Size = new System.Drawing.Size(77, 17);
+			this.lblImgPath.Size = new System.Drawing.Size(78, 17);
 			this.lblImgPath.TabIndex = 35;
-			this.lblImgPath.Text = "Photo path";
+			this.lblImgPath.Text = "Photo Path";
 			// 
 			// txtphotoPath
 			// 

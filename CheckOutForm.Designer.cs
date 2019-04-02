@@ -32,11 +32,13 @@
 			this.printButton = new System.Windows.Forms.Button();
 			this.emailButton = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.printLabel = new System.Windows.Forms.Label();
+			this.emailLabel = new System.Windows.Forms.Label();
 			this.quitButton = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-			this.emailLabel = new System.Windows.Forms.Label();
-			this.printLabel = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -84,6 +86,28 @@
 			this.groupBox1.TabIndex = 4;
 			this.groupBox1.TabStop = false;
 			// 
+			// printLabel
+			// 
+			this.printLabel.AutoSize = true;
+			this.printLabel.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.printLabel.ForeColor = System.Drawing.Color.Red;
+			this.printLabel.Location = new System.Drawing.Point(310, 107);
+			this.printLabel.Name = "printLabel";
+			this.printLabel.Size = new System.Drawing.Size(88, 20);
+			this.printLabel.TabIndex = 34;
+			this.printLabel.Text = "Error printing!";
+			// 
+			// emailLabel
+			// 
+			this.emailLabel.AutoSize = true;
+			this.emailLabel.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.emailLabel.ForeColor = System.Drawing.Color.Red;
+			this.emailLabel.Location = new System.Drawing.Point(6, 107);
+			this.emailLabel.Name = "emailLabel";
+			this.emailLabel.Size = new System.Drawing.Size(129, 20);
+			this.emailLabel.TabIndex = 33;
+			this.emailLabel.Text = "Error sending email!";
+			// 
 			// quitButton
 			// 
 			this.quitButton.BackColor = System.Drawing.Color.PaleGreen;
@@ -110,33 +134,33 @@
 			// 
 			this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
 			// 
-			// emailLabel
+			// label2
 			// 
-			this.emailLabel.AutoSize = true;
-			this.emailLabel.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.emailLabel.ForeColor = System.Drawing.Color.Red;
-			this.emailLabel.Location = new System.Drawing.Point(6, 107);
-			this.emailLabel.Name = "emailLabel";
-			this.emailLabel.Size = new System.Drawing.Size(129, 20);
-			this.emailLabel.TabIndex = 33;
-			this.emailLabel.Text = "Error sending email!";
+			this.label2.AutoSize = true;
+			this.label2.Font = new System.Drawing.Font("Monotype Corsiva", 36F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label2.Location = new System.Drawing.Point(854, 286);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(212, 57);
+			this.label2.TabIndex = 6;
+			this.label2.Text = "Thank You";
 			// 
-			// printLabel
+			// label3
 			// 
-			this.printLabel.AutoSize = true;
-			this.printLabel.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.printLabel.ForeColor = System.Drawing.Color.Red;
-			this.printLabel.Location = new System.Drawing.Point(310, 107);
-			this.printLabel.Name = "printLabel";
-			this.printLabel.Size = new System.Drawing.Size(88, 20);
-			this.printLabel.TabIndex = 34;
-			this.printLabel.Text = "Error printing!";
+			this.label3.AutoSize = true;
+			this.label3.Font = new System.Drawing.Font("Monotype Corsiva", 36F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label3.Location = new System.Drawing.Point(752, 329);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(430, 57);
+			this.label3.TabIndex = 7;
+			this.label3.Text = "For Shopping With Us!";
 			// 
 			// CheckOutForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1370, 749);
+			this.Controls.Add(this.label3);
+			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.quitButton);
 			this.Controls.Add(this.groupBox1);
@@ -163,5 +187,7 @@
 		private System.Drawing.Printing.PrintDocument printDocument1;
 		private System.Windows.Forms.Label printLabel;
 		private System.Windows.Forms.Label emailLabel;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label label3;
 	}
 }
