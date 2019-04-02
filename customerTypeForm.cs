@@ -24,6 +24,7 @@ namespace MultiFaceRec
             this.Hide();
             UserInfoForm userinfo = new UserInfoForm();
 			userinfo.ShowDialog();
+			this.Close();
         }
 
         //Go to form to start checkout 
@@ -32,8 +33,7 @@ namespace MultiFaceRec
             this.Hide();
             CustScanForm custscan = new CustScanForm("CustomerTypeForm", "existing");
             custscan.ShowDialog();
-            //custscan.ShowDialog();
-            //this.Close();
+            this.Close();
         }
 
         //back to home form
@@ -41,5 +41,13 @@ namespace MultiFaceRec
         {
             this.Close();
         }
-    }
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			this.Hide();
+			CustScanForm custscan = new CustScanForm("CustomerTypeForm", "guest");
+			custscan.ShowDialog();
+			this.Close();
+		}
+	}
 }

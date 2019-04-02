@@ -28,8 +28,8 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.empButton = new System.Windows.Forms.Button();
 			this.lblPlsScan = new System.Windows.Forms.Label();
 			this.cartGrid = new System.Windows.Forms.DataGridView();
@@ -67,6 +67,7 @@
 			this.grpboxFaceRecog = new System.Windows.Forms.GroupBox();
 			this.picBoxProduct = new System.Windows.Forms.PictureBox();
 			this.wrongLabel = new System.Windows.Forms.Label();
+			this.emptyCartLabel = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.cartGrid)).BeginInit();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
@@ -79,9 +80,9 @@
 			// 
 			this.empButton.BackColor = System.Drawing.Color.Salmon;
 			this.empButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.empButton.Location = new System.Drawing.Point(430, 39);
+			this.empButton.Location = new System.Drawing.Point(430, 386);
 			this.empButton.Name = "empButton";
-			this.empButton.Size = new System.Drawing.Size(193, 43);
+			this.empButton.Size = new System.Drawing.Size(187, 37);
 			this.empButton.TabIndex = 3;
 			this.empButton.Text = "Employee Menu";
 			this.empButton.UseVisualStyleBackColor = false;
@@ -104,14 +105,14 @@
 			this.cartGrid.AllowUserToResizeColumns = false;
 			this.cartGrid.AllowUserToResizeRows = false;
 			this.cartGrid.BackgroundColor = System.Drawing.Color.White;
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.cartGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+			dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.cartGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
 			this.cartGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.cartGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.deleteCol,
@@ -120,14 +121,14 @@
             this.itemCol,
             this.priceCol,
             this.totalCol});
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.cartGrid.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+			dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.cartGrid.DefaultCellStyle = dataGridViewCellStyle8;
 			this.cartGrid.Location = new System.Drawing.Point(647, 3);
 			this.cartGrid.Name = "cartGrid";
 			this.cartGrid.RowHeadersVisible = false;
@@ -239,7 +240,7 @@
 			// 
 			this.checkOutButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
 			this.checkOutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.checkOutButton.Location = new System.Drawing.Point(430, 101);
+			this.checkOutButton.Location = new System.Drawing.Point(430, 76);
 			this.checkOutButton.Name = "checkOutButton";
 			this.checkOutButton.Size = new System.Drawing.Size(193, 162);
 			this.checkOutButton.TabIndex = 14;
@@ -333,7 +334,7 @@
 			// 
 			this.btnHome.BackColor = System.Drawing.SystemColors.ActiveCaption;
 			this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnHome.Location = new System.Drawing.Point(430, 279);
+			this.btnHome.Location = new System.Drawing.Point(430, 22);
 			this.btnHome.Name = "btnHome";
 			this.btnHome.Size = new System.Drawing.Size(193, 48);
 			this.btnHome.TabIndex = 29;
@@ -481,11 +482,23 @@
 			this.wrongLabel.TabIndex = 32;
 			this.wrongLabel.Text = "Incorrect value entered!";
 			// 
+			// emptyCartLabel
+			// 
+			this.emptyCartLabel.AutoSize = true;
+			this.emptyCartLabel.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.emptyCartLabel.ForeColor = System.Drawing.Color.Red;
+			this.emptyCartLabel.Location = new System.Drawing.Point(448, 241);
+			this.emptyCartLabel.Name = "emptyCartLabel";
+			this.emptyCartLabel.Size = new System.Drawing.Size(164, 20);
+			this.emptyCartLabel.TabIndex = 33;
+			this.emptyCartLabel.Text = "There\'s nothing in the cart!";
+			// 
 			// CustScanForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1370, 749);
+			this.Controls.Add(this.emptyCartLabel);
 			this.Controls.Add(this.wrongLabel);
 			this.Controls.Add(this.picBoxProduct);
 			this.Controls.Add(this.grpboxFaceRecog);
@@ -554,5 +567,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalCol;
 		private System.Windows.Forms.Label wrongLabel;
+		private System.Windows.Forms.Label emptyCartLabel;
 	}
 }

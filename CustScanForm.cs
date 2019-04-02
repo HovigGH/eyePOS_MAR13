@@ -52,6 +52,8 @@ namespace MultiFaceRec
             InitializeComponent();
 
 			wrongLabel.Visible = false;
+			emptyCartLabel.Visible = false;
+
 
 			if (beenCalledBy == "EmployeeLogInForm")    //show face recognition controls only if the user is an employee
             {
@@ -64,9 +66,11 @@ namespace MultiFaceRec
                     typeOfCust_ = "new";
                 else if (typeOfCust == "existing")
                     typeOfCust_ = "existing";
-            }
+				else if (typeOfCust == "guest")
+					typeOfCust_ = "guest";
+			}
 
-            try
+			try
             {
                 this.KeyPreview = true;                 //Needed to enable Keypress function
                                                         //Load haarcascades for face detection
@@ -339,8 +343,11 @@ namespace MultiFaceRec
 		}
 
 
-		private void addToCart(string barcode) //TODO: add DB connection to items
+		private void addToCart(string barcode)
 		{
+			emptyCartLabel.Visible = false;
+			wrongLabel.Visible = false;
+
 			bool createNew = true; //To see if a new entry is needed
 
 			foreach (DataGridViewRow r in cartGrid.Rows) //If a duplicate item is scanned it increases the amount of items
@@ -349,13 +356,13 @@ namespace MultiFaceRec
 				{
 					r.Cells[1].Value = Convert.ToInt32(r.Cells[1].Value) + 1;
 
-					createNew = false; //Don't create new entry
+					createNew = false; //Don't create new entry!
 				}
 			}
 
-            if (createNew == true)//DB connection CHANGE VALUES PLS 
+            if (createNew == true)
             {
-                //TODO: Get strings from database.
+               
                 string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
 
                 var con = new OleDbConnection();
@@ -425,7 +432,7 @@ namespace MultiFaceRec
                 }
                 catch
                 {
-					picBoxProduct.Image = Image.FromFile("productsPhotos\\noPhoto.jpg");
+					picBoxProduct.Image = Image.FromFile("productsPhotos\\noPhoto.png");
                 }
             }
 		}
@@ -468,9 +475,6 @@ namespace MultiFaceRec
 			subLabel.Text = "$" + sum.ToString();
 			taxLabel.Text = "$" + tax.ToString();
 			totalLabel.Text = "$" + total.ToString();
-
-
-
 		}
 
 
@@ -478,12 +482,9 @@ namespace MultiFaceRec
 		{
             if (e.KeyCode == Keys.Enter) //Reads for specific button to send to cart, i.e tab, enter
 			{
-				wrongLabel.Visible = false;
-
 				addToCart(barcodeInputTextbox.Text);
 				barcodeInputTextbox.Clear();
 			}
-
 		}
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -547,23 +548,25 @@ namespace MultiFaceRec
 				CheckOutForm checkout = new CheckOutForm(username, cart, totals);
 				checkout.ShowDialog();
 				this.Close();
-
 			}
+			emptyCartLabel.Visible = true;
         }
 
         //*************HOME************************
         private void btnHome_Click(object sender, EventArgs e)
         {
-			try
+			if (btnHome.Text == "Home")
+				btnHome.Text = "Are you sure?";
+			else
 			{
-				writeProfile(ProfileId_ToWrite);
-			}
-			catch
-			{
+				try
+				{
+					writeProfile(ProfileId_ToWrite);
+				}
+				catch{}
 
+				this.Close();
 			}
-
-            this.Close();
         }
 
     }

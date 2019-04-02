@@ -83,38 +83,40 @@ namespace MultiFaceRec
         //takes the user to checkout form whitout entering info
 		private void skipButton_Click(object sender, EventArgs e)
 		{
+			/*
             try
-                    {
-                        using (var con = new OleDbConnection())
-                        {
-                            con.ConnectionString = connectionStr;
-                            con.Open();
+            {
+                using (var con = new OleDbConnection())
+                {
+                    con.ConnectionString = connectionStr;
+                    con.Open();
 
-                            using (var com = new OleDbCommand())
-                            {
-                                com.Connection = con;
-                                com.CommandText = "INSERT INTO customers ([cust_name],[cust_email],[cust_dob],[cust_address],[cust_post]) " +
-                                                  "VALUES (@cust_name,@cust_email,@cust_dob,@cust_address,@cust_post)";
-                                //set insert values
-                                com.Parameters.AddWithValue("@cust_name", "");
-                                com.Parameters.AddWithValue("@cust_email", "");
-                                com.Parameters.AddWithValue("@cust_dob", "");
-                                com.Parameters.AddWithValue("@cust_address", "");
-                                com.Parameters.AddWithValue("@cust_post", "");
-								com.Parameters.AddWithValue("@cust_gender", "");
-								com.ExecuteNonQuery();
-                            }
-                        }
-                        //MessageBox.Show("A new customer profile has been created.","New customer", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (Exception ex)
+                    using (var com = new OleDbCommand())
                     {
-                        MessageBox.Show("Not Saved: " + ex.Message);
+                        com.Connection = con;
+                        com.CommandText = "INSERT INTO customers ([cust_name],[cust_email],[cust_dob],[cust_address],[cust_post]) " +
+                                            "VALUES (@cust_name,@cust_email,@cust_dob,@cust_address,@cust_post)";
+                        //set insert values
+                        com.Parameters.AddWithValue("@cust_name", "");
+                        com.Parameters.AddWithValue("@cust_email", "");
+                        com.Parameters.AddWithValue("@cust_dob", "");
+                        com.Parameters.AddWithValue("@cust_address", "");
+                        com.Parameters.AddWithValue("@cust_post", "");
+						com.Parameters.AddWithValue("@cust_gender", "");
+						com.ExecuteNonQuery();
                     }
+                }
+                //MessageBox.Show("A new customer profile has been created.","New customer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Not Saved: " + ex.Message);
+            }
+			*/
             this.Hide();
-            CustScanForm custscan = new CustScanForm("CustomerTypeForm", "new");
+            CustScanForm custscan = new CustScanForm("CustomerTypeForm", "guest");
             custscan.ShowDialog();
-            //this.Close();
+            this.Close();
         }
 
         //A function which validates the user input
@@ -128,11 +130,6 @@ namespace MultiFaceRec
             else if (dateOfBithChecked == false)
             {
                 MessageBox.Show("Please enter your date of birth.");
-                return false;
-            }
-            else if (gender == null)
-            {
-                MessageBox.Show("Please select a gender.");
                 return false;
             }
             return true;
@@ -162,5 +159,15 @@ namespace MultiFaceRec
 			else
 				gender = "O";
         }
-    }
+
+		private void dataInfo_Click(object sender, EventArgs e)
+		{
+			string message = "Information collected will be used to direct promotional emails, coupons, and your purchase receipts to you.\n" +
+				"A photo will be taken of your face in order to allow for quicker login in the future.\n"
+				+ "We will NOT share any information or photos with third parties. Any information collected will be used in internal demographics analysis.";
+			string title = "Disclaimer";
+
+			MessageBox.Show(message, title);
+		}
+	}
 }

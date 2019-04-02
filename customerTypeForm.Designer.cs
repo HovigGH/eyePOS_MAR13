@@ -32,13 +32,14 @@
 			this.btnExist = new System.Windows.Forms.Button();
 			this.lblIAm = new System.Windows.Forms.Label();
 			this.btnHome = new System.Windows.Forms.Button();
+			this.button1 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// btnNew
 			// 
 			this.btnNew.BackColor = System.Drawing.SystemColors.ActiveCaption;
 			this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnNew.Location = new System.Drawing.Point(215, 35);
+			this.btnNew.Location = new System.Drawing.Point(198, 35);
 			this.btnNew.Name = "btnNew";
 			this.btnNew.Size = new System.Drawing.Size(500, 635);
 			this.btnNew.TabIndex = 0;
@@ -50,7 +51,7 @@
 			// 
 			this.btnExist.BackColor = System.Drawing.SystemColors.ButtonFace;
 			this.btnExist.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnExist.Location = new System.Drawing.Point(756, 35);
+			this.btnExist.Location = new System.Drawing.Point(858, 35);
 			this.btnExist.Name = "btnExist";
 			this.btnExist.Size = new System.Drawing.Size(500, 635);
 			this.btnExist.TabIndex = 1;
@@ -80,11 +81,24 @@
 			this.btnHome.UseVisualStyleBackColor = false;
 			this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
 			// 
+			// button1
+			// 
+			this.button1.BackColor = System.Drawing.Color.IndianRed;
+			this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.button1.Location = new System.Drawing.Point(704, 583);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(148, 87);
+			this.button1.TabIndex = 5;
+			this.button1.Text = "Guest Customer";
+			this.button1.UseVisualStyleBackColor = false;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
+			// 
 			// CustomerTypeForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1370, 749);
+			this.Controls.Add(this.button1);
 			this.Controls.Add(this.btnHome);
 			this.Controls.Add(this.lblIAm);
 			this.Controls.Add(this.btnExist);
@@ -103,5 +117,6 @@
         private System.Windows.Forms.Button btnExist;
         private System.Windows.Forms.Label lblIAm;
         private System.Windows.Forms.Button btnHome;
-    }
+		private System.Windows.Forms.Button button1;
+	}
 }

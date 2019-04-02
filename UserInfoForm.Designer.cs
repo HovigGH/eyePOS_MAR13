@@ -47,6 +47,7 @@
 			this.countryTB = new System.Windows.Forms.TextBox();
 			this.btnHome = new System.Windows.Forms.Button();
 			this.skipButton = new System.Windows.Forms.Button();
+			this.dataInfoButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// nameTB
@@ -71,7 +72,7 @@
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label2.Location = new System.Drawing.Point(302, 247);
+			this.label2.Location = new System.Drawing.Point(302, 184);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(52, 20);
 			this.label2.TabIndex = 3;
@@ -80,7 +81,7 @@
 			// emailTB
 			// 
 			this.emailTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.emailTB.Location = new System.Drawing.Point(306, 270);
+			this.emailTB.Location = new System.Drawing.Point(306, 207);
 			this.emailTB.Name = "emailTB";
 			this.emailTB.Size = new System.Drawing.Size(349, 26);
 			this.emailTB.TabIndex = 5;
@@ -89,7 +90,7 @@
 			// 
 			this.label3.AutoSize = true;
 			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label3.Location = new System.Drawing.Point(302, 179);
+			this.label3.Location = new System.Drawing.Point(302, 114);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(99, 20);
 			this.label3.TabIndex = 5;
@@ -99,7 +100,7 @@
 			// 
 			this.dateTimePickerDOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.dateTimePickerDOB.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.dateTimePickerDOB.Location = new System.Drawing.Point(306, 202);
+			this.dateTimePickerDOB.Location = new System.Drawing.Point(306, 137);
 			this.dateTimePickerDOB.Name = "dateTimePickerDOB";
 			this.dateTimePickerDOB.Size = new System.Drawing.Size(220, 26);
 			this.dateTimePickerDOB.TabIndex = 4;
@@ -108,7 +109,7 @@
 			// addressTB
 			// 
 			this.addressTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.addressTB.Location = new System.Drawing.Point(306, 331);
+			this.addressTB.Location = new System.Drawing.Point(306, 277);
 			this.addressTB.Name = "addressTB";
 			this.addressTB.Size = new System.Drawing.Size(349, 26);
 			this.addressTB.TabIndex = 6;
@@ -117,7 +118,7 @@
 			// 
 			this.label4.AutoSize = true;
 			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label4.Location = new System.Drawing.Point(302, 308);
+			this.label4.Location = new System.Drawing.Point(302, 254);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(72, 20);
 			this.label4.TabIndex = 8;
@@ -126,7 +127,7 @@
 			// postalTB
 			// 
 			this.postalTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.postalTB.Location = new System.Drawing.Point(306, 412);
+			this.postalTB.Location = new System.Drawing.Point(306, 345);
 			this.postalTB.Name = "postalTB";
 			this.postalTB.Size = new System.Drawing.Size(349, 26);
 			this.postalTB.TabIndex = 7;
@@ -135,7 +136,7 @@
 			// 
 			this.label5.AutoSize = true;
 			this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label5.Location = new System.Drawing.Point(302, 380);
+			this.label5.Location = new System.Drawing.Point(302, 322);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(99, 20);
 			this.label5.TabIndex = 10;
@@ -145,17 +146,17 @@
 			// 
 			this.label6.AutoSize = true;
 			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label6.Location = new System.Drawing.Point(302, 114);
+			this.label6.Location = new System.Drawing.Point(302, 453);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(67, 20);
+			this.label6.Size = new System.Drawing.Size(137, 20);
 			this.label6.TabIndex = 12;
-			this.label6.Text = "Gender:";
+			this.label6.Text = "Gender (optional):";
 			// 
 			// maleRadio
 			// 
 			this.maleRadio.AutoSize = true;
 			this.maleRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.maleRadio.Location = new System.Drawing.Point(306, 137);
+			this.maleRadio.Location = new System.Drawing.Point(306, 480);
 			this.maleRadio.Name = "maleRadio";
 			this.maleRadio.Size = new System.Drawing.Size(61, 24);
 			this.maleRadio.TabIndex = 1;
@@ -168,7 +169,7 @@
 			// 
 			this.femaleRadio.AutoSize = true;
 			this.femaleRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.femaleRadio.Location = new System.Drawing.Point(391, 137);
+			this.femaleRadio.Location = new System.Drawing.Point(387, 480);
 			this.femaleRadio.Name = "femaleRadio";
 			this.femaleRadio.Size = new System.Drawing.Size(80, 24);
 			this.femaleRadio.TabIndex = 2;
@@ -181,7 +182,7 @@
 			// 
 			this.otherRadio.AutoSize = true;
 			this.otherRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.otherRadio.Location = new System.Drawing.Point(494, 137);
+			this.otherRadio.Location = new System.Drawing.Point(493, 480);
 			this.otherRadio.Name = "otherRadio";
 			this.otherRadio.Size = new System.Drawing.Size(67, 24);
 			this.otherRadio.TabIndex = 3;
@@ -194,7 +195,7 @@
 			// 
 			this.submitButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
 			this.submitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.submitButton.Location = new System.Drawing.Point(802, 96);
+			this.submitButton.Location = new System.Drawing.Point(802, 115);
 			this.submitButton.Name = "submitButton";
 			this.submitButton.Size = new System.Drawing.Size(220, 198);
 			this.submitButton.TabIndex = 9;
@@ -206,7 +207,7 @@
 			// 
 			this.label7.AutoSize = true;
 			this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label7.Location = new System.Drawing.Point(306, 447);
+			this.label7.Location = new System.Drawing.Point(306, 389);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(68, 20);
 			this.label7.TabIndex = 20;
@@ -215,7 +216,7 @@
 			// countryTB
 			// 
 			this.countryTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.countryTB.Location = new System.Drawing.Point(306, 470);
+			this.countryTB.Location = new System.Drawing.Point(306, 412);
 			this.countryTB.Name = "countryTB";
 			this.countryTB.Size = new System.Drawing.Size(349, 26);
 			this.countryTB.TabIndex = 8;
@@ -224,7 +225,7 @@
 			// 
 			this.btnHome.BackColor = System.Drawing.SystemColors.ButtonShadow;
 			this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnHome.Location = new System.Drawing.Point(802, 405);
+			this.btnHome.Location = new System.Drawing.Point(802, 412);
 			this.btnHome.Name = "btnHome";
 			this.btnHome.Size = new System.Drawing.Size(220, 41);
 			this.btnHome.TabIndex = 11;
@@ -236,19 +237,32 @@
 			// 
 			this.skipButton.BackColor = System.Drawing.SystemColors.ControlDark;
 			this.skipButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.skipButton.Location = new System.Drawing.Point(802, 345);
+			this.skipButton.Location = new System.Drawing.Point(802, 322);
 			this.skipButton.Name = "skipButton";
 			this.skipButton.Size = new System.Drawing.Size(220, 37);
 			this.skipButton.TabIndex = 10;
-			this.skipButton.Text = "Skip Info";
+			this.skipButton.Text = "Continue as Guest";
 			this.skipButton.UseVisualStyleBackColor = false;
 			this.skipButton.Click += new System.EventHandler(this.skipButton_Click);
+			// 
+			// dataInfoButton
+			// 
+			this.dataInfoButton.BackColor = System.Drawing.Color.LightCoral;
+			this.dataInfoButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.dataInfoButton.Location = new System.Drawing.Point(802, 16);
+			this.dataInfoButton.Name = "dataInfoButton";
+			this.dataInfoButton.Size = new System.Drawing.Size(220, 89);
+			this.dataInfoButton.TabIndex = 21;
+			this.dataInfoButton.Text = "Data Use Policy and Information";
+			this.dataInfoButton.UseVisualStyleBackColor = false;
+			this.dataInfoButton.Click += new System.EventHandler(this.dataInfo_Click);
 			// 
 			// UserInfoForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1370, 565);
+			this.Controls.Add(this.dataInfoButton);
 			this.Controls.Add(this.skipButton);
 			this.Controls.Add(this.btnHome);
 			this.Controls.Add(this.countryTB);
@@ -297,5 +311,6 @@
 		private System.Windows.Forms.TextBox countryTB;
         private System.Windows.Forms.Button btnHome;
 		private System.Windows.Forms.Button skipButton;
+		private System.Windows.Forms.Button dataInfoButton;
 	}
 }
