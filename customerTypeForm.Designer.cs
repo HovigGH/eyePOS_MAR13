@@ -89,6 +89,7 @@
 			this.Controls.Add(this.lblIAm);
 			this.Controls.Add(this.btnExist);
 			this.Controls.Add(this.btnNew);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "CustomerTypeForm";
 			this.Text = "eyePOS";
 			this.ResumeLayout(false);

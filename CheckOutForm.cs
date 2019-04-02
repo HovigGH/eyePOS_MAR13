@@ -6,6 +6,7 @@ using System.Data.OleDb;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Windows.Forms;
 
@@ -16,11 +17,12 @@ namespace MultiFaceRec
 		private Timer tm;
 		string printout = "";
 		string textout = "";
-
+		string name = "";
 		public CheckOutForm(string username, string[,] cart, string[] totals)
 		{
 			InitializeComponent();
-			loadInfo(username, cart, totals);
+			loadInfo(cart, totals);
+			name = username;
             this.WindowState = FormWindowState.Maximized;
 		}
 
@@ -38,20 +40,22 @@ namespace MultiFaceRec
 			this.Close();
 		}
 
-		private void loadInfo(string username, string[,] cart, string[] totals)
+		private void loadInfo(string[,] cart, string[] totals)
 		{
-			DateTime today = DateTime.Today;
+			string today = DateTime.Now.ToString("M/d/yyyy hh:mm:ss");
 			//nameLabel.Text = username;
 			//timeLabel.Text = today.ToString();
 			string barcode = "";
 			string quantity = "";
+			
 
 			string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
 
+			textout += today;
 
 			printout += "eyePOS Test Kiosk\n";
-			printout += "Customer: " + username + "\n";
-			printout += "Date: " + today.ToString() + "\n\n";
+			printout += "Customer: " + name + "\n";
+			printout += "Date: " + today + "\n\n";
 
 			printout += "--------------------------------------------------\n\n";
 
@@ -75,7 +79,7 @@ namespace MultiFaceRec
 					}
 				}
 
-				//Add print out eg
+				//Add print out e.g
 				// x3 Candy Bar (102130) @ $2.00 - 0.25 = $6.00
 
 
@@ -87,10 +91,13 @@ namespace MultiFaceRec
 				//printout += " - " + cart[j, 5]; //discount
 				printout += " = " + cart[j, 4] + "\n\n"; //Total price
 
-				textout += Environment.NewLine + cart[j, 0] + "-"+ cart[j, 1] + "-" + "-" + cart[j, 1]; 
+				textout += ":" + cart[j, 1] + "-"+ cart[j, 0] + "-" + cart[j, 3] + "|";
+			
 			}
 
-			textout += "|";
+			textout += Environment.NewLine;
+
+			storeSale(name, textout);
 
 			printout += "--------------------------------------------------\n\n";
 			printout += "Subtotal: " + totals[0] + "\n";
@@ -103,6 +110,35 @@ namespace MultiFaceRec
 			recieptTextBox.Text = printout;
 		}
 
+		private void storeSale(string name, string text)
+		{
+			if (name != "Guest")
+			{
+				string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+				string sqlstr = "SELECT ID FROM customers WHERE cust_name = @name";
+				string id = "";
+				DataSet ds = new DataSet();
+
+				using (OleDbConnection connection = new OleDbConnection(connectionStr))
+				{
+					OleDbDataAdapter adapter = new OleDbDataAdapter();
+
+					OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
+					adapter.SelectCommand = selectCMD;
+
+					// Add parameters and set values.  
+					selectCMD.Parameters.Add(
+					  "@name", OleDbType.VarChar, 40).Value = name;
+
+					adapter.Fill(ds);
+
+					id = ds.Tables[0].Rows[0]["ID"].ToString();
+
+				}
+
+			}
+		}
+
 		private void printButton_Click(object sender, EventArgs e)
 		{
 			printDocument1.Print();
@@ -110,7 +146,46 @@ namespace MultiFaceRec
 
 		private void emailButton_Click(object sender, EventArgs e)
 		{
+			string useremail = "";
+			string storeemail = "ioursoulov@myseneca.ca";
 
+			try
+			{
+				if (name != "Guest")
+				{
+					string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+					string sqlstr = "SELECT cust_email FROM customers WHERE cust_name = @name";
+
+					DataSet ds = new DataSet();
+
+					using (OleDbConnection connection = new OleDbConnection(connectionStr))
+					{
+						OleDbDataAdapter adapter = new OleDbDataAdapter();
+
+						OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
+						adapter.SelectCommand = selectCMD;
+
+						// Add parameters and set values.  
+						selectCMD.Parameters.Add(
+						  "@name", OleDbType.VarChar, 40).Value = name;
+
+						adapter.Fill(ds);
+
+						useremail = ds.Tables[0].Rows[0]["cust_email"].ToString();
+					}
+
+					MailMessage mail = new MailMessage(storeemail, useremail);
+					SmtpClient client = new SmtpClient();
+					client.Port = 587;
+					client.DeliveryMethod = SmtpDeliveryMethod.Network;
+					client.UseDefaultCredentials = false;
+					client.Host = "smtp.office365.com";
+					mail.Subject = "Your Purchase Reciept.";
+					mail.Body = recieptTextBox.Text;
+					client.Send(mail);
+				}
+			}
+			catch{}
 		}
 
 		private void quitButton_Click(object sender, EventArgs e)

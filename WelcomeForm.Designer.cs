@@ -81,7 +81,7 @@
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.btnImEmployee);
 			this.Controls.Add(this.btnContinue);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "WelcomeForm";
 			this.Text = "eyePOS-Welcome";
 			this.WindowState = System.Windows.Forms.FormWindowState.Minimized;

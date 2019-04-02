@@ -15,8 +15,9 @@ namespace MultiFaceRec
         //DB variables
         string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
         string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
-        //info from the customer
-        bool dateOfBithChecked = false, gender = false;
+		//info from the customer
+		bool dateOfBithChecked = false;
+		string gender = null;
         public UserInfoForm()
 		{
             InitializeComponent();
@@ -42,15 +43,16 @@ namespace MultiFaceRec
                             using (var com = new OleDbCommand())
                             {
                                 com.Connection = con;
-                                com.CommandText = "INSERT INTO customers ([cust_name],[cust_email],[cust_dob],[cust_address],[cust_post]) " +
-                                                  "VALUES (@cust_name,@cust_email,@cust_dob,@cust_address,@cust_post)";
+                                com.CommandText = "INSERT INTO customers ([cust_name],[cust_email],[cust_dob],[cust_address],[cust_post][gender]) " +
+                                                  "VALUES (@cust_name,@cust_email,@cust_dob,@cust_address,@cust_post,@cust_gender)";
                                 //set insert values
                                 com.Parameters.AddWithValue("@cust_name", nameTB.Text);
                                 com.Parameters.AddWithValue("@cust_email", emailTB.Text);
                                 com.Parameters.AddWithValue("@cust_dob", dateTimePickerDOB.Value);
                                 com.Parameters.AddWithValue("@cust_address", addressTB.Text);
                                 com.Parameters.AddWithValue("@cust_post", postalTB.Text);
-                                com.ExecuteNonQuery();
+								com.Parameters.AddWithValue("@cust_gender", gender);
+								com.ExecuteNonQuery();
                             }
                         }
                         MessageBox.Show("A new customer profile has been created.","New customer", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -99,7 +101,8 @@ namespace MultiFaceRec
                                 com.Parameters.AddWithValue("@cust_dob", "");
                                 com.Parameters.AddWithValue("@cust_address", "");
                                 com.Parameters.AddWithValue("@cust_post", "");
-                                com.ExecuteNonQuery();
+								com.Parameters.AddWithValue("@cust_gender", "");
+								com.ExecuteNonQuery();
                             }
                         }
                         //MessageBox.Show("A new customer profile has been created.","New customer", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -127,7 +130,7 @@ namespace MultiFaceRec
                 MessageBox.Show("Please enter your date of birth.");
                 return false;
             }
-            else if (gender == false)
+            else if (gender == null)
             {
                 MessageBox.Show("Please select a gender.");
                 return false;
@@ -152,7 +155,12 @@ namespace MultiFaceRec
         //the events makes sure the user checked the gender radio button
         private void radioBtns_CheckedChanged(object sender, EventArgs e)
         {
-            gender = true;
+			if (maleRadio.Checked)
+				gender = "M";
+			else if (femaleRadio.Checked)
+				gender = "F";
+			else
+				gender = "O";
         }
     }
 }

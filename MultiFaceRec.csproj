@@ -217,15 +217,15 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Coca_Cola.jpg" />
+    <Content Include="Images\Coca_Cola.jpg" />
     <Content Include="eyePOS_DB_.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="hersheys.jpg" />
-    <Content Include="kitkat.jpg" />
-    <Content Include="noPhoto.png" />
-    <Content Include="pepsi.png" />
-    <Content Include="ruffels.jpg" />
+    <Content Include="Images\hersheys.jpg" />
+    <Content Include="Images\kitkat.jpg" />
+    <Content Include="Images\noPhoto.png" />
+    <Content Include="Images\pepsi.png" />
+    <Content Include="Images\ruffles.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

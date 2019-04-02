@@ -35,6 +35,8 @@ namespace MultiFaceRec
         string name, names = null;
         string typeOfCust_ = "";
         bool match=false;
+		
+		
 
         //sql parameters for CUSTOMERS DB
         string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
@@ -42,7 +44,6 @@ namespace MultiFaceRec
 
         string ProfileId_ToWrite;
         //----------------------------------------------------------------------------
-
 
         //constructor gets the name of the form that called it and type of the customer 
         //from customer type form 
@@ -52,7 +53,7 @@ namespace MultiFaceRec
 
 			wrongLabel.Visible = false;
 
-            if (beenCalledBy == "EmployeeLogInForm")    //show face recognition controls only if the user is an employee
+			if (beenCalledBy == "EmployeeLogInForm")    //show face recognition controls only if the user is an employee
             {
                 grpboxFaceRecog.Visible = true;
             }
@@ -212,7 +213,7 @@ namespace MultiFaceRec
 			}
 			catch
 			{
-				MessageBox.Show("Error with Camera, continuing to checkout.","Someting Went Wrong...",MessageBoxButtons.OK,MessageBoxIcon.Error);
+				MessageBox.Show("Error with Camera, continuing to checkout.","Something Went Wrong...",MessageBoxButtons.OK,MessageBoxIcon.Error);
 			}
         }
 
@@ -397,6 +398,7 @@ namespace MultiFaceRec
                 string photoPath = "";
                 //Exception Handlling for any errors
                 //Fill the data table with all the employee info
+
                 try
                 {
                     string sqlst = "SELECT * FROM items";
@@ -410,18 +412,20 @@ namespace MultiFaceRec
                 {
                     MessageBox.Show("error " + ex, "Getting product photo error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
+
                 for (int i = 0; i < vt.Rows.Count; i++)
                 {
                     if (Convert.ToString(vt.Rows[i][1]) == barcode)
                         photoPath = Convert.ToString(vt.Rows[i][4]);
                 }
+
                 try
                 {
                     picBoxProduct.Image = Image.FromFile(photoPath);
                 }
                 catch
                 {
-                    MessageBox.Show("Please reset path from product edit.", "Error Loading product photo. ", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+					picBoxProduct.Image = Image.FromFile("productsPhotos\\noPhoto.jpg");
                 }
             }
 		}
@@ -464,6 +468,9 @@ namespace MultiFaceRec
 			subLabel.Text = "$" + sum.ToString();
 			taxLabel.Text = "$" + tax.ToString();
 			totalLabel.Text = "$" + total.ToString();
+
+
+
 		}
 
 
@@ -471,6 +478,8 @@ namespace MultiFaceRec
 		{
             if (e.KeyCode == Keys.Enter) //Reads for specific button to send to cart, i.e tab, enter
 			{
+				wrongLabel.Visible = false;
+
 				addToCart(barcodeInputTextbox.Text);
 				barcodeInputTextbox.Clear();
 			}
@@ -507,48 +516,58 @@ namespace MultiFaceRec
 		{
 			updateTotals();
 			int length = cartGrid.RowCount;
-			string[,] cart = new string[length,5];
-			string[] totals = new string[3]{ subLabel.Text, taxLabel.Text, totalLabel.Text };
-			string username = "";
-			int i = -1;
 
-			if (name == null)
-				username = "Guest";
-			else
-				username = name;
-			//r.Cells[2].Value.ToString()
-			foreach (DataGridViewRow r in cartGrid.Rows)
+			if (length != 0)
 			{
-				i++;
+				string[,] cart = new string[length, 5];
+				string[] totals = new string[3] { subLabel.Text, taxLabel.Text, totalLabel.Text };
+				string username = "";
+				int i = -1;
 
-				if (!r.IsNewRow)
+				if (name == null)
+					username = "Guest";
+				else
+					username = name;
+
+				foreach (DataGridViewRow r in cartGrid.Rows)
 				{
-					cart[i, 0] = r.Cells[1].Value.ToString(); //qty
-					cart[i, 1] = r.Cells[2].Value.ToString(); //upc
-					cart[i, 2] = r.Cells[3].Value.ToString(); //item name
-					cart[i, 3] = r.Cells[4].Value.ToString(); //price
-					cart[i, 4] = r.Cells[5].Value.ToString(); //totalprice
-				}
-			}
+					i++;
 
-            this.Close();
-            CheckOutForm checkout = new CheckOutForm(username, cart, totals);
-			checkout.ShowDialog();
+					if (!r.IsNewRow)
+					{
+						cart[i, 0] = r.Cells[1].Value.ToString(); //qty
+						cart[i, 1] = r.Cells[2].Value.ToString(); //upc
+						cart[i, 2] = r.Cells[3].Value.ToString(); //item name
+						cart[i, 3] = r.Cells[4].Value.ToString(); //price
+						cart[i, 4] = r.Cells[5].Value.ToString(); //totalprice
+					}
+				}
+
+				this.Hide();
+				CheckOutForm checkout = new CheckOutForm(username, cart, totals);
+				checkout.ShowDialog();
+				this.Close();
+
+			}
         }
 
         //*************HOME************************
         private void btnHome_Click(object sender, EventArgs e)
         {
-            writeProfile(ProfileId_ToWrite);
+			try
+			{
+				writeProfile(ProfileId_ToWrite);
+			}
+			catch
+			{
+
+			}
+
             this.Close();
         }
 
     }
 }
-
-
-
-
 
 /*        public void updateProfileTable(string id)
         {
