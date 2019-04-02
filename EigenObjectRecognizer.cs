@@ -4,9 +4,7 @@ using Emgu.CV.Structure;
 
 namespace Emgu.CV
 {
-   /// <summary>
-   /// An object recognizer using PCA (Principle Components Analysis)
-   /// </summary>
+   // An object recognizer using PCA (Principle Components Analysis)
    [Serializable]
    public class EigenObjectRecognizer
    {
@@ -16,50 +14,44 @@ namespace Emgu.CV
       private string[] _labels;
       private double _eigenDistanceThreshold;
 
-      /// <summary>
-      /// Get the eigen vectors that form the eigen space
-      /// </summary>
-      /// <remarks>The set method is primary used for deserialization, do not attemps to set it unless you know what you are doing</remarks>
+ 
+      // Get the eigen vectors that form the eigen space
+
+      // <remarks>The set method is primary used for deserialization, do not attemps to set it unless you know what you are doing</remarks>
       public Image<Gray, Single>[] EigenImages
       {
          get { return _eigenImages; }
          set { _eigenImages = value; }
       }
 
-      /// <summary>
-      /// Get or set the labels for the corresponding training image
-      /// </summary>
+
+      // Get or set the labels for the corresponding training image
+
       public String[] Labels
       {
          get { return _labels; }
          set { _labels = value; }
       }
 
-      /// <summary>
-      /// Get or set the eigen distance threshold.
-      /// The smaller the number, the more likely an examined image will be treated as unrecognized object. 
-      /// Set it to a huge number (e.g. 5000) and the recognizer will always treated the examined image as one of the known object. 
-      /// </summary>
+      // Get or set the eigen distance threshold.
+      // The smaller the number, the more likely an examined image will be treated as unrecognized object. 
+      // Set it to a huge number (e.g. 5000) and the recognizer will always treated the examined image as one of the known object. 
       public double EigenDistanceThreshold
       {
          get { return _eigenDistanceThreshold; }
          set { _eigenDistanceThreshold = value; }
       }
 
-      /// <summary>
-      /// Get the average Image. 
-      /// </summary>
-      /// <remarks>The set method is primary used for deserialization, do not attemps to set it unless you know what you are doing</remarks>
+      // Get the average Image. 
+      // <remarks>The set method is primary used for deserialization, do not attemps to set it unless you know what you are doing</remarks>
       public Image<Gray, Single> AverageImage
       {
          get { return _avgImage; }
          set { _avgImage = value; }
       }
 
-      /// <summary>
-      /// Get the eigen values of each of the training image
-      /// </summary>
-      /// <remarks>The set method is primary used for deserialization, do not attemps to set it unless you know what you are doing</remarks>
+      // Get the eigen values of each of the training image
+      // <remarks>The set method is primary used for deserialization, do not attemps to set it unless you know what you are doing</remarks>
       public Matrix<float>[] EigenValues
       {
          get { return _eigenValues; }
@@ -71,11 +63,10 @@ namespace Emgu.CV
       }
 
 
-      /// <summary>
-      /// Create an object recognizer using the specific tranning data and parameters, it will always return the most similar object
-      /// </summary>
-      /// <param name="images">The images used for training, each of them should be the same size. It's recommended the images are histogram normalized</param>
-      /// <param name="termCrit">The criteria for recognizer training</param>
+      // Create an object recognizer using the specific tranning data and parameters, it will always return the most similar object
+
+      // <param name="images">The images used for training, each of them should be the same size. It's recommended the images are histogram normalized</param>
+      // <param name="termCrit">The criteria for recognizer training</param>
       public EigenObjectRecognizer(Image<Gray, Byte>[] images, ref MCvTermCriteria termCrit)
          : this(images, GenerateLabels(images.Length), ref termCrit)
       {
@@ -89,28 +80,23 @@ namespace Emgu.CV
          return labels;
       }
 
-      /// <summary>
-      /// Create an object recognizer using the specific tranning data and parameters, it will always return the most similar object
-      /// </summary>
-      /// <param name="images">The images used for training, each of them should be the same size. It's recommended the images are histogram normalized</param>
-      /// <param name="labels">The labels corresponding to the images</param>
-      /// <param name="termCrit">The criteria for recognizer training</param>
+      // Create an object recognizer using the specific tranning data and parameters, it will always return the most similar object
+      // <param name="images">The images used for training, each of them should be the same size. It's recommended the images are histogram normalized</param>
+      // <param name="labels">The labels corresponding to the images</param>
+      // <param name="termCrit">The criteria for recognizer training</param>
       public EigenObjectRecognizer(Image<Gray, Byte>[] images, String[] labels, ref MCvTermCriteria termCrit)
          : this(images, labels, 0, ref termCrit)
       {
       }
 
-      /// <summary>
-      /// Create an object recognizer using the specific tranning data and parameters
-      /// </summary>
-      /// <param name="images">The images used for training, each of them should be the same size. It's recommended the images are histogram normalized</param>
-      /// <param name="labels">The labels corresponding to the images</param>
-      /// <param name="eigenDistanceThreshold">
-      /// The eigen distance threshold, (0, ~1000].
-      /// The smaller the number, the more likely an examined image will be treated as unrecognized object. 
-      /// If the threshold is &lt; 0, the recognizer will always treated the examined image as one of the known object. 
-      /// </param>
-      /// <param name="termCrit">The criteria for recognizer training</param>
+      // Create an object recognizer using the specific tranning data and parameters
+      // <param name="images">The images used for training, each of them should be the same size. It's recommended the images are histogram normalized</param>
+      // <param name="labels">The labels corresponding to the images</param>
+      // <param name="eigenDistanceThreshold">
+      // The eigen distance threshold, (0, ~1000].
+      // The smaller the number, the more likely an examined image will be treated as unrecognized object. 
+      // If the threshold is &lt; 0, the recognizer will always treated the examined image as one of the known object. 
+      // <param name="termCrit">The criteria for recognizer training</param>
       public EigenObjectRecognizer(Image<Gray, Byte>[] images, String[] labels, double eigenDistanceThreshold, ref MCvTermCriteria termCrit)
       {
          Debug.Assert(images.Length == labels.Length, "The number of images should equals the number of labels");

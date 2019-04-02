@@ -83,7 +83,7 @@ namespace MultiFaceRec
         //takes the user to checkout form whitout entering info
 		private void skipButton_Click(object sender, EventArgs e)
 		{
-			/*
+			
             try
             {
                 using (var con = new OleDbConnection())
@@ -112,7 +112,7 @@ namespace MultiFaceRec
             {
                 MessageBox.Show("Not Saved: " + ex.Message);
             }
-			*/
+			
             this.Hide();
             CustScanForm custscan = new CustScanForm("CustomerTypeForm", "guest");
             custscan.ShowDialog();

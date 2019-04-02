@@ -30,15 +30,7 @@ namespace MultiFaceRec
         //Continue as customer
         private void btnContinue_Click(object sender, EventArgs e)
         {
-                /*
-                System.IO.File.WriteAllText(@"profiles\\2.txt", "ara");
-
-                if (File.Exists("profiles\\1.txt"))
-                    MessageBox.Show("Yes");
-                if (!File.Exists("profiles\\1.txt"))
-                    MessageBox.Show("nah nah");
-                    */
-                CustomerTypeForm id = new CustomerTypeForm();
+            CustomerTypeForm id = new CustomerTypeForm();
 			this.Hide();
             id.ShowDialog();
             this.Show();
