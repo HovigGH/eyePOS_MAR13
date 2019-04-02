@@ -35,6 +35,8 @@
 			this.quitButton = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+			this.emailLabel = new System.Windows.Forms.Label();
+			this.printLabel = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -71,12 +73,14 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.printLabel);
+			this.groupBox1.Controls.Add(this.emailLabel);
 			this.groupBox1.Controls.Add(this.emailButton);
 			this.groupBox1.Controls.Add(this.printButton);
 			this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.groupBox1.Location = new System.Drawing.Point(593, 12);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(426, 115);
+			this.groupBox1.Size = new System.Drawing.Size(426, 139);
 			this.groupBox1.TabIndex = 4;
 			this.groupBox1.TabStop = false;
 			// 
@@ -106,6 +110,28 @@
 			// 
 			this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
 			// 
+			// emailLabel
+			// 
+			this.emailLabel.AutoSize = true;
+			this.emailLabel.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.emailLabel.ForeColor = System.Drawing.Color.Red;
+			this.emailLabel.Location = new System.Drawing.Point(6, 107);
+			this.emailLabel.Name = "emailLabel";
+			this.emailLabel.Size = new System.Drawing.Size(129, 20);
+			this.emailLabel.TabIndex = 33;
+			this.emailLabel.Text = "Error sending email!";
+			// 
+			// printLabel
+			// 
+			this.printLabel.AutoSize = true;
+			this.printLabel.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.printLabel.ForeColor = System.Drawing.Color.Red;
+			this.printLabel.Location = new System.Drawing.Point(310, 107);
+			this.printLabel.Name = "printLabel";
+			this.printLabel.Size = new System.Drawing.Size(88, 20);
+			this.printLabel.TabIndex = 34;
+			this.printLabel.Text = "Error printing!";
+			// 
 			// CheckOutForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -120,6 +146,7 @@
 			this.Text = "Confirmation";
 			this.Load += new System.EventHandler(this.CheckOutForm_Load);
 			this.groupBox1.ResumeLayout(false);
+			this.groupBox1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -134,5 +161,7 @@
 		private System.Windows.Forms.Button quitButton;
 		private System.Windows.Forms.Label label1;
 		private System.Drawing.Printing.PrintDocument printDocument1;
+		private System.Windows.Forms.Label printLabel;
+		private System.Windows.Forms.Label emailLabel;
 	}
 }

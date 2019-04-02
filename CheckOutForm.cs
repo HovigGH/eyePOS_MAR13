@@ -6,6 +6,7 @@ using System.Data.OleDb;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Windows.Forms;
@@ -21,6 +22,10 @@ namespace MultiFaceRec
 		public CheckOutForm(string username, string[,] cart, string[] totals)
 		{
 			InitializeComponent();
+
+			emailLabel.Visible = false;
+			printLabel.Visible = false;
+
 			loadInfo(cart, totals);
 			name = username;
             this.WindowState = FormWindowState.Maximized;
@@ -110,44 +115,80 @@ namespace MultiFaceRec
 			recieptTextBox.Text = printout;
 		}
 
-		private void storeSale(string name, string text)
+		private void storeSale(string name, string text) //Output entry to text
 		{
-			if (name != "Guest")
+			try
 			{
-				string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
-				string sqlstr = "SELECT ID FROM customers WHERE cust_name = @name";
-				string id = "";
-				DataSet ds = new DataSet();
-
-				using (OleDbConnection connection = new OleDbConnection(connectionStr))
+				if (name != "Guest")
 				{
-					OleDbDataAdapter adapter = new OleDbDataAdapter();
+					string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+					string sqlstr = "SELECT ID FROM customers WHERE cust_name = @name";
+					string id = "";
+					DataSet ds = new DataSet();
 
-					OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
-					adapter.SelectCommand = selectCMD;
+					using (OleDbConnection connection = new OleDbConnection(connectionStr))
+					{
+						OleDbDataAdapter adapter = new OleDbDataAdapter();
 
-					// Add parameters and set values.  
-					selectCMD.Parameters.Add(
-					  "@name", OleDbType.VarChar, 40).Value = name;
+						OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
+						adapter.SelectCommand = selectCMD;
 
-					adapter.Fill(ds);
+						// Add parameters and set values.  
+						selectCMD.Parameters.Add(
+						  "@name", OleDbType.VarChar, 40).Value = name;
 
-					id = ds.Tables[0].Rows[0]["ID"].ToString();
+						adapter.Fill(ds);
 
+						id = ds.Tables[0].Rows[0]["ID"].ToString();
+
+					}
+
+					string fileName = @"userHistory\\" + id;
+
+
+					// Check if file already exists. If yes, delete it.     
+					if (File.Exists(fileName))
+					{
+						using (StreamWriter sw = File.AppendText(fileName))
+						{
+							File.AppendText(textout);
+						}
+					}
+					else
+					{
+						using (StreamWriter sw = File.CreateText(fileName))
+						{
+							sw.WriteLine(textout);
+						}
+					}
 				}
-
+				
 			}
+			catch {} //throw out error 
+				
 		}
 
 		private void printButton_Click(object sender, EventArgs e)
 		{
-			printDocument1.Print();
+			try
+			{
+				printDocument1.Print();
+
+			}
+			catch
+			{
+				printLabel.Visible = true;
+			}
 		}
 
 		private void emailButton_Click(object sender, EventArgs e)
 		{
-			string useremail = "";
-			string storeemail = "ioursoulov@myseneca.ca";
+			string useremail = ""; //User's email
+			string storeemail = "ioursoulov@myseneca.ca"; //Store's email
+			const string fromPassword = "fromPassword"; //Store password
+			const string subject = "Your purchase receipt!";
+			string body = recieptTextBox.Text;
+
 
 			try
 			{
@@ -174,18 +215,38 @@ namespace MultiFaceRec
 						useremail = ds.Tables[0].Rows[0]["cust_email"].ToString();
 					}
 
-					MailMessage mail = new MailMessage(storeemail, useremail);
-					SmtpClient client = new SmtpClient();
-					client.Port = 587;
-					client.DeliveryMethod = SmtpDeliveryMethod.Network;
-					client.UseDefaultCredentials = false;
-					client.Host = "smtp.office365.com";
-					mail.Subject = "Your Purchase Reciept.";
-					mail.Body = recieptTextBox.Text;
-					client.Send(mail);
+					MailAddress fromAddress = new MailAddress(storeemail, "eyePOS Terminal");
+					MailAddress toAddress = new MailAddress(useremail, name);
+
+					SmtpClient smtp = new SmtpClient
+					{
+						Host = "smtp.live.com",
+						Port = 587,
+						EnableSsl = true,
+						DeliveryMethod = SmtpDeliveryMethod.Network,
+						UseDefaultCredentials = false,
+						Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+					};
+					using (MailMessage message = new MailMessage(fromAddress, toAddress)
+					{
+						Subject = subject,
+						Body = body
+					})
+					{
+						smtp.Send(message);
+					}
+
+				}
+				else
+				{
+					emailLabel.Text = "Guests cannot send email!";
+					emailLabel.Visible = true;
 				}
 			}
-			catch{}
+			catch
+			{
+				emailLabel.Visible = true;
+			}
 		}
 
 		private void quitButton_Click(object sender, EventArgs e)
