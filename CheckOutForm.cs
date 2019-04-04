@@ -19,25 +19,23 @@ namespace MultiFaceRec
 		string printout = "";
 		string textout = "";
 
-		string custID = "";
 		string custName = "";
 		string custEmail = "";
 
-		public CheckOutForm(string ID, string[,] cart, string[] totals)
+		public CheckOutForm(string name, string[,] cart, string[] totals)
 		{
 			InitializeComponent();
-
+            emailButton.Visible = true;
 			emailLabel.Visible = false;
 			printLabel.Visible = false;
 
-			custID = ID;
 
-			if (custID == null){
+			if (name == "Guest"){
 				custName = "Guest";
 			}
 			else
 			{
-				getDBInfo();
+                custName = name;
 			}
 
 			loadInfo(cart, totals);
@@ -59,31 +57,6 @@ namespace MultiFaceRec
 			this.Close();
 		}
 
-		private void getDBInfo()
-		{
-			string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
-			string sqlstr = "SELECT * FROM customers WHERE id = @id";
-
-			DataSet ds = new DataSet();
-
-			using (OleDbConnection connection = new OleDbConnection(connectionStr))
-			{
-				OleDbDataAdapter adapter = new OleDbDataAdapter();
-
-				OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
-				adapter.SelectCommand = selectCMD;
-
-				// Add parameters and set values.  
-				selectCMD.Parameters.Add(
-				  "@id", OleDbType.VarChar, 40).Value = custID;
-
-				adapter.Fill(ds);
-
-				custName = ds.Tables[0].Rows[0][1].ToString();
-				custEmail = ds.Tables[0].Rows[0][2].ToString();
-			}
-
-		}
 
 		private void loadInfo(string[,] cart, string[] totals)
 		{
@@ -94,7 +67,7 @@ namespace MultiFaceRec
 			string quantity = "";
 			
 
-			string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+			string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;Persist Security Info=False;";
 
 			textout += today;
 
@@ -155,35 +128,7 @@ namespace MultiFaceRec
 			recieptTextBox.Text = printout;
 		}
 
-		private void storeSale(string text) //Output entry to text
-		{
-			try
-			{
-				if (custID != null)
-				{
-					string fileName = @"userHistory\\" + custID;
-
-					// Check if file already exists. If yes, delete it.     
-					if (File.Exists(fileName))
-					{
-						using (StreamWriter sw = File.AppendText(fileName))
-						{
-							File.AppendText(textout);
-						}
-					}
-					else
-					{
-						using (StreamWriter sw = File.CreateText(fileName))
-						{
-							sw.WriteLine(textout);
-						}
-					}
-				}
-				
-			}
-			catch {} //throw out error 
-				
-		}
+	
 
 		private void printButton_Click(object sender, EventArgs e)
 		{
@@ -208,7 +153,7 @@ namespace MultiFaceRec
 
 			try
 			{
-				if (custID != null)
+				if (custName != "Guest")
 				{
 					MailAddress fromAddress = new MailAddress(storeemail, "eyePOS Terminal");
 					MailAddress toAddress = new MailAddress(custEmail, custName);

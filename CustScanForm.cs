@@ -564,7 +564,7 @@ namespace MultiFaceRec
                 writeProfile(ProfileId_ToWrite);
    
                 this.Hide();
-				CheckOutForm checkout = new CheckOutForm(ProfileId_ToWrite, cart, totals); //Checks out, with customerID, cart contents, and totals
+				CheckOutForm checkout = new CheckOutForm(nameLabel.Text, cart, totals); //Checks out, with customerID, cart contents, and totals
 				checkout.ShowDialog();
 				this.Close();
 			}

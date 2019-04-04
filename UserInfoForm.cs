@@ -13,8 +13,7 @@ namespace MultiFaceRec
 	public partial class UserInfoForm : Form
 	{
         //DB variables
-        string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
-        string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+        string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;Persist Security Info=False;";
 		//info from the customer
 		bool dateOfBithChecked = false;
 		string gender = "O";
@@ -37,7 +36,7 @@ namespace MultiFaceRec
                     {
                         using (var con = new OleDbConnection())
                         {
-                            con.ConnectionString = connectionStr;
+                            con.ConnectionString = constr;
                             con.Open();
 
                             using (var com = new OleDbCommand())

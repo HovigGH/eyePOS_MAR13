@@ -16,7 +16,7 @@ namespace MultiFaceRec
 	public partial class EmployeeForm1 : Form
     {
         //DB parameters
-        string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+        string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;Persist Security Info=False;";
         DataTable vt = new DataTable();
 
         //constructor

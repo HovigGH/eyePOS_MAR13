@@ -518,9 +518,9 @@
             this.nameLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameLabel.Location = new System.Drawing.Point(172, 9);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(86, 18);
+            this.nameLabel.Size = new System.Drawing.Size(56, 18);
             this.nameLabel.TabIndex = 35;
-            this.nameLabel.Text = "Welcome,";
+            this.nameLabel.Text = "Guest";
             this.nameLabel.Visible = false;
             // 
             // btnFaceRecg
