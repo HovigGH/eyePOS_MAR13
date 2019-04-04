@@ -43,7 +43,7 @@ namespace MultiFaceRec
         string constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
         DataTable vt = new DataTable();        //data table
 
-        string ProfileId_ToWrite = "";
+        string ProfileId_ToWrite = null;
         //----------------------------------------------------------------------------
 
         //constructor gets the name of the form that called it and type of the customer 
@@ -393,7 +393,8 @@ namespace MultiFaceRec
 
                     OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
                     adapter.SelectCommand = selectCMD;
-                    selectCMD.Parameters.Add("@barcode", OleDbType.VarChar, 25).Value = barcode;
+					selectCMD.Parameters.AddWithValue("@barcode", barcode);
+
                     // Add parameters and set values.  
 
                     adapter.Fill(ds);
@@ -513,8 +514,10 @@ namespace MultiFaceRec
 
 		private void empButton_Click(object sender, EventArgs e)
 		{
+			this.Hide();
 			EmployeeLogInForm employeeLogInForm = new EmployeeLogInForm("CustScanForm");
-			employeeLogInForm.Show();
+			employeeLogInForm.ShowDialog();
+			this.Show();
 		}
 
         private void cartGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)

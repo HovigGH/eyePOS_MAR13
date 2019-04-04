@@ -45,17 +45,17 @@ namespace MultiFaceRec
             this.WindowState = FormWindowState.Maximized;
 		}
 
-		private void CheckOutForm_Load(object sender, EventArgs e)
+		private void CheckOutForm_Load(object sender, EventArgs e) //Closes form after 30 seconds
 		{
 			tm = new Timer();
-			tm.Interval = 60 * 1000; // 10 seconds
+			tm.Interval = 30 * 1000; // 30 seconds
 			tm.Tick += new EventHandler(tm_Tick);
 			tm.Start();
 		}
 
 		private void tm_Tick(object sender, EventArgs e)
 		{
-			tm.Stop(); // so that we only fire the timer message once
+			tm.Stop();
 			this.Close();
 		}
 
@@ -136,13 +136,13 @@ namespace MultiFaceRec
 				//printout += " - " + cart[j, 5]; //discount
 				printout += " = " + cart[j, 4] + "\n\n"; //Total price
 
-				textout += ":" + cart[j, 1] + "-"+ cart[j, 0] + "-" + cart[j, 3] + "|";
+				//textout += ":" + cart[j, 1] + "-"+ cart[j, 0] + "-" + cart[j, 3] + "|";
 			
 			}
 
 			textout += Environment.NewLine;
 
-			storeSale(textout);
+			//storeSale(textout);
 
 			printout += "--------------------------------------------------\n\n";
 			printout += "Subtotal: " + totals[0] + "\n";
@@ -200,7 +200,7 @@ namespace MultiFaceRec
 
 		private void emailButton_Click(object sender, EventArgs e)
 		{
-			string storeemail = "ioursoulov@myseneca.ca"; //Store's email
+			const string storeemail = "store@email.com"; //Store's email
 			const string fromPassword = "fromPassword"; //Store password
 			const string subject = "Your purchase receipt!";
 			string body = recieptTextBox.Text;
@@ -210,14 +210,12 @@ namespace MultiFaceRec
 			{
 				if (custID != null)
 				{
-					
-
 					MailAddress fromAddress = new MailAddress(storeemail, "eyePOS Terminal");
 					MailAddress toAddress = new MailAddress(custEmail, custName);
 
 					SmtpClient smtp = new SmtpClient
 					{
-						Host = "smtp.live.com",
+						Host = "smtp.live.com", //May change
 						Port = 587,
 						EnableSsl = true,
 						DeliveryMethod = SmtpDeliveryMethod.Network,
@@ -242,6 +240,7 @@ namespace MultiFaceRec
 			}
 			catch
 			{
+				emailLabel.Text = "Error sending email!";
 				emailLabel.Visible = true;
 			}
 		}

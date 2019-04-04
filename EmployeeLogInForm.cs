@@ -64,7 +64,7 @@ namespace MultiFaceRec
                                 authorize = true; //authorization been granted
                                  //if this form was called from the welcome form 
                                  //if the logged in employee is an admin, pass it to EmployeeForm1
-                                 if (beenCalledBy == "WelcomeForm" && Convert.ToString(vt.Rows[i][4]) == "admin")
+                                 if (Convert.ToString(vt.Rows[i][4]) == "admin")
                                  {
 									this.Hide();
 									EmployeeForm1 employeeForm1 = new EmployeeForm1("admin");
@@ -72,20 +72,14 @@ namespace MultiFaceRec
 									this.Close();
 								 }
                                 //if the logged in employee is a regular employee, pass it to EmployeeForm1
-                                if (beenCalledBy == "WelcomeForm" && Convert.ToString(vt.Rows[i][4]) == "regular")
+                                if (Convert.ToString(vt.Rows[i][4]) == "regular")
                                  {
 									this.Hide();
 									EmployeeForm1 employeeForm1 = new EmployeeForm1("regular");
 									employeeForm1.ShowDialog();
 									this.Close();
                                  }
-                                //if this form was called from the CustScan form loopback
-                                else if (beenCalledBy == "CustScanForm")
-                                {
-                                    this.Hide();
-                                    CustScanForm custscan = new CustScanForm("EmployeeLoginForm", "CustScanForm");
-                                    custscan.ShowDialog();
-                                }
+
                             }
                         }
                     }

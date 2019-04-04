@@ -246,8 +246,9 @@ namespace MultiFaceRec
         private void button2_Click(object sender, EventArgs e)
 		{
             employee_settings_Form settings_Form = new employee_settings_Form();
-            settings_Form.ShowDialog();
-            this.Hide();
+			this.Hide();
+			settings_Form.ShowDialog();
+			this.Show();
 		}
 
         //search by upc
@@ -267,8 +268,9 @@ namespace MultiFaceRec
 				adapter.SelectCommand = selectCMD;
 
 				// Add parameters and set values.  
-				selectCMD.Parameters.Add(
-				  "@BarCode", OleDbType.VarChar, 25).Value = "%"+ value+ "%";
+				selectCMD.Parameters.AddWithValue("@barcode", "%"+value+"%");
+
+				//selectCMD.Parameters.Add( "@BarCode", OleDbType.VarChar, 25).Value = "%"+ value+ "%";
 
 				adapter.Fill(dt);
 				dgvInventory.DataSource = dt;
@@ -286,8 +288,9 @@ namespace MultiFaceRec
 		private void nameSearchButton_Click(object sender, EventArgs e)
 		{
             //select everything similar to the entered string
-			string sqlstr = "SELECT * FROM items WHERE name LIKE @name";
+			string sqlstr = "SELECT * FROM items WHERE prod_name LIKE @name";
 			string value = searchTextBox.Text;
+
 			DataTable dt = new DataTable();
             
 			using (OleDbConnection connection = new OleDbConnection(connectionStr))
@@ -298,7 +301,10 @@ namespace MultiFaceRec
 				adapter.SelectCommand = selectCMD;
 
 				// Add parameters and set values.  
-				selectCMD.Parameters.Add("@name", OleDbType.VarChar, 25).Value = "%" + value + "%";
+
+				selectCMD.Parameters.AddWithValue("@name", "%" + value + "%");
+
+				//selectCMD.Parameters.Add("@name", OleDbType.VarChar, 50).Value = "%" + value + "%";
 				adapter.Fill(dt);
 				dgvInventory.DataSource = dt;
 			}
