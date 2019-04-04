@@ -127,7 +127,9 @@ namespace MultiFaceRec
                     dad.Fill(vtt);
                     dad.Dispose();
                     dad = null;
-                   // MessageBox.Show("araaa" + vtt.Rows[0][0].ToString());
+                    nameLabel.Text = vtt.Rows[0][1].ToString(); //saves user name
+                    nameLabel.Visible = true;
+                    preNameLabel.Visible = true;
                 }
                 catch (Exception ex)
                 {
@@ -135,9 +137,7 @@ namespace MultiFaceRec
                 }
                 textBox1.Text = vtt.Rows[0][0].ToString(); //assign the latest added id to the new customer
 
-				nameLabel.Text = vtt.Rows[0][1].ToString(); //saves user name
-				nameLabel.Visible = true;
-				preNameLabel.Visible = true;
+
 
                 add_newFace();
                 match = true;
@@ -167,7 +167,7 @@ namespace MultiFaceRec
                             {
 								//customer id is saved in the memory to up the the txt file at checkout
 
-								nameLabel.Text = wt.Rows[0][1].ToString(); //saves user name
+								nameLabel.Text = wt.Rows[i][1].ToString(); //saves user name
 
 								nameLabel.Visible = true;
 								preNameLabel.Visible = true;
@@ -561,8 +561,9 @@ namespace MultiFaceRec
 						cart[i, 4] = r.Cells[5].Value.ToString(); //totalprice
 					}
 				}
-
-				this.Hide();
+                writeProfile(ProfileId_ToWrite);
+   
+                this.Hide();
 				CheckOutForm checkout = new CheckOutForm(ProfileId_ToWrite, cart, totals); //Checks out, with customerID, cart contents, and totals
 				checkout.ShowDialog();
 				this.Close();
