@@ -278,6 +278,7 @@
 			this.txtProfile.ReadOnly = true;
 			this.txtProfile.Size = new System.Drawing.Size(377, 665);
 			this.txtProfile.TabIndex = 16;
+			this.txtProfile.TextChanged += new System.EventHandler(this.txtProfile_TextChanged);
 			// 
 			// employee_settings_Form
 			// 

@@ -28,8 +28,8 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.empButton = new System.Windows.Forms.Button();
 			this.lblPlsScan = new System.Windows.Forms.Label();
 			this.cartGrid = new System.Windows.Forms.DataGridView();
@@ -68,6 +68,8 @@
 			this.picBoxProduct = new System.Windows.Forms.PictureBox();
 			this.wrongLabel = new System.Windows.Forms.Label();
 			this.emptyCartLabel = new System.Windows.Forms.Label();
+			this.preNameLabel = new System.Windows.Forms.Label();
+			this.nameLabel = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.cartGrid)).BeginInit();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
@@ -92,7 +94,7 @@
 			// 
 			this.lblPlsScan.AutoSize = true;
 			this.lblPlsScan.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblPlsScan.Location = new System.Drawing.Point(21, 22);
+			this.lblPlsScan.Location = new System.Drawing.Point(21, 41);
 			this.lblPlsScan.Name = "lblPlsScan";
 			this.lblPlsScan.Size = new System.Drawing.Size(226, 18);
 			this.lblPlsScan.TabIndex = 8;
@@ -105,14 +107,14 @@
 			this.cartGrid.AllowUserToResizeColumns = false;
 			this.cartGrid.AllowUserToResizeRows = false;
 			this.cartGrid.BackgroundColor = System.Drawing.Color.White;
-			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-			dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.cartGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.cartGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
 			this.cartGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.cartGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.deleteCol,
@@ -121,14 +123,14 @@
             this.itemCol,
             this.priceCol,
             this.totalCol});
-			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-			dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.cartGrid.DefaultCellStyle = dataGridViewCellStyle8;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.cartGrid.DefaultCellStyle = dataGridViewCellStyle4;
 			this.cartGrid.Location = new System.Drawing.Point(647, 3);
 			this.cartGrid.Name = "cartGrid";
 			this.cartGrid.RowHeadersVisible = false;
@@ -192,7 +194,7 @@
 			// 
 			// barcodeInputTextbox
 			// 
-			this.barcodeInputTextbox.Location = new System.Drawing.Point(83, 45);
+			this.barcodeInputTextbox.Location = new System.Drawing.Point(83, 64);
 			this.barcodeInputTextbox.Name = "barcodeInputTextbox";
 			this.barcodeInputTextbox.Size = new System.Drawing.Size(223, 20);
 			this.barcodeInputTextbox.TabIndex = 12;
@@ -230,7 +232,7 @@
 			// 
 			this.lblOrEnter.AutoSize = true;
 			this.lblOrEnter.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblOrEnter.Location = new System.Drawing.Point(253, 22);
+			this.lblOrEnter.Location = new System.Drawing.Point(253, 41);
 			this.lblOrEnter.Name = "lblOrEnter";
 			this.lblOrEnter.Size = new System.Drawing.Size(105, 20);
 			this.lblOrEnter.TabIndex = 13;
@@ -434,7 +436,7 @@
 			// button2
 			// 
 			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.button2.Location = new System.Drawing.Point(393, 220);
+			this.button2.Location = new System.Drawing.Point(393, 225);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(53, 31);
 			this.button2.TabIndex = 3;
@@ -454,7 +456,7 @@
 			this.grpboxFaceRecog.Controls.Add(this.label4);
 			this.grpboxFaceRecog.Controls.Add(this.textBox1);
 			this.grpboxFaceRecog.Controls.Add(this.imageBoxFrameGrabber);
-			this.grpboxFaceRecog.Location = new System.Drawing.Point(11, 429);
+			this.grpboxFaceRecog.Location = new System.Drawing.Point(12, 470);
 			this.grpboxFaceRecog.Name = "grpboxFaceRecog";
 			this.grpboxFaceRecog.Size = new System.Drawing.Size(574, 267);
 			this.grpboxFaceRecog.TabIndex = 30;
@@ -464,9 +466,9 @@
 			// picBoxProduct
 			// 
 			this.picBoxProduct.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.picBoxProduct.Location = new System.Drawing.Point(15, 101);
+			this.picBoxProduct.Location = new System.Drawing.Point(25, 114);
 			this.picBoxProduct.Name = "picBoxProduct";
-			this.picBoxProduct.Size = new System.Drawing.Size(377, 322);
+			this.picBoxProduct.Size = new System.Drawing.Size(350, 350);
 			this.picBoxProduct.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.picBoxProduct.TabIndex = 31;
 			this.picBoxProduct.TabStop = false;
@@ -476,7 +478,7 @@
 			this.wrongLabel.AutoSize = true;
 			this.wrongLabel.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.wrongLabel.ForeColor = System.Drawing.Color.Red;
-			this.wrongLabel.Location = new System.Drawing.Point(124, 68);
+			this.wrongLabel.Location = new System.Drawing.Point(124, 87);
 			this.wrongLabel.Name = "wrongLabel";
 			this.wrongLabel.Size = new System.Drawing.Size(149, 20);
 			this.wrongLabel.TabIndex = 32;
@@ -493,11 +495,35 @@
 			this.emptyCartLabel.TabIndex = 33;
 			this.emptyCartLabel.Text = "There\'s nothing in the cart!";
 			// 
+			// preNameLabel
+			// 
+			this.preNameLabel.AutoSize = true;
+			this.preNameLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.preNameLabel.Location = new System.Drawing.Point(80, 9);
+			this.preNameLabel.Name = "preNameLabel";
+			this.preNameLabel.Size = new System.Drawing.Size(86, 18);
+			this.preNameLabel.TabIndex = 34;
+			this.preNameLabel.Text = "Welcome,";
+			this.preNameLabel.Visible = false;
+			// 
+			// nameLabel
+			// 
+			this.nameLabel.AutoSize = true;
+			this.nameLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.nameLabel.Location = new System.Drawing.Point(172, 9);
+			this.nameLabel.Name = "nameLabel";
+			this.nameLabel.Size = new System.Drawing.Size(86, 18);
+			this.nameLabel.TabIndex = 35;
+			this.nameLabel.Text = "Welcome,";
+			this.nameLabel.Visible = false;
+			// 
 			// CustScanForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1370, 749);
+			this.Controls.Add(this.nameLabel);
+			this.Controls.Add(this.preNameLabel);
 			this.Controls.Add(this.emptyCartLabel);
 			this.Controls.Add(this.wrongLabel);
 			this.Controls.Add(this.picBoxProduct);
@@ -568,5 +594,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn totalCol;
 		private System.Windows.Forms.Label wrongLabel;
 		private System.Windows.Forms.Label emptyCartLabel;
+		private System.Windows.Forms.Label preNameLabel;
+		private System.Windows.Forms.Label nameLabel;
 	}
 }

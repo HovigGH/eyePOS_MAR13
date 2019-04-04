@@ -18,16 +18,30 @@ namespace MultiFaceRec
 		private Timer tm;
 		string printout = "";
 		string textout = "";
-		string name = "";
-		public CheckOutForm(string username, string[,] cart, string[] totals)
+
+		string custID = "";
+		string custName = "";
+		string custEmail = "";
+
+		public CheckOutForm(string ID, string[,] cart, string[] totals)
 		{
 			InitializeComponent();
 
 			emailLabel.Visible = false;
 			printLabel.Visible = false;
 
+			custID = ID;
+
+			if (custID == null){
+				custName = "Guest";
+			}
+			else
+			{
+				getDBInfo();
+			}
+
 			loadInfo(cart, totals);
-			name = username;
+
             this.WindowState = FormWindowState.Maximized;
 		}
 
@@ -45,6 +59,32 @@ namespace MultiFaceRec
 			this.Close();
 		}
 
+		private void getDBInfo()
+		{
+			string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
+			string sqlstr = "SELECT * FROM customers WHERE id = @id";
+
+			DataSet ds = new DataSet();
+
+			using (OleDbConnection connection = new OleDbConnection(connectionStr))
+			{
+				OleDbDataAdapter adapter = new OleDbDataAdapter();
+
+				OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
+				adapter.SelectCommand = selectCMD;
+
+				// Add parameters and set values.  
+				selectCMD.Parameters.Add(
+				  "@id", OleDbType.VarChar, 40).Value = custID;
+
+				adapter.Fill(ds);
+
+				custName = ds.Tables[0].Rows[0][1].ToString();
+				custEmail = ds.Tables[0].Rows[0][2].ToString();
+			}
+
+		}
+
 		private void loadInfo(string[,] cart, string[] totals)
 		{
 			string today = DateTime.Now.ToString("M/d/yyyy hh:mm:ss");
@@ -59,7 +99,7 @@ namespace MultiFaceRec
 			textout += today;
 
 			printout += "eyePOS Test Kiosk\n";
-			printout += "Customer: " + name + "\n";
+			printout += "Customer: " + custName + "\n";
 			printout += "Date: " + today + "\n\n";
 
 			printout += "--------------------------------------------------\n\n";
@@ -102,7 +142,7 @@ namespace MultiFaceRec
 
 			textout += Environment.NewLine;
 
-			storeSale(name, textout);
+			storeSale(textout);
 
 			printout += "--------------------------------------------------\n\n";
 			printout += "Subtotal: " + totals[0] + "\n";
@@ -115,36 +155,13 @@ namespace MultiFaceRec
 			recieptTextBox.Text = printout;
 		}
 
-		private void storeSale(string name, string text) //Output entry to text
+		private void storeSale(string text) //Output entry to text
 		{
 			try
 			{
-				if (name != "Guest")
+				if (custID != null)
 				{
-					string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
-					string sqlstr = "SELECT ID FROM customers WHERE cust_name = @name";
-					string id = "";
-					DataSet ds = new DataSet();
-
-					using (OleDbConnection connection = new OleDbConnection(connectionStr))
-					{
-						OleDbDataAdapter adapter = new OleDbDataAdapter();
-
-						OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
-						adapter.SelectCommand = selectCMD;
-
-						// Add parameters and set values.  
-						selectCMD.Parameters.Add(
-						  "@name", OleDbType.VarChar, 40).Value = name;
-
-						adapter.Fill(ds);
-
-						id = ds.Tables[0].Rows[0]["ID"].ToString();
-
-					}
-
-					string fileName = @"userHistory\\" + id;
-
+					string fileName = @"userHistory\\" + custID;
 
 					// Check if file already exists. If yes, delete it.     
 					if (File.Exists(fileName))
@@ -183,7 +200,6 @@ namespace MultiFaceRec
 
 		private void emailButton_Click(object sender, EventArgs e)
 		{
-			string useremail = ""; //User's email
 			string storeemail = "ioursoulov@myseneca.ca"; //Store's email
 			const string fromPassword = "fromPassword"; //Store password
 			const string subject = "Your purchase receipt!";
@@ -192,31 +208,12 @@ namespace MultiFaceRec
 
 			try
 			{
-				if (name != "Guest")
+				if (custID != null)
 				{
-					string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
-					string sqlstr = "SELECT cust_email FROM customers WHERE cust_name = @name";
-
-					DataSet ds = new DataSet();
-
-					using (OleDbConnection connection = new OleDbConnection(connectionStr))
-					{
-						OleDbDataAdapter adapter = new OleDbDataAdapter();
-
-						OleDbCommand selectCMD = new OleDbCommand(sqlstr, connection);
-						adapter.SelectCommand = selectCMD;
-
-						// Add parameters and set values.  
-						selectCMD.Parameters.Add(
-						  "@name", OleDbType.VarChar, 40).Value = name;
-
-						adapter.Fill(ds);
-
-						useremail = ds.Tables[0].Rows[0]["cust_email"].ToString();
-					}
+					
 
 					MailAddress fromAddress = new MailAddress(storeemail, "eyePOS Terminal");
-					MailAddress toAddress = new MailAddress(useremail, name);
+					MailAddress toAddress = new MailAddress(custEmail, custName);
 
 					SmtpClient smtp = new SmtpClient
 					{

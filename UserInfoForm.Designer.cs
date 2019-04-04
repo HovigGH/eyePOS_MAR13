@@ -148,9 +148,9 @@
 			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label6.Location = new System.Drawing.Point(302, 453);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(137, 20);
+			this.label6.Size = new System.Drawing.Size(67, 20);
 			this.label6.TabIndex = 12;
-			this.label6.Text = "Gender (optional):";
+			this.label6.Text = "Gender:";
 			// 
 			// maleRadio
 			// 
@@ -160,7 +160,6 @@
 			this.maleRadio.Name = "maleRadio";
 			this.maleRadio.Size = new System.Drawing.Size(61, 24);
 			this.maleRadio.TabIndex = 1;
-			this.maleRadio.TabStop = true;
 			this.maleRadio.Text = "Male";
 			this.maleRadio.UseVisualStyleBackColor = true;
 			this.maleRadio.CheckedChanged += new System.EventHandler(this.radioBtns_CheckedChanged);
@@ -173,7 +172,6 @@
 			this.femaleRadio.Name = "femaleRadio";
 			this.femaleRadio.Size = new System.Drawing.Size(80, 24);
 			this.femaleRadio.TabIndex = 2;
-			this.femaleRadio.TabStop = true;
 			this.femaleRadio.Text = "Female";
 			this.femaleRadio.UseVisualStyleBackColor = true;
 			this.femaleRadio.CheckedChanged += new System.EventHandler(this.radioBtns_CheckedChanged);
@@ -181,6 +179,7 @@
 			// otherRadio
 			// 
 			this.otherRadio.AutoSize = true;
+			this.otherRadio.Checked = true;
 			this.otherRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.otherRadio.Location = new System.Drawing.Point(493, 480);
 			this.otherRadio.Name = "otherRadio";

@@ -294,5 +294,10 @@ namespace MultiFaceRec
                 txtProfile.Text = "";
             }
         }
-    }
+
+		private void txtProfile_TextChanged(object sender, EventArgs e)
+		{
+
+		}
+	}
 }

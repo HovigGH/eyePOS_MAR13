@@ -17,7 +17,7 @@ namespace MultiFaceRec
         string connectionStr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=eyePOS_DB_.accdb;";
 		//info from the customer
 		bool dateOfBithChecked = false;
-		string gender = null;
+		string gender = "O";
         public UserInfoForm()
 		{
             InitializeComponent();
@@ -43,7 +43,7 @@ namespace MultiFaceRec
                             using (var com = new OleDbCommand())
                             {
                                 com.Connection = con;
-                                com.CommandText = "INSERT INTO customers ([cust_name],[cust_email],[cust_dob],[cust_address],[cust_post][gender]) " +
+                                com.CommandText = "INSERT INTO customers ([cust_name],[cust_email],[cust_dob],[cust_address],[cust_post],[cust_gender]) " +
                                                   "VALUES (@cust_name,@cust_email,@cust_dob,@cust_address,@cust_post,@cust_gender)";
                                 //set insert values
                                 com.Parameters.AddWithValue("@cust_name", nameTB.Text);
@@ -83,36 +83,6 @@ namespace MultiFaceRec
         //takes the user to checkout form whitout entering info
 		private void skipButton_Click(object sender, EventArgs e)
 		{
-			
-            try
-            {
-                using (var con = new OleDbConnection())
-                {
-                    con.ConnectionString = connectionStr;
-                    con.Open();
-
-                    using (var com = new OleDbCommand())
-                    {
-                        com.Connection = con;
-                        com.CommandText = "INSERT INTO customers ([cust_name],[cust_email],[cust_dob],[cust_address],[cust_post]) " +
-                                            "VALUES (@cust_name,@cust_email,@cust_dob,@cust_address,@cust_post)";
-                        //set insert values
-                        com.Parameters.AddWithValue("@cust_name", "");
-                        com.Parameters.AddWithValue("@cust_email", "");
-                        com.Parameters.AddWithValue("@cust_dob", "");
-                        com.Parameters.AddWithValue("@cust_address", "");
-                        com.Parameters.AddWithValue("@cust_post", "");
-						com.Parameters.AddWithValue("@cust_gender", "");
-						com.ExecuteNonQuery();
-                    }
-                }
-                //MessageBox.Show("A new customer profile has been created.","New customer", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Not Saved: " + ex.Message);
-            }
-			
             this.Hide();
             CustScanForm custscan = new CustScanForm("CustomerTypeForm", "guest");
             custscan.ShowDialog();
