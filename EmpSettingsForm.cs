@@ -20,7 +20,6 @@ namespace MultiFaceRec
         {
             InitializeComponent();
             displayDataGridView();
-            displayDataGridViewCust();
             rdbtnRegEmp.Checked = true;
             this.WindowState = FormWindowState.Maximized;
         }
@@ -44,24 +43,6 @@ namespace MultiFaceRec
             }
         }
 
-        public void displayDataGridViewCust()
-        {
-            DataTable vt = new DataTable();
-            string sqlstr = "SELECT id FROM customers";
-            try
-            {
-                vt.Clear();
-                OleDbDataAdapter dad = new OleDbDataAdapter(sqlstr, constr);
-                dad.Fill(vt);
-                dad.Dispose();
-                dad = null;
-                dgvCustms.DataSource = vt;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error " + ex);
-            }
-        }
 
         //Add a new eployee
         private void lblEmpAdd_Click(object sender, EventArgs e)
@@ -271,33 +252,6 @@ namespace MultiFaceRec
             return "not selected";
         }
 
-        private void dgvCustms_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int index = e.RowIndex;// get the Row Index
-            //DataGridViewRow selectedRow = dgvCustms.Rows[index];
-            string id__ = dgvCustms.Rows[index].Cells[0].Value.ToString();
-            //string id__= dgvCustms.Rows[DataGridView.SelectedRows[0].Index].Cells[0].Value.ToString()
-            string path = "profiles\\" + id__ + ".txt";
-            string line = "";
-            if (File.Exists(path))
-            {
-                System.IO.StreamReader file = new System.IO.StreamReader(path);
-                while ((line = file.ReadLine()) != null)
-                {
-                    txtProfile.Text += line + Environment.NewLine;
-                }
-                file.Close();
-            }
-            else
-            {
-                MessageBox.Show("Error", "Profile not found", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                txtProfile.Text = "";
-            }
-        }
-
-		private void txtProfile_TextChanged(object sender, EventArgs e)
-		{
-
-		}
-	}
+       
+    }
 }

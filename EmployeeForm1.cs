@@ -423,5 +423,17 @@ namespace MultiFaceRec
             }
             return true;
         }
+
+        private void btnCustomerSettings_Click(object sender, EventArgs e)
+        {
+            Customers_SettingsForm customers_SettingsForm = new Customers_SettingsForm();
+            this.Hide();
+            customers_SettingsForm.ShowDialog();
+        }
+
+        private void homeButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

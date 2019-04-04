@@ -82,6 +82,12 @@
     <Compile Include="CheckOutForm.Designer.cs">
       <DependentUpon>CheckOutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Customers_SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customers_SettingsForm.Designer.cs">
+      <DependentUpon>Customers_SettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustScanForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     </Compile>
     <EmbeddedResource Include="CheckOutForm.resx">
       <DependentUpon>CheckOutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customers_SettingsForm.resx">
+      <DependentUpon>Customers_SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustScanForm.resx">
       <DependentUpon>CustScanForm.cs</DependentUpon>

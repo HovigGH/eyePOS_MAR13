@@ -512,7 +512,15 @@ namespace MultiFaceRec
             detect_recognize();
         }
 
-		private void empButton_Click(object sender, EventArgs e)
+        private void btnFaceRecg_Click(object sender, EventArgs e)
+        {
+            if(grpboxFaceRecog.Visible)
+                grpboxFaceRecog.Visible = false;
+            else if (!grpboxFaceRecog.Visible)
+                grpboxFaceRecog.Visible = true;
+        }
+
+        private void empButton_Click(object sender, EventArgs e)
 		{
 			this.Hide();
 			EmployeeLogInForm employeeLogInForm = new EmployeeLogInForm("CustScanForm");
