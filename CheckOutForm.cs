@@ -25,6 +25,7 @@ namespace MultiFaceRec
 		public CheckOutForm(string name, string[,] cart, string[] totals)
 		{
 			InitializeComponent();
+
             emailButton.Visible = true;
 			emailLabel.Visible = false;
 			printLabel.Visible = false;
@@ -32,6 +33,7 @@ namespace MultiFaceRec
 
 			if (name == "Guest"){
 				custName = "Guest";
+				emailLabel.Visible = true;
 			}
 			else
 			{
@@ -143,11 +145,17 @@ namespace MultiFaceRec
 			}
 		}
 
-		private void emailButton_Click(object sender, EventArgs e)
+		private void emailButton_Click(object sender, EventArgs e) //This will email contents to the user; Requires them to be logged in, requires SMTP server to be running!
 		{
+			//Email constants
+
 			const string storeemail = "store@email.com"; //Store's email
-			const string fromPassword = "fromPassword"; //Store password
+			const string fromPassword = "fromPassword"; //Store email password
 			const string subject = "Your purchase receipt!";
+
+			const string SMTPhost = "smtp.live.com"; //May change depending on needs
+			const int SMTPport = 587;
+
 			string body = recieptTextBox.Text;
 
 
@@ -160,8 +168,8 @@ namespace MultiFaceRec
 
 					SmtpClient smtp = new SmtpClient
 					{
-						Host = "smtp.live.com", //May change
-						Port = 587,
+						Host = SMTPhost, 
+						Port = SMTPport,
 						EnableSsl = true,
 						DeliveryMethod = SmtpDeliveryMethod.Network,
 						UseDefaultCredentials = false,

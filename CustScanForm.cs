@@ -188,6 +188,7 @@ namespace MultiFaceRec
         //---------------------------------------------------------------------
         public void writeProfile(string id)
         {
+			
             string path = @"profiles\" + id + ".txt";
             //append the existing file
             DateTime date = DateTime.Now;
@@ -463,6 +464,7 @@ namespace MultiFaceRec
 					cartGrid.Rows.RemoveAt(e.RowIndex); //Removes current row
 				}
 			}
+			updateTotals();
 		}
 
 		private void updateTotals() //Updates UI to calculate totals/sums
@@ -512,7 +514,7 @@ namespace MultiFaceRec
             detect_recognize();
         }
 
-        private void btnFaceRecg_Click(object sender, EventArgs e)
+        private void btnFaceRecg_Click(object sender, EventArgs e) //FOR DEMO PURPOSE ONLY; REMOVE BEFORE SHIPPING PRODUCT
         {
             if(grpboxFaceRecog.Visible)
                 grpboxFaceRecog.Visible = false;
@@ -561,7 +563,8 @@ namespace MultiFaceRec
 						cart[i, 4] = r.Cells[5].Value.ToString(); //totalprice
 					}
 				}
-                writeProfile(ProfileId_ToWrite);
+				if (ProfileId_ToWrite != null)
+					writeProfile(ProfileId_ToWrite);
    
                 this.Hide();
 				CheckOutForm checkout = new CheckOutForm(nameLabel.Text, cart, totals); //Checks out, with customerID, cart contents, and totals
@@ -580,9 +583,11 @@ namespace MultiFaceRec
 			{
 				try
 				{
-					writeProfile(ProfileId_ToWrite);
+					if (ProfileId_ToWrite != null)
+						writeProfile(ProfileId_ToWrite);
+
 				}
-				catch{}
+				catch {}
 
 				this.Close();
 			}

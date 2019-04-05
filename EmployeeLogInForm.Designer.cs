@@ -82,7 +82,7 @@
 			this.lblEmpLogIn.Name = "lblEmpLogIn";
 			this.lblEmpLogIn.Size = new System.Drawing.Size(262, 39);
 			this.lblEmpLogIn.TabIndex = 4;
-			this.lblEmpLogIn.Text = "Employee log In";
+			this.lblEmpLogIn.Text = "Employee Login";
 			// 
 			// btnLogIn
 			// 

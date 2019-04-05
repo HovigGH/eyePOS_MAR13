@@ -29,7 +29,7 @@ namespace MultiFaceRec
             this.WindowState = FormWindowState.Maximized;
         }
 
-        private void btnLogIn_Click(object sender, EventArgs e)
+        private void btnLogIn_Click(object sender, EventArgs e) //Try 1/1 for username/password
         {
             bool authorize = false;
             DataTable vt = new DataTable();        //data table
